@@ -1,3 +1,13 @@
 .form-horizontal .form-group label{
     text-align: left;
 }
+
+.custom
+{
+    width:100%;
+}
+
+.centered
+{
+    vertical-align:middle; text-align:center;
+}

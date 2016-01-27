@@ -72,41 +72,51 @@
 
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Register</h1>
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="inputUserName3" class="col-sm-2 control-label">User Name</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="inputUserName3" placeholder="User Name">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-5">
-                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputVerifyPassword3" class="col-sm-2 control-label">Verify Password</label>
-                    <div class="col-sm-5">
-                        <input type="password" class="form-control" id="inputVerifyPassword3" placeholder="Verify Password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-5">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
+            <h2>Admin</h2>
+            <h3>Users</h3>
+            <table class="table table-striped table-bordered dataTable">
+                <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>Password</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
 
+                <tbody>
+                <tr>
+                    <td><input type="text" placeholder="username"> </td>
+                    <td><input type="text" placeholder="password"></td>
+                    <td><input type="text" placeholder="role1,role2"></td>
+                    <td class="centered"><img src="Images/Plus_sign.png">
+                        <img src="Images/check_mark.png">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Alice</td>
+                    <td></td>
+                    <td>student</td>
+                    <td class="centered"><img src="Images/wrong.png">
+                        <img src="Images/edit.png"></td>
+                </tr>
+                <tr>
+                    <td>Bob</td>
+                    <td></td>
+                    <td>faculty | admin</td>
+                    <td class="centered"><img src="Images/wrong.png">
+                        <img src="Images/edit.png"></td>
+                </tr>
 
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-5">
-                        <button type="submit" class="btn btn-primary custom">Register</button>
-                    </div>
-                </div>
-            </form>
+                <tr>
+                    <td>Charlie</td>
+                    <td></td>
+                    <td></td>
+                    <td class="centered"><img src="Images/wrong.png">
+                        <img src="Images/edit.png"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
