@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+    <link href="css/site.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../assignment/css/dashboard.css" rel="stylesheet">
+    <link href="../assignment/css/site.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Username</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+
+        </div>
+
+
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Admin</a></li>
+                <li><a href="#">Forms</a></li>
+            </ul>
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h2>Forms</h2>
+
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="forms.html">Forms</a></li>
+                <li role="presentation"><a href="form-fields.html">Fields</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="inputfirstname">First Name</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="inputfirstname" placeholder="First Name">
+                    </div>
+
+                    <div class="col-sm-7">
+                    <span class="glyphicon glyphicon-pencil iconsize removespace"/>
+                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
+                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
+                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputlastname" class="col-sm-2 control-label">Last Name</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="inputlastname" placeholder="First Name">
+                    </div>
+                    <div class="col-sm-7">
+                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
+                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
+                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
+                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputDOB" class="col-sm-2 control-label">Date Of Birth</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <input placeholder="Select Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="inputDOB">
+                    </div>
+                    <div class="col-sm-7">
+                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
+                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
+                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
+                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="drpGender" class="col-sm-2 control-label">Gender</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="drpGender" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Dropdown
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="drpGender">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
+                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
+                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
+                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Roles :</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <div>
+                            <label class="notbold">
+                                <input type="checkbox" checked="checked">
+                                <span class="custom-check"></span>
+                               Admin
+                            </label>
+                       </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
+                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
+                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
+                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <div>
+                            <label class="notbold">
+                                <input type="checkbox">
+                                <span class="custom-check"></span>
+                                Student
+                            </label>
+                        </div>
+                    </div>
+                    </div>
+
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <div>
+                            <label class="notbold" >
+                                <input type="checkbox" checked="checked">
+                                <span class="custom-check"></span>
+                                User
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">License Agreement :</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <div>
+                            <label class="notbold">
+                                <input type="radio" checked="checked">
+                                <span class="custom-check"></span>
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
+                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
+                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
+                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <div>
+                            <label class="notbold">
+                                <input type="radio">
+                                <span class="custom-check"></span>
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></script>
+</body>
+</html>
