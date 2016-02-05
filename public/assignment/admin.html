@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <title>Admin</title>
-    <link href="css/site.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -41,8 +41,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Register</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="login.html">Login</a></li>
                 <li><a href="#">Username</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
@@ -61,53 +61,50 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h2>Admin</h2>
+            <h2 class="page-header">Admin</h2>
             <h3>Users</h3>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th><span class="glyphicon glyphicon-triangle-bottom"></span> UserName</th>
-                        <th><span class="glyphicon glyphicon-triangle-bottom"></span> Password</th>
-                        <th><span class="glyphicon glyphicon-triangle-bottom"></span> Role</th>
-                        <th><span class="glyphicon glyphicon-triangle-bottom"></span> Action</th>
+                        <th class="col-xs-3"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> UserName</th>
+                        <th class="col-xs-3"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Password</th>
+                        <th class="col-xs-3"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Role</th>
+                        <th class="col-xs-3"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Action</th>
                     </tr>
 
                     <tr>
-                        <td><input type="text" placeholder="username"></td>
-                        <td><input type="text" placeholder="password"></td>
-                        <td><input type="text" placeholder="role1,role2"></td>
-                        <td><span class="glyphicon glyphicon-plus iconsize"></span>
-                            <span class="glyphicon glyphicon-ok iconsize "></span>
-                       </td>
-
+                        <th><input type="text" class="form-control" placeholder="username"></th>
+                        <th><input type="text" class="form-control" placeholder="password"></th>
+                        <th><input type="text" class="form-control" placeholder="role1,role2"></th>
+                        <th><a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-ok"></span></a>
+                        </th>
                     </tr>
-
                     </thead>
 
                     <tbody>
-
                     <tr>
                         <td>Alice</td>
                         <td></td>
                         <td>student</td>
-                        <td><span class="glyphicon glyphicon-remove iconsize"></span>
-                            <span class="glyphicon glyphicon-pencil iconsize"></span></td>
+                        <td><a href="#"> <span class="glyphicon glyphicon-remove iconsize"> </span></a>
+                            <a href="#"><span class="glyphicon glyphicon-pencil iconsize"></span></a></td>
                     </tr>
                     <tr>
                         <td>Bob</td>
                         <td></td>
                         <td>faculty | admin</td>
-                        <td><span class="glyphicon glyphicon-remove iconsize"></span>
-                            <span class="glyphicon glyphicon-pencil iconsize"></span></td>
+                        <td><a href="#"><span class="glyphicon glyphicon-remove iconsize"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-pencil iconsize"></span></a></td>
                     </tr>
 
                     <tr>
                         <td>Charlie</td>
                         <td></td>
                         <td></td>
-                        <td><span class="glyphicon glyphicon-remove iconsize"></span>
-                            <span class="glyphicon glyphicon-pencil iconsize"></span></td>
+                        <td><a href="#"><span class="glyphicon glyphicon-remove iconsize"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-pencil iconsize"></span></a></td>
                     </tr>
                     </tbody>
                 </table>
@@ -120,7 +117,6 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></script>
 </body>
 </html>
