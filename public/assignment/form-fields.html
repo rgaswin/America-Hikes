@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+     <title>Dashboard Template for Bootstrap</title>
     <link href="css/site.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!--  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+
 
     <!-- Custom styles for this template -->
     <link href="../assignment/css/dashboard.css" rel="stylesheet">
@@ -31,7 +37,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -57,195 +64,213 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Admin</a></li>
-                <li><a href="#">Forms</a></li>
+                <li class="active"><a href="home.html">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="forms.html">Forms</a></li>
             </ul>
 
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h2>Forms</h2>
 
-            <ul class="nav nav-pills">
-                <li role="presentation" class="active"><a href="forms.html">Forms</a></li>
-                <li role="presentation"><a href="form-fields.html">Fields</a></li>
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="forms.html">Forms</a></li>
+                <li role="presentation" class="active"><a href="form-fields.html">Fields</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <label for="inputfirstname">First Name</label>
-                        <input type="text" class="form-control" id="inputfirstname" placeholder="First Name">
-                    </div>
-                    <div class="col-sm-7">
-                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
-                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
-                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
-                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <label for="inputlastname">Last Name</label>
-                        <input type="text" class="form-control" id="inputlastname" placeholder="First Name">
-                    </div>
-                    <div class="col-sm-7">
-                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
-                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
-                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
-                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <label for="inputDOB">Date Of Birth</label>
-                        <input placeholder="Select Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="inputDOB">
-                    </div>
-                    <div class="col-sm-7">
-                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
-                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
-                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
-                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="drpGender" class="col-sm-2 control-label">Gender</label>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="drpGender" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Dropdown
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="drpGender">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="inputfirstname">First Name</label>
                         </div>
                     </div>
-                    <div class="col-sm-7">
-                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
-                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
-                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
-                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="inputfirstname" placeholder="First Name">
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Roles :</label>
+                <br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="inputlastname">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="inputlastname" placeholder="First Name">
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                            <span class="glyphicon glyphicon-align-justify"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <div>
+                <br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="inputDOB">Date Of Birth</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input placeholder="Select Date" class="form-control" type="text"
+                                   onfocus="(this.type='date')"
+                                   onblur="(this.type='text')" id="inputDOB">
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                            <span class="glyphicon glyphicon-align-justify"></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="drpGender">Gender</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="drpGender"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Gender
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="drpGender">
+                                    <li><a href="#">Male</a></li>
+                                    <li><a href="#">Female</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label> Roles :</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
                             <label class="notbold">
                                 <input type="checkbox" checked="checked">
                                 <span class="custom-check"></span>
-                               Admin
-                            </label>
-                       </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
-                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
-                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
-                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <div>
+                                Admin
+                            </label><br>
                             <label class="notbold">
                                 <input type="checkbox">
                                 <span class="custom-check"></span>
                                 Student
-                            </label>
-                        </div>
-                    </div>
-                    </div>
-
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <div>
-                            <label class="notbold" >
+                            </label><br>
+                            <label class="notbold">
                                 <input type="checkbox" checked="checked">
                                 <span class="custom-check"></span>
                                 User
                             </label>
                         </div>
+                        <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">License Agreement :</label>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <div>
+                <br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label>License Agreement :</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
                             <label class="notbold">
-                                <input type="radio" checked="checked">
+                                <input type="radio" name="rdblicense">
                                 <span class="custom-check"></span>
                                 Yes
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
-                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
-                        <span class="glyphicon glyphicon-remove iconsize removespace"/>
-                        <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <div>
+                            </label><br>
                             <label class="notbold">
-                                <input type="radio">
+                                <input type="radio" name="rdblicense">
                                 <span class="custom-check"></span>
                                 No
-                            </label>
+                            </label><br>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                         </div>
                     </div>
                 </div>
+                <br>
 
-             <hr class="bold">
+                <hr class="bold">
 
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="drpGender" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Add new fields
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="drpGender">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="drpGender">Add New Fields</label>
                         </div>
                     </div>
-                    <div class="col-sm-7">
-                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
-                   </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="drpAddNewFields"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Add New Fields
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="drpAddNewFields">
+                                    <li>Single Line Text</li>
+                                    <li>Date</li>
+                                    <li>Dropdown</li>
+                                    <li>Checkboxes</li>
+                                    <li>Radio Button</li>
+                                    <li>Paragraph Text Field</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </div>
+                    </div>
                 </div>
+                <br>
 
-            </form>
+            </div>
+            <br>
         </div>
     </div>
 </div>
+</div>
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

@@ -12,11 +12,16 @@
     vertical-align:middle; text-align:center;
 }
 
-.iconsize
+.glyphicon
 {
-    font-size: x-large;
+ font-size: large;
 }
 
+.glyphicon-triangle-bottom
+{
+    font-size: small;
+
+}
 .tblwidth
 {
     width:50%;
@@ -28,6 +33,6 @@
 }
 
 .bold{
-
     font-weight: bold;
+    align:left;
 }
