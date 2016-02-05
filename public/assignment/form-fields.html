@@ -77,26 +77,20 @@
                 <div class="form-group">
                     <div class="col-sm-5">
                         <label for="inputfirstname">First Name</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-5">
                         <input type="text" class="form-control" id="inputfirstname" placeholder="First Name">
                     </div>
-
                     <div class="col-sm-7">
-                    <span class="glyphicon glyphicon-pencil iconsize removespace"/>
+                        <span class="glyphicon glyphicon-pencil iconsize removespace"/>
                         <span class="glyphicon glyphicon-plus iconsize removespace"/>
                         <span class="glyphicon glyphicon-remove iconsize removespace"/>
                         <span class="glyphicon glyphicon-align-justify iconsize removespace"/>
                     </div>
+                </div>
 
-                </div>
-                <div class="form-group">
-                    <label for="inputlastname" class="col-sm-2 control-label">Last Name</label>
-                </div>
+
                 <div class="form-group">
                     <div class="col-sm-5">
+                        <label for="inputlastname">Last Name</label>
                         <input type="text" class="form-control" id="inputlastname" placeholder="First Name">
                     </div>
                     <div class="col-sm-7">
@@ -108,10 +102,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputDOB" class="col-sm-2 control-label">Date Of Birth</label>
-                </div>
-                <div class="form-group">
                     <div class="col-sm-5">
+                        <label for="inputDOB">Date Of Birth</label>
                         <input placeholder="Select Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="inputDOB">
                     </div>
                     <div class="col-sm-7">
@@ -226,6 +218,30 @@
                         </div>
                     </div>
                 </div>
+
+             <hr class="bold">
+
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="drpGender" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Add new fields
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="drpGender">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <span class="glyphicon glyphicon-plus iconsize removespace"/>
+                   </div>
+                </div>
+
             </form>
         </div>
     </div>
