@@ -43,48 +43,39 @@
 
         return api;
 
-        function findUserByUsernameAndPassword(username, password, callback)
-        {
-            var parsedJSONData = JSON.parse(users);
-            for (var i=0;i<parsedJSONData.length;i++) {
-                if(parsedJSONData[i].username == username && parsedJSONData[i].password == password)
-                    callback(parsedJSONData[i]);
+        function findUserByUsernameAndPassword(username, password, callback) {
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].username == username && users[i].password == password)
+                    callback(users[i]);
 
                 else
-                return callback(null);
+                    return callback(null);
             }
         }
 
-        function findAllUsers(callback)
-        {
+        function findAllUsers(callback) {
             callback(users);
         }
 
-        function createUser(user, callback)
-        {
+        function createUser(user, callback) {
             users.push(user);
             callback(user);
+            console.log(users);
         }
 
-        function deleteUserById(userId, callback)
-        {
-            for(var i=0;i<users.length;i++)
-            {
-                if(users[i].id == userid)
-                {
-                    users.splice(i,1);
+        function deleteUserById(userId, callback) {
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].id == userid) {
+                    users.splice(i, 1);
                     break;
                 }
             }
             callback(users);
         }
 
-        function updateUser(userId, user, callback)
-        {
-            for(var i=0; i<users.length;i++)
-            {
-                if(users[i].id == userid)
-                {
+        function updateUser(userId, user, callback) {
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].id == userId) {
                     users[i].name = user.name;
                     users[i].firstName = user.firstName;
                     users[i].lastName = user.lastName;
@@ -94,8 +85,6 @@
                     callback(user[i]);
                 }
             }
-
-
         }
     }
 })();

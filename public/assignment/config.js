@@ -19,19 +19,19 @@
             .when("/login",
                 {
                     templateUrl: "views/users/login.view.html",
-                    controller: "logincontroller"
+                    controller: "LoginController"
                 }
             )
             .when("/profile",
                 {
                     templateUrl: "views/users/profile.view.html",
-                    controller: "profilecontroller"
+                    controller: "ProfileController"
                 }
             )
             .when("/register",
                 {
                     templateUrl: "views/users/register.view.html",
-                    controller: "registercontroller"
+                    controller: "RegisterController"
                 }
             )
             .when("/admin",
