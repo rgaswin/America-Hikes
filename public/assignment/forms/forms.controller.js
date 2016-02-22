@@ -30,32 +30,23 @@
             });
         }
 
-        function updateForm(movie) {
+        function updateForm() {
             if (selecteMovieIndex >= 0) {
-                $scope.movies[selecteMovieIndex] = {
-                    id: movie.id,
-                    title: movie.title,
-                    director: movie.director
+                $scope.forms[selecteMovieIndex] = {
+                   title: $scope.formtitle
                 }
             }
         }
 
         var selecteMovieIndex = -1;
 
-        function selectForm(movie) {
-            selecteMovieIndex = $scope.movies.indexOf(movie);
-            console.log(movie);
-            $scope.movie = {
-                id: movie.id,
-                title: movie.title,
-                director: movie.director
-            };
+        function selectForm(index) {
+            selecteMovieIndex = index;
+            $scope.formtitle = $scope.forms[index].title;
         }
 
         function deleteForm(index) {
-            console.log("deleteMovie: " + index);
             $scope.forms.splice(index, 1);
         }
-
     }
 })();

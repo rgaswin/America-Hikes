@@ -31,13 +31,13 @@
         }
 
         function findAllFormsForUser(userId, callback) {
-            //for (var i = 0; i < forms.length; i++) {
-              //  if (forms[i].userId == userid) {
-                //    callback(forms[i]);
-               // }
-            //}
-
-            callback(forms);
+            var formsForUser = [];
+            for (var i = 0; i < forms.length; i++) {
+                if (forms[i].userId == userId) {
+                    formsForUser.push(forms[i]);
+                }
+            }
+            callback(formsForUser);
         }
 
         function deleteFormById(formId, callback) {

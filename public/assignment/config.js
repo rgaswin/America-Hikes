@@ -13,7 +13,7 @@
             .when("/home",
                 {
                     templateUrl: "views/home/home.view.html",
-                    controller: "homecontroller"
+                    controller: "HomeController"
                 }
             )
             .when("/login",
@@ -53,7 +53,7 @@
                 }
             )
             .otherwise({
-                redirectTo: "views/home/home.view.html"
+                redirectTo: "/home"
             });
     }
 })();
