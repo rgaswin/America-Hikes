@@ -82,7 +82,7 @@
                     users[i].username = user.username;
                     users[i].password = user.password;
                     user[i].roles = user.roles;
-                    callback(user[i]);
+                    callback(users[i]);
                 }
             }
         }

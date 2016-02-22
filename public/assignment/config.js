@@ -42,13 +42,13 @@
             )
             .when("/forms",
                 {
-                    templateUrl: "views/admin/forms/forms.view.html",
-                    controller: "formscontroller"
+                    templateUrl: "forms/forms.view.html",
+                    controller: "FormController"
                 }
             )
             .when("/fields",
                 {
-                    templateUrl: "views/admin/forms/fields.view.html",
+                    templateUrl: "forms/fields.view.html",
                     controller: "fieldscontroller"
                 }
             )
