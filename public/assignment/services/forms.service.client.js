@@ -37,13 +37,13 @@
                     formsForUser.push(forms[i]);
                 }
             }
+            console.log(formsForUser);
             callback(formsForUser);
         }
 
         function deleteFormById(formId, callback) {
             for (var i = 0; i < forms.length; i++) {
-                if (forms[i].formid == formId) {
-                    callback(forms[i]);
+                if (forms[i]._id == formId) {
                     forms.splice(i, 1);
                     break;
                 }
@@ -53,16 +53,13 @@
 
         function updateFormById(formId, newForm, callback) {
             for (var i = 0; i < forms.length; i++) {
-                if (forms[i].id == userId) {
-                    forms[i].name = newForm.name;
-                    forms[i].firstName = newForm.firstName;
-                    forms[i].lastName = newForm.lastName;
-                    forms[i].username = newForm.username;
-                    forms[i].password = newForm.password;
-                    forms[i].roles = newForm.roles;
-                    callback(forms[i]);
+                if (forms[i]._id == formId) {
+                    forms[i]._id = newForm._id;
+                    forms[i].title = newForm.title;
+                    forms[i].userId = newForm.userId;
                 }
             }
+            callback();
         }
     }
 })();

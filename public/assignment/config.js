@@ -12,8 +12,7 @@
         $routeProvider
             .when("/home",
                 {
-                    templateUrl: "views/home/home.view.html",
-                    controller: "HomeController"
+                    templateUrl: "views/home/home.view.html"
                 }
             )
             .when("/login",
@@ -37,7 +36,7 @@
             .when("/admin",
                 {
                     templateUrl: "views/admin/admin.view.html",
-                    controller: "admincontroller"
+                    controller: "AdminController"
                 }
             )
             .when("/forms",
@@ -49,7 +48,7 @@
             .when("/fields",
                 {
                     templateUrl: "forms/fields.view.html",
-                    controller: "fieldscontroller"
+                    controller: "FieldsController"
                 }
             )
             .otherwise({

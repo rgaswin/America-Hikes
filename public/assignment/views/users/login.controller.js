@@ -1,24 +1,21 @@
-(function()
-    {
+(function () {
         angular
             .module("FormBuilderApp")
-            .controller("LoginController",LoginController);
+            .controller("LoginController", LoginController);
 
-        function LoginController($scope,$location,$rootScope,UserService)
-        {
+        function LoginController($scope, $location, $rootScope, UserService) {
             $scope.login = login;
 
-            function login()
-            {
+            function login() {
                 var username = $scope.username;
                 var password = $scope.password;
-                UserService.findUserByUsernameAndPassword(username,password,function(user)
-                {
-                    $rootScope.user = user;
-                    $location.url("/profile");
-                    console.log(user);
+                var loggedUser = UserService.findUserByUsernameAndPassword(username, password, function (response) {
+                    $rootScope.data = response;
+                    console.log(response);
                 });
+
+                $rootScope.loggedInUser = loggedUser;
+                $location.url("/profile");
             }
         }
-    }
-)();
+    })();

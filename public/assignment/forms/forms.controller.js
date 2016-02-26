@@ -4,11 +4,9 @@
         .controller("FormController", FormController);
 
     function FormController($scope, $rootScope, FormService) {
-        FormService.findAllFormsForUser($rootScope.user._id, function (data) {
+        FormService.findAllFormsForUser($rootScope.loggedInUser._id, function (data) {
             $scope.forms = data;
         });
-
-        console.log($scope.forms);
 
         // event handler declarations
         $scope.addForm = addForm;
@@ -16,36 +14,54 @@
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
 
-
         // event handler implementation
         function addForm() {
             var newForm = {
-                id: (new Date).getTime(),
+                _id: (new Date).getTime(),
                 title: $scope.formtitle,
-                userid: $rootScope.user._id
+                userId: $rootScope.loggedInUser._id
             };
 
-            FormService.createFormForUser($rootScope.user._id, newForm, function (form) {
-                console.log(form);
+            FormService.createFormForUser($rootScope.loggedInUser._id, newForm, function (form) {
+                FormService.findAllFormsForUser($rootScope.loggedInUser._id, function (data) {
+                    $scope.forms = data;
+                });
             });
         }
 
         function updateForm() {
-            if (selecteMovieIndex >= 0) {
-                $scope.forms[selecteMovieIndex] = {
-                   title: $scope.formtitle
-                }
+            if (selectedFormIndex >= 0) {
+                var userId = $scope.forms[selectedFormIndex].userId;
+                var formid = $scope.forms[selectedFormIndex]._id;
+                var newform = {
+                    _id: formid,
+                    title: $scope.formtitle,
+                    userId: userId
+                };
+
+                FormService.updateFormById(formid, newform, function () {
+                    FormService.findAllFormsForUser($rootScope.loggedInUser._id, function (data) {
+                        $scope.forms = data;
+                    });
+                });
             }
         }
 
-        var selecteMovieIndex = -1;
+        var selectedFormIndex = -1;
 
         function selectForm(index) {
-            selecteMovieIndex = index;
-            $scope.formtitle = $scope.forms[index].title;
+            selectedFormIndex = index;
+            var formid = $scope.forms[selectedFormIndex]._id;
+            $scope.formtitle = $scope.forms[selectedFormIndex].title;
         }
 
         function deleteForm(index) {
+            var formid = $scope.forms[index]._id;
+            FormService.deleteFormById(formid, function () {
+                FormService.findAllFormsForUser($rootScope.loggedInUser._id, function (data) {
+                    $scope.forms = data;
+                });
+            });
             $scope.forms.splice(index, 1);
         }
     }

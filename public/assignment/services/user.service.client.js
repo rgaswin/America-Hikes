@@ -45,8 +45,10 @@
 
         function findUserByUsernameAndPassword(username, password, callback) {
             for (var i = 0; i < users.length; i++) {
-                if (users[i].username == username && users[i].password == password)
+                if (users[i].username == username && users[i].password == password) {
                     callback(users[i]);
+                    return users[i];
+                }
 
                 else
                     return callback(null);
@@ -60,7 +62,7 @@
         function createUser(user, callback) {
             users.push(user);
             callback(user);
-            console.log(users);
+            return user;
         }
 
         function deleteUserById(userId, callback) {

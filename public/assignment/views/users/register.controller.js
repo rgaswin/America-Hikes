@@ -8,18 +8,24 @@
 
     function RegisterController($scope, $rootScope, $location, UserService) {
 
+        console.log($scope.username);
+
         var user = {
             "_id": (new Date).getTime(), "firstName": $scope.firstName, "lastName": $scope.lastName,
-            "username": $scope.usrname, "password": $scope.password, "roles": ["student"]
-        }
+            "username": $scope.username, "password": $scope.password, "roles": ["student"]
+        };
 
         $scope.register = register;
 
         function register() {
-            UserService.createUser(user, function () {
-                $rootScope.user = user;
-                $location.url("/profile/");
-            })
+
+            console.log(user);
+
+            var newUser = UserService.createUser(user, function(response){
+                $rootScope.loggedInUser = response;
+                console.log(response);
+                $location.url("/profile");
+            });
         }
     }
 })();
