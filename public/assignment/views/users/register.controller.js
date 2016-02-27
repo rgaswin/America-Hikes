@@ -18,12 +18,9 @@
         $scope.register = register;
 
         function register() {
-
-            console.log(user);
-
-            var newUser = UserService.createUser(user, function(response){
+            user.username = $scope.username;
+            UserService.createUser(user, function (response) {
                 $rootScope.loggedInUser = response;
-                console.log(response);
                 $location.url("/profile");
             });
         }

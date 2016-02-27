@@ -2,7 +2,7 @@
 <html lang="en" ng-app="FormBuilderApp">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Form Maker</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
@@ -24,7 +24,7 @@
 </head>
 
 <body ng-controller="MainController">
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
             <div ng-include = "'views/header/header.view.html'"></div>
@@ -32,11 +32,11 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-md-2 sidebar" >
             <div ng-include = "'views/sidebar/sidebar.view.html'"></div>
         </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-view>
         </div>
 
     </div>

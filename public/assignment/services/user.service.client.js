@@ -49,10 +49,8 @@
                     callback(users[i]);
                     return users[i];
                 }
-
-                else
-                    return callback(null);
             }
+            callback(null);
         }
 
         function findAllUsers(callback) {
