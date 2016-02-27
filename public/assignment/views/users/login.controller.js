@@ -16,10 +16,15 @@
             UserService.findUserByCredentials($scope.username, $scope.password, function (response) {
                 if (response !== null) {
                     $rootScope.loggedInUser = response;
-                    $location.url("/profile");
+                    if ($rootScope.loggedInUser.roles.indexOf('admin') >= 0) {
+                        $location.url("/admin");
+                    }
+                    else {
+                        $location.url("/profile");
+                    }
                 }
                 else
-                $scope.message = "Invalid Credentials";
+                    $scope.message = "Invalid Credentials";
 
             });
         }
