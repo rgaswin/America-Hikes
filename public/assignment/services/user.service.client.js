@@ -8,7 +8,7 @@
         .factory("UserService", UserService);
 
     function UserService() {
-        var users = [];
+        var users = []; // A list of Users Initialized as empty initially
         users = [
             {
                 "_id": 123, "firstName": "Alice", "lastName": "Wonderland",
@@ -33,7 +33,6 @@
         ];
 
         var api = {
-
             findUserByUsernameAndPassword: findUserByUsernameAndPassword,
             findAllUsers: findAllUsers,
             createUser: createUser,
@@ -45,7 +44,7 @@
 
         function findUserByUsernameAndPassword(username, password, callback) {
             for (var i = 0; i < users.length; i++) {
-                if (users[i].username == username && users[i].password == password) {
+                if (users[i].username === username && users[i].password === password) {
                     callback(users[i]);
                     return users[i];
                 }
@@ -65,7 +64,7 @@
 
         function deleteUserById(userId, callback) {
             for (var i = 0; i < users.length; i++) {
-                if (users[i].id == userId) {
+                if (users[i].id === userId) {
                     users.splice(i, 1);
                     break;
                 }
@@ -75,7 +74,7 @@
 
         function updateUser(userId, user, callback) {
             for (var i = 0; i < users.length; i++) {
-                if (users[i].id == userId) {
+                if (users[i].id === userId) {
                     users[i].name = user.name;
                     users[i].firstName = user.firstName;
                     users[i].lastName = user.lastName;

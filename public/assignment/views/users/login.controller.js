@@ -1,3 +1,6 @@
+/**
+ * Created by gopal on 2/15/2016.
+ */
 (function () {
     "use strict";
     angular
@@ -5,16 +8,15 @@
         .controller("LoginController", LoginController);
 
     function LoginController($scope, $location, $rootScope, UserService) {
+        // Event Handler Declarations
         $scope.login = login;
 
+        // Event Handler Implementation
         function login() {
-            var username = $scope.username;
-            var password = $scope.password;
-            UserService.findUserByUsernameAndPassword(username, password, function (response) {
+            UserService.findUserByUsernameAndPassword($scope.username, $scope.password, function (response) {
                 $rootScope.loggedInUser = response;
                 $location.url("/profile");
             });
-
         }
     }
 })();

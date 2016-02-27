@@ -33,7 +33,7 @@
         function findAllFormsForUser(userId, callback) {
             var formsForUser = [];
             for (var i = 0; i < forms.length; i++) {
-                if (forms[i].userId == userId) {
+                if (forms[i].userId === userId) {
                     formsForUser.push(forms[i]);
                 }
             }
@@ -43,7 +43,7 @@
 
         function deleteFormById(formId, callback) {
             for (var i = 0; i < forms.length; i++) {
-                if (forms[i]._id == formId) {
+                if (forms[i]._id === formId) {
                     forms.splice(i, 1);
                     break;
                 }
@@ -53,7 +53,7 @@
 
         function updateFormById(formId, newForm, callback) {
             for (var i = 0; i < forms.length; i++) {
-                if (forms[i]._id == formId) {
+                if (forms[i]._id === formId) {
                     forms[i]._id = newForm._id;
                     forms[i].title = newForm.title;
                     forms[i].userId = newForm.userId;

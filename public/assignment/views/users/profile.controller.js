@@ -1,3 +1,6 @@
+/**
+ * Created by gopal on 2/15/2016.
+ */
 (function () {
     "use strict";
     angular
@@ -6,8 +9,10 @@
 
     function ProfileController($scope, $rootScope, UserService) {
 
+        // Event Handler Declarations
         $scope.update = update;
 
+        // Event Handler Implementations
         function update() {
             $rootScope.loggedInUser.firstName = $scope.firstname;
             $rootScope.loggedInUser.lastName = $scope.lastname;

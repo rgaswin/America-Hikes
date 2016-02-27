@@ -1,3 +1,6 @@
+/**
+ * Created by gopal on 2/15/2016.
+ */
 (function () {
     "use strict";
     angular
@@ -48,7 +51,7 @@
             }
         }
 
-        var selectedFormIndex = -1;
+        var selectedFormIndex = -1; // Contains the Index of currently selected record
 
         function selectForm(index) {
             selectedFormIndex = index;
