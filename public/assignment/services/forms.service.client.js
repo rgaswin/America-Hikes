@@ -1,8 +1,8 @@
 /**
  * Created by gopal on 2/18/2016.
  */
-
 (function () {
+    "use strict";
     angular
         .module("FormBuilderApp")
         .factory("FormService", FormService);

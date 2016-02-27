@@ -1,4 +1,5 @@
 (function () {
+    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("FormController", FormController);
@@ -22,7 +23,7 @@
                 userId: $rootScope.loggedInUser._id
             };
 
-            FormService.createFormForUser($rootScope.loggedInUser._id, newForm, function (form) {
+            FormService.createFormForUser($rootScope.loggedInUser._id, newForm, function () {
                 FormService.findAllFormsForUser($rootScope.loggedInUser._id, function (data) {
                     $scope.forms = data;
                 });
@@ -51,7 +52,6 @@
 
         function selectForm(index) {
             selectedFormIndex = index;
-            var formid = $scope.forms[selectedFormIndex]._id;
             $scope.formtitle = $scope.forms[selectedFormIndex].title;
         }
 
@@ -62,7 +62,6 @@
                     $scope.forms = data;
                 });
             });
-            $scope.forms.splice(index, 1);
         }
     }
 })();

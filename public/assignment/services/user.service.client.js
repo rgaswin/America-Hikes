@@ -1,8 +1,8 @@
 /**
  * Created by gopal on 2/18/2016.
  */
-
 (function () {
+    "use strict";
     angular
         .module("FormBuilderApp")
         .factory("UserService", UserService);
@@ -65,7 +65,7 @@
 
         function deleteUserById(userId, callback) {
             for (var i = 0; i < users.length; i++) {
-                if (users[i].id == userid) {
+                if (users[i].id == userId) {
                     users.splice(i, 1);
                     break;
                 }
