@@ -58,7 +58,6 @@
         function createUser(user, callback) {
             users.push(user);
             callback(user);
-          //  return user;
         }
 
         function deleteUserById(userId, callback) {

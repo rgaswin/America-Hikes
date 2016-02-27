@@ -23,9 +23,9 @@
                         $location.url("/profile");
                     }
                 }
-                else
+                else {
                     $scope.message = "Invalid Credentials";
-
+                }
             });
         }
     }
