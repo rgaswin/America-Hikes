@@ -26,10 +26,8 @@
                 userId: $rootScope.loggedInUser._id
             };
 
-            FormService.createFormForUser($rootScope.loggedInUser._id, newForm, function () {
-                FormService.findAllFormsForUser($rootScope.loggedInUser._id, function (data) {
-                    $scope.forms = data;
-                });
+            FormService.createFormForUser($rootScope.loggedInUser._id, newForm, function (form) {
+                $scope.forms.push(form);
             });
         }
 
@@ -42,11 +40,7 @@
                     title: $scope.formtitle,
                     userId: userId
                 };
-
                 FormService.updateFormById(formid, newform, function () {
-                    FormService.findAllFormsForUser($rootScope.loggedInUser._id, function (data) {
-                        $scope.forms = data;
-                    });
                 });
             }
         }
@@ -61,9 +55,7 @@
         function deleteForm(index) {
             var formid = $scope.forms[index]._id;
             FormService.deleteFormById(formid, function () {
-                FormService.findAllFormsForUser($rootScope.loggedInUser._id, function (data) {
-                    $scope.forms = data;
-                });
+                $scope.forms.splice(index, 1);
             });
         }
     }

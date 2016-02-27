@@ -13,9 +13,14 @@
 
         // Event Handler Implementation
         function login() {
-            UserService.findUserByUsernameAndPassword($scope.username, $scope.password, function (response) {
-                $rootScope.loggedInUser = response;
-                $location.url("/profile");
+            UserService.findUserByCredentials($scope.username, $scope.password, function (response) {
+                if (response !== null) {
+                    $rootScope.loggedInUser = response;
+                    $location.url("/profile");
+                }
+                else
+                $scope.message = "Invalid Credentials";
+
             });
         }
     }

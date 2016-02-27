@@ -33,7 +33,7 @@
         ];
 
         var api = {
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+            findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
@@ -42,11 +42,10 @@
 
         return api;
 
-        function findUserByUsernameAndPassword(username, password, callback) {
+        function findUserByCredentials(username, password, callback) {
             for (var i = 0; i < users.length; i++) {
                 if (users[i].username === username && users[i].password === password) {
                     callback(users[i]);
-                    return users[i];
                 }
             }
             callback(null);
@@ -59,7 +58,7 @@
         function createUser(user, callback) {
             users.push(user);
             callback(user);
-            return user;
+          //  return user;
         }
 
         function deleteUserById(userId, callback) {
