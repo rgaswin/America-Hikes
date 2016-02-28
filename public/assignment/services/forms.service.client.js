@@ -57,9 +57,10 @@
                     forms[i]._id = newForm._id;
                     forms[i].title = newForm.title;
                     forms[i].userId = newForm.userId;
+                    callback(forms[i]);
                 }
             }
-            callback();
+
         }
     }
 })();

@@ -9,7 +9,7 @@
 
     function RegisterController($scope, $rootScope, $location, UserService) {
         var user = {
-            "_id": (new Date).getTime(), "firstName": $scope.firstName, "lastName": $scope.lastName,
+            "firstName": $scope.firstName, "lastName": $scope.lastName,
             "username": $scope.username,"email": $scope.email, "password": $scope.password, "roles": ["student"]
         };
 

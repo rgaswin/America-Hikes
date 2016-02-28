@@ -40,7 +40,7 @@
                     title: $scope.formtitle,
                     userId: userId
                 };
-                FormService.updateFormById(formid, newform, function () {
+                FormService.updateFormById(formid, newform, function (response) {
                 });
             }
         }
