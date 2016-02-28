@@ -13,7 +13,8 @@
         $scope.username = $rootScope.loggedInUser.username;
         $scope.email = $rootScope.loggedInUser.email;
         $scope.password = $rootScope.loggedInUser.password;
-
+        $scope.firstname = $rootScope.loggedInUser.firstName;
+        $scope.lastname = $rootScope.loggedInUser.lastName;
         // Event Handler Declarations
         $scope.update = update;
 

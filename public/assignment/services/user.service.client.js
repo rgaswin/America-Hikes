@@ -43,12 +43,14 @@
         return api;
 
         function findUserByCredentials(username, password, callback) {
+            var loggedInUser = null;
             for (var i = 0; i < users.length; i++) {
                 if (users[i].username === username && users[i].password === password) {
-                    callback(users[i]);
+                    loggedInUser = users[i];
+                    break;
                 }
             }
-            callback(null);
+            callback(users[i]);
         }
 
         function findAllUsers(callback) {
