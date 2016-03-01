@@ -1,7 +1,7 @@
 /**
  * Created by gopal on 2/15/2016.
  */
-(function () {
+(function() {
     "use strict";
     angular
         .module("FormBuilderApp")
@@ -13,17 +13,15 @@
 
         // Event Handler Implementation
         function login() {
-            UserService.findUserByCredentials($scope.username, $scope.password, function (response) {
-                if (response !== null) {
+            UserService.findUserByCredentials($scope.username, $scope.password, function(response) {
+                if (response !== null && typeof(response) !== 'undefined') {
                     $rootScope.loggedInUser = response;
                     if ($rootScope.loggedInUser.roles.indexOf('admin') >= 0) {
                         $location.url("/admin");
-                    }
-                    else {
+                    } else {
                         $location.url("/profile");
                     }
-                }
-                else {
+                } else {
                     $scope.message = "Invalid Credentials";
                 }
             });

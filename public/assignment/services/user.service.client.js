@@ -1,7 +1,7 @@
 /**
  * Created by gopal on 2/18/2016.
  */
-(function () {
+(function() {
     "use strict";
     angular
         .module("FormBuilderApp")
@@ -9,28 +9,42 @@
 
     function UserService() {
         var users = []; // A list of Users Initialized as empty initially
-        users = [
-            {
-                "_id": 123, "firstName": "Alice", "lastName": "Wonderland",
-                "username": "alice", "password": "alice", "roles": ["student"]
-            },
-            {
-                "_id": 234, "firstName": "Bob", "lastName": "Hope",
-                "username": "bob", "password": "bob", "roles": ["admin"]
-            },
-            {
-                "_id": 345, "firstName": "Charlie", "lastName": "Brown",
-                "username": "charlie", "password": "charlie", "roles": ["faculty"]
-            },
-            {
-                "_id": 456, "firstName": "Dan", "lastName": "Craig",
-                "username": "dan", "password": "dan", "roles": ["faculty", "admin"]
-            },
-            {
-                "_id": 567, "firstName": "Edward", "lastName": "Norton",
-                "username": "ed", "password": "ed", "roles": ["student"]
-            }
-        ];
+        users = [{
+            "_id": 123,
+            "firstName": "Alice",
+            "lastName": "Wonderland",
+            "username": "alice",
+            "password": "alice",
+            "roles": ["student"]
+        }, {
+            "_id": 234,
+            "firstName": "Bob",
+            "lastName": "Hope",
+            "username": "bob",
+            "password": "bob",
+            "roles": ["admin"]
+        }, {
+            "_id": 345,
+            "firstName": "Charlie",
+            "lastName": "Brown",
+            "username": "charlie",
+            "password": "charlie",
+            "roles": ["faculty"]
+        }, {
+            "_id": 456,
+            "firstName": "Dan",
+            "lastName": "Craig",
+            "username": "dan",
+            "password": "dan",
+            "roles": ["faculty", "admin"]
+        }, {
+            "_id": 567,
+            "firstName": "Edward",
+            "lastName": "Norton",
+            "username": "ed",
+            "password": "ed",
+            "roles": ["student"]
+        }];
 
         var api = {
             findUserByCredentials: findUserByCredentials,
@@ -50,7 +64,7 @@
                     break;
                 }
             }
-            callback(users[i]);
+            callback(loggedInUser);
         }
 
         function findAllUsers(callback) {
@@ -73,15 +87,15 @@
             callback(users);
         }
 
-        function updateUser(userId, user, callback) {
+        function updateUser(userId, newuser, callback) {
             for (var i = 0; i < users.length; i++) {
                 if (users[i].id === userId) {
-                    users[i].name = user.name;
-                    users[i].firstName = user.firstName;
-                    users[i].lastName = user.lastName;
-                    users[i].username = user.username;
-                    users[i].password = user.password;
-                    user[i].roles = user.roles;
+                    users[i].name = newuser.name;
+                    users[i].firstName = newuser.firstName;
+                    users[i].lastName = newuser.lastName;
+                    users[i].username = newuser.username;
+                    users[i].password = newuser.password;
+                    user[i].roles = newuser.roles;
                     callback(users[i]);
                 }
             }

@@ -9,25 +9,34 @@
 
     function FormService() {
         var forms = [];
-        forms = [
-            {"_id": "000", "title": "Contacts", "userId": 123},
-            {"_id": "010", "title": "ToDo", "userId": 123},
-            {"_id": "020", "title": "CDs", "userId": 234}
-        ];
+        forms = [{
+            "_id": "000",
+            "title": "Contacts",
+            "userId": 123
+        }, {
+            "_id": "010",
+            "title": "ToDo",
+            "userId": 123
+        }, {
+            "_id": "020",
+            "title": "CDs",
+            "userId": 234
+        }];
 
-        var formapi = {
+        var api = {
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
             updateFormById: updateFormById
         };
 
-        return formapi;
+        return api;
 
-        function createFormForUser(userId, form, callback) {
-            form.userId = userId;
-            forms.push(form);
-            callback(form);
+        function createFormForUser(userId, newForm, callback) {
+            newForm._id = (new Date).getTime();
+            newForm.userId = userId;
+            forms.push(newForm);
+            callback(newForm);
         }
 
         function findAllFormsForUser(userId, callback) {
@@ -37,7 +46,6 @@
                     formsForUser.push(forms[i]);
                 }
             }
-            console.log(formsForUser);
             callback(formsForUser);
         }
 
@@ -58,6 +66,7 @@
                     forms[i].title = newForm.title;
                     forms[i].userId = newForm.userId;
                     callback(forms[i]);
+                    break;
                 }
             }
 

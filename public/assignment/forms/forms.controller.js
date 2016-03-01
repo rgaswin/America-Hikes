@@ -1,14 +1,14 @@
 /**
  * Created by gopal on 2/15/2016.
  */
-(function () {
+(function() {
     "use strict";
     angular
         .module("FormBuilderApp")
         .controller("FormController", FormController);
 
     function FormController($scope, $rootScope, FormService) {
-        FormService.findAllFormsForUser($rootScope.loggedInUser._id, function (data) {
+        FormService.findAllFormsForUser($rootScope.loggedInUser._id, function(data) {
             $scope.forms = data;
         });
 
@@ -21,12 +21,10 @@
         // event handler implementation
         function addForm() {
             var newForm = {
-                _id: (new Date).getTime(),
-                title: $scope.formtitle,
-                userId: $rootScope.loggedInUser._id
+                title: $scope.formtitle
             };
 
-            FormService.createFormForUser($rootScope.loggedInUser._id, newForm, function (form) {
+            FormService.createFormForUser($rootScope.loggedInUser._id, newForm, function(form) {
                 $scope.forms.push(form);
             });
         }
@@ -34,14 +32,13 @@
         function updateForm() {
             if (selectedFormIndex >= 0) {
                 var userId = $scope.forms[selectedFormIndex].userId;
-                var formid = $scope.forms[selectedFormIndex]._id;
-                var newform = {
-                    _id: formid,
+                var formId = $scope.forms[selectedFormIndex]._id;
+                var newForm = {
+                    _id: formId,
                     title: $scope.formtitle,
                     userId: userId
                 };
-                FormService.updateFormById(formid, newform, function (response) {
-                });
+                FormService.updateFormById(formId, newForm, function(response) {});
             }
         }
 
@@ -53,8 +50,8 @@
         }
 
         function deleteForm(index) {
-            var formid = $scope.forms[index]._id;
-            FormService.deleteFormById(formid, function () {
+            var formId = $scope.forms[index]._id;
+            FormService.deleteFormById(formId, function() {
                 $scope.forms.splice(index, 1);
             });
         }

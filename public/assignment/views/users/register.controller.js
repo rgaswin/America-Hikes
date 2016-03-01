@@ -1,7 +1,7 @@
 /**
  * Created by gopal on 2/15/2016.
  */
-(function () {
+(function() {
     "use strict";
     angular
         .module("FormBuilderApp")
@@ -9,8 +9,12 @@
 
     function RegisterController($scope, $rootScope, $location, UserService) {
         var user = {
-            "firstName": $scope.firstName, "lastName": $scope.lastName,
-            "username": $scope.username,"email": $scope.email, "password": $scope.password, "roles": ["student"]
+            "firstName": $scope.firstName,
+            "lastName": $scope.lastName,
+            "username": $scope.username,
+            "email": $scope.email,
+            "password": $scope.password,
+            "roles": ["student"]
         };
 
         // Event Handler Declarations
@@ -21,7 +25,7 @@
             user.username = $scope.username;
             user.password = $scope.password;
             user.email = $scope.email;
-            UserService.createUser(user, function (response) {
+            UserService.createUser(user, function(response) {
                 $rootScope.loggedInUser = response;
                 $location.url("/profile");
             });

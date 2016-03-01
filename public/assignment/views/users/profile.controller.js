@@ -1,7 +1,7 @@
 /**
  * Created by gopal on 2/15/2016.
  */
-(function () {
+(function() {
     "use strict";
     angular
         .module("FormBuilderApp")
@@ -25,7 +25,7 @@
             $rootScope.loggedInUser.lastName = $scope.lastname;
             $rootScope.loggedInUser.email = $scope.email;
             $rootScope.loggedInUser.password = $scope.password;
-            UserService.updateUser($rootScope.loggedInUser._id, $rootScope.loggedInUser, function (ResponseUser) {
+            UserService.updateUser($rootScope.loggedInUser._id, $rootScope.loggedInUser, function(ResponseUser) {
                 $rootScope.loggedInUser = ResponseUser;
             });
         }
