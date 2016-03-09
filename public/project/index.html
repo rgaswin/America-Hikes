@@ -1,56 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="HikerApp">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Aswin Gopalan - Home Page</title>
-
-    <!-- Bootstrap Core CSS -->
+    <title>The Hiker</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/grayscale.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
-          type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="/assignment/css/dashboard.css" rel="stylesheet">
+    <link href="/assignment/css/style.css" rel="stylesheet">
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="views/main/main.controller.js"></script>
+    <script src="views/users/login.controller.js"></script>
+    <script src="views/users/profile.controller.js"></script>
+    <script src="views/users/register.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/sidebar/sidebar.controller.js"></script>
+    <script src="views/search/search.controller.js"></script>
+    <script src="views/home/home.controller.js"></script>
 
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-
-<!-- Navigation -->
-<!-- Intro Header -->
-<header class="intro">
-    <div class="intro-body">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <h2 class="brand-heading">Web Development</h2>
-                    <p class="intro-text">
-                        <a href="https://docs.google.com/document/d/13ktzIMa6aFIDXmKusWwXDViPaHhGvuARlO_tdROjRnE">
-                            Aswin Gopalan - Project Documentation
-                        </a>
-
-                    </p>
-                </div>
-            </div>
+<body ng-controller="MainController">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div ng-include="'views/header/header.view.html'"></div>
         </div>
     </div>
-</header>
+
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <div ng-include="'views/sidebar/sidebar.view.html'"></div>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

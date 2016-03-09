@@ -3,5 +3,5 @@
  */
 (function () {
     angular
-        .module("HikerApp", ["ngroute"]);
+        .module("HikerApp", ["ngRoute"]);
 })();
