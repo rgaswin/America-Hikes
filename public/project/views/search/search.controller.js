@@ -9,6 +9,7 @@
     function SearchController($routeParams, $http, $scope) {
 
         $scope.form = {};
+        $scope.getweather = getweather;
 
         $http.defaults.headers.common.Authorization = 'X-Mashape-Key JpqqeDQjdxmshlSW6xeSFJUKWuFfp1nz7QTjsnuWxTaf8awgDO';
 
@@ -29,8 +30,6 @@
             }
         };
 
-        console.log(url);
-
         $http(req).then(function (result) {
             console.log(result);
             //var filter = result.data.places.city.indexOf(city);
@@ -46,9 +45,67 @@
                 }
             }
             $scope.place = filter;
-            console.log(filter);
+
         }, function (result) {
-            console.log('Error');
+
         });
+
+        //var Flickr = requirejs("flickrapi"),
+        //    flickrOptions = {
+        //        api_key: "8344999c551c14b4b3f671f8df25abd8",
+        //        secret: "2e124629293b8ce3"
+        //    };
+        //
+        //Flickr.tokenOnly(flickrOptions, function(error, flickr) {
+        //    // we can now use "flickr" as our API object,
+        //    // but we can only call public methods and access public data
+        //    console.log(flickr);
+        //
+        //});
+
+        //var req = {
+        //    method: 'GET',
+        //    url: "https://api.forecast.io/forecast/e9ca6bb302fd28ed3733bc20fab313fa/37.8267,-122.423?callback=JSON_CALLBACK"
+        //};
+
+       var currentdate = Date.parse(new Date().getDate())/1000;
+
+
+       console.log(currentdate);
+
+        var url = "https://api.forecast.io/forecast/e9ca6bb302fd28ed3733bc20fab313fa/" + lat + "," + lon + "," + currentdate + "?callback=JSON_CALLBACK";
+
+        $http.jsonp(url).then(
+            function (result) {
+                console.log(result);
+                $scope.weather = result;
+            }, function (result) {
+
+            }
+        );
+
+        function getweather() {
+
+            console.log(Date.parse(new Date().getDate()))
+
+            var date = Date.parse($scope.startdate) / 1000;
+
+            var url = "https://api.forecast.io/forecast/e9ca6bb302fd28ed3733bc20fab313fa/" + lat + "," + lon + ","
+                + date + "?callback=JSON_CALLBACK";
+
+
+            console.log(date);
+
+            $scope.weather = {};
+
+            $http.jsonp(url).then(
+                function (result) {
+                    console.log(result);
+                    $scope.weather = result;
+                }, function (result) {
+
+                }
+            );
+        }
     }
 })();

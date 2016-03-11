@@ -23,7 +23,9 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
-    "express": "^3.21.2"
+    "express": "^3.21.2",
+    "flickrapi": "^0.4.1",
+    "forecast": "^0.2.1"
   },
   "devDependencies": {},
   "bundleDependencies": [],
