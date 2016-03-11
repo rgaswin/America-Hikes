@@ -6,6 +6,28 @@
             <input type="text" ng-model="username" class="form-control" id="inputUserName3" placeholder="User Name">
         </div>
     </div>
+
+    <div class="form-group">
+        <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
+        <div class="col-sm-5">
+            <input type="text" ng-model="firstname" class="form-control" id="inputFirstName" placeholder="First Name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
+        <div class="col-sm-5">
+            <input type="text" ng-model="lastname" class="form-control" id="inputLastName" placeholder="Last Name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputDOB" class="col-sm-2 control-label">Date Of Birth</label>
+        <div class="col-sm-5">
+            <input type="date" ng-model="dob" class="form-control" id="inputDOB" placeholder="Date Of Birth">
+        </div>
+    </div>
+
     <div class="form-group">
         <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
         <div class="col-sm-5">
@@ -25,9 +47,29 @@
             <input type="email" ng-model="email" class="form-control" id="inputEmail3" placeholder="Email">
         </div>
     </div>
+
+    <div class="form-group">
+        <label for="inputTrekExp" class="col-sm-2 control-label">Years Of Trek Experience</label>
+        <div class="col-sm-5">
+            <input type="text" ng-model="yrsOfTrekExp" class="form-control" id="inputTrekExp"
+                   placeholder="Trek Experience in Years">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-5">
+            <label class="notbold">
+                <input type="checkbox">
+                <span class="custom-check"></span>
+                I agree to Terms and Conditions
+            </label><br>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-5">
             <a class="btn btn-primary btn-block" ng-click="register()">Register</a>
         </div>
     </div>
+
+
 </form>

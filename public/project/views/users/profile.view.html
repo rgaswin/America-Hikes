@@ -1,5 +1,18 @@
-<h1 class="page-header">Profile</h1>
 <form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <h1 class="page-header">
+                {{firstname}} , {{lastname}}
+            </h1>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">About Me</label>
+        <div class="col-sm-5">
+            <input type="text" ng-model="aboutme" class="form-control" placeholder="About Me">
+        </div>
+    </div>
     <div class="form-group">
         <label for="inputUserName3" class="col-sm-2 control-label">User Name</label>
         <div class="col-sm-5">
@@ -12,24 +25,45 @@
             <input type="password" ng-model="password" class="form-control" id="inputPassword3" placeholder="Password">
         </div>
     </div>
+
     <div class="form-group">
-        <label for="inputfirstname" class="col-sm-2 control-label">First Name</label>
+        <label for="inputDOB" class="col-sm-2 control-label">Date Of Birth</label>
         <div class="col-sm-5">
-            <input type="text" ng-model="firstname" class="form-control" id="inputfirstname" placeholder="First Name">
+            <input type="date" ng-model="dob" class="form-control" id="inputDOB" placeholder="Date Of Birth">
         </div>
     </div>
-    <div class="form-group">
-        <label for="inputlastname" class="col-sm-2 control-label">Last Name</label>
-        <div class="col-sm-5">
-            <input type="text" ng-model="lastname" class="form-control" id="inputlastname" placeholder="Last Name">
-        </div>
-    </div>
+
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
         <div class="col-sm-5">
             <input type="email" ng-model="email" class="form-control" id="inputEmail3" placeholder="Email">
         </div>
     </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Favourite Treks</label>
+        <div class="col-sm-1" ng-repeat="trek in favoriteTreks">
+            <a href="">{{trek}}</a>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Treks Reviewed</label>
+        <div class="col-sm-1" ng-repeat="trek in treksReviewed">
+            <a href="">{{trek}}</a>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Photos</label>
+        <div class="col-sm-1" ng-repeat="image in trekimages">
+            <a href="">{{image}}</a>
+        </div>
+        <div class="col-sm-1">
+            <button class="btn-group-sm">upload</button>
+        </div>
+    </div>
+
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-5">
             <a href="#/profile" ng-click="update()" class="btn btn-primary btn-block">Update</a>

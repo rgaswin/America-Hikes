@@ -25,6 +25,11 @@
             user.username = $scope.username;
             user.password = $scope.password;
             user.email = $scope.email;
+            user.firstName = $scope.firstname;
+            user.lastName = $scope.lastname;
+            user.dob = $scope.dob;
+            user.yearsOfTrekExperience = $scope.yrsOfTrekExp;
+
             UserService.createUser(user, function(response) {
                 $rootScope.loggedInUser = response;
                 $location.url("/profile");
