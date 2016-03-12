@@ -2,45 +2,15 @@
 <br>
 <div class="container-fluid" ng-controller="HomeController">
     <form class="form-horizontal">
+
         <div class="form-group">
-            <label for="txtDescription" class="col-sm-2 control-label">Description</label>
-            <div class="col-sm-4">
-                <input id="txtDescription" type="text" ng-model="description" class="form-control">
+            <div class="col-sm-10">
+                <input id="txtState" type="text" ng-model="state" class="form-control"
+                       placeholder="Search for Trail By State">
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="txtCity" class="col-sm-2 control-label">City</label>
-            <div class="col-sm-4">
-                <input id="txtCity" type="text" ng-model="city" class="form-control">
+            <div class="col-sm-2">
+                <a class="btn btn-block btn-primary" ng-click="searchByInput()">Search</a>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="txtZip" class="col-sm-2 control-label">Zip</label>
-            <div class="col-sm-4">
-                <input id="txtZip" type="text" ng-model="zip" class="form-control">
-            </div>
-        </div>
-
-        <!--<div class="form-group">-->
-            <!--<label for="txtLatitude" class="col-sm-2 control-label">Latitude</label>-->
-            <!--<div class="col-sm-4">-->
-                <!--<input id="txtLatitude" type="text" ng-model="latitude" class="form-control">-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group">-->
-            <!--<label for="txtLongtitude" class="col-sm-2 control-label">Longtitude</label>-->
-            <!--<div class="col-sm-4">-->
-                <!--<input id="txtLongtitude" type="text" ng-model="longtitude" class="form-control">-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-4">
-              <a class="btn btn-block btn-primary" ng-click="searchByInput()">Search</a>
-          </div>
         </div>
 
         <div>
@@ -69,7 +39,5 @@
                 </tbody>
             </table>
         </div>
-
-
     </form>
 </div>
