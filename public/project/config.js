@@ -28,6 +28,10 @@
                 templateUrl: "views/admin/admin.view.html",
                 controller: "AdminController"
             })
+            .when("/event", {
+                templateUrl: "views/event/event.view.html",
+                controller: "EventController"
+            })
             .when("/forms", {
                 templateUrl: "forms/forms.view.html",
                 controller: "FormController"

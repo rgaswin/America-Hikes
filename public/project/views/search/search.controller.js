@@ -6,11 +6,12 @@
         .module("HikerApp")
         .controller("SearchController", SearchController);
 
-    function SearchController($routeParams, $http, $scope) {
+    function SearchController($routeParams, $http, $scope, UserDataService, $rootScope) {
 
         $scope.form = {};
         $scope.getweather = getweather;
-
+        $scope.addcomment = addcomment;
+        $scope.deletecomment = deletecomment;
         $http.defaults.headers.common.Authorization = 'X-Mashape-Key JpqqeDQjdxmshlSW6xeSFJUKWuFfp1nz7QTjsnuWxTaf8awgDO';
 
         var lat = $routeParams.lat;
@@ -68,10 +69,10 @@
         //    url: "https://api.forecast.io/forecast/e9ca6bb302fd28ed3733bc20fab313fa/37.8267,-122.423?callback=JSON_CALLBACK"
         //};
 
-       var currentdate = Date.parse(new Date().getDate())/1000;
+        var currentdate = Date.parse(new Date().getDate()) / 1000;
 
 
-       console.log(currentdate);
+        console.log(currentdate);
 
         var url = "https://api.forecast.io/forecast/e9ca6bb302fd28ed3733bc20fab313fa/" + lat + "," + lon + "," + currentdate + "?callback=JSON_CALLBACK";
 
@@ -107,5 +108,36 @@
                 }
             );
         }
+
+        console.log($scope.loggedInUser !== null && typeof($scope.loggedInUser) !== "undefined");
+
+        if ($scope.loggedInUser !== null && typeof($scope.loggedInUser) !== "undefined") {
+            UserDataService.findAllCommentsForUser($rootScope.loggedInUser._id, function (result) {
+                $scope.comments = result;
+                console.log(result);
+            });
+
+            console.log($scope.loggedInUser);
+
+        }
+
+        function addcomment() {
+            console.log($rootScope.loggedInUser._id);
+            console.log($scope.comment);
+
+            UserDataService.createCommentForUser($rootScope.loggedInUser._id, $scope.comment, $rootScope.loggedInUser.username, function (result) {
+                console.log(result);
+                $scope.comments.push(result);
+                $scope.comment = "";
+            });
+        };
+
+        function deletecomment(index) {
+            var commentId = $scope.comments[index]._id;
+            UserDataService.deleteCommentById(commentId,function(result){
+                $scope.comments.splice(index, 1);
+            });
+        }
+
     }
 })();
