@@ -69,8 +69,9 @@
             for (var i = 0; i < comments.length; i++) {
                 if (comments[i]._id === commentId) {
                     comments[i]._id = newComment._id;
-                    comments[i].title = newComment.title;
+                    comments[i].comment = newComment.comment;
                     comments[i].userId = newComment.userId;
+                    comments[i].username = newComment.username;
                     callback(comments[i]);
                     break;
                 }
