@@ -64,3 +64,13 @@ function findFormByTitle(title) {
     }
     return form;
 }
+
+function findFormById(Id) {
+    var form = null;
+    for (var i = 0; i < forms.length; i++) {
+        if (forms[i].title === Id) {
+            form = forms[i];
+        }
+    }
+    return form;
+}
