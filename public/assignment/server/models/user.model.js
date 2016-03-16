@@ -12,21 +12,13 @@ module.exports = function () {
         findAllUsers: findAllUsers,
         createUser: createUser,
         deleteUserById: deleteUserById,
-        updateUser: updateUser
+        updateUser: updateUser,
+        findUserByUsername: findUserByUsername,
+        findUserById: findUserById
     };
 
     return api;
 
-    function findUserByUsername(username){
-        var user = null;
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].username === username) {
-                user = users[i];
-                break;
-            }
-        }
-        return user;
-    }
 
     function findUserByCredentials(credentials) {
         var loggedInUser = null;
@@ -59,7 +51,7 @@ module.exports = function () {
         return users;
     }
 
-    function updateUser(userId, newuser) {
+    function updateUser(userId,newuser) {
         for (var i = 0; i < users.length; i++) {
             if (users[i].id === userId) {
                 users[i].name = newuser.name;
@@ -72,4 +64,30 @@ module.exports = function () {
             }
         }
     }
+
+    function findUserByUsername(username) {
+        var user = null;
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].username === username) {
+                user = users[i];
+                break;
+            }
+        }
+        return user;
+    }
+
+    function findUserById(id) {
+        var user = null;
+        for (var i = 0; i < users.length; i++) {
+            if (users[i]._id === id) {
+                user = users[i];
+                break;
+            }
+        }
+        return user;
+    }
 }
+
+
+
+
