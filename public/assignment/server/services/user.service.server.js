@@ -3,8 +3,8 @@
  */
 module.exports = function (app, model, db) {
 
-    app.post("/api/assignment/user/", createUser);
-    app.get("/api/assignment/user/", findAllUsers);
+    app.post("/api/assignment/user", createUser);
+    app.get("/api/assignment/user", findAllUsers);
     app.get("/api/assignment/user/:id", findUserById);
     app.get("/api/assignment/user/username/:username", findUserByUsername);
     app.get("/api/assignment/user/username/:username/password/:password", findUserByCredentials);
@@ -50,7 +50,7 @@ module.exports = function (app, model, db) {
     function findUserByCredentials(req, res) {
         var username = req.params.username;
         var password = req.params.password;
-        var userResponse = model.findUserByCredentials(userId);
+        var userResponse = model.findUserByCredentials(username,password);
         res.json(userResponse);
     }
 }

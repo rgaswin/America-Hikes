@@ -8,8 +8,8 @@
         .controller("FormController", FormController);
 
     function FormController($scope, $rootScope, FormService) {
-        FormService.findAllFormsForUser($rootScope.loggedInUser._id, function(data) {
-            $scope.forms = data;
+        FormService.findAllFormsForUser($rootScope.loggedInUser._id).then(function(response) {
+            $scope.forms = response.data;
         });
 
         // event handler declarations
@@ -24,8 +24,9 @@
                 title: $scope.formtitle
             };
 
-            FormService.createFormForUser($rootScope.loggedInUser._id, newForm, function(form) {
-                $scope.forms.push(form);
+            FormService.createFormForUser($rootScope.loggedInUser._id, newForm).then(function(response) {
+                console.log(response.data);
+                $scope.forms = response.data;
             });
         }
 
@@ -38,7 +39,9 @@
                     title: $scope.formtitle,
                     userId: userId
                 };
-                FormService.updateFormById(formId, newForm, function(response) {});
+                FormService.updateFormById(formId, newForm).then(function(response) {
+                    $scope.forms = response.data;
+                });
             }
         }
 
@@ -51,8 +54,8 @@
 
         function deleteForm(index) {
             var formId = $scope.forms[index]._id;
-            FormService.deleteFormById(formId, function() {
-                $scope.forms.splice(index, 1);
+            FormService.deleteFormById(formId).then(function(response) {
+                $scope.forms = response.data;
             });
         }
     }

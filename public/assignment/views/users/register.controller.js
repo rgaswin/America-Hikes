@@ -1,34 +1,31 @@
 /**
  * Created by gopal on 2/15/2016.
  */
-(function() {
+(function () {
     "use strict";
     angular
         .module("FormBuilderApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($scope, $rootScope, $location, UserService) {
-        var user = {
-            "firstName": $scope.firstName,
-            "lastName": $scope.lastName,
-            "username": $scope.username,
-            "email": $scope.email,
-            "password": $scope.password,
-            "roles": ["student"]
-        };
-
+    function RegisterController($rootScope, $location, UserService) {
+        var vm = this;
         // Event Handler Declarations
-        $scope.register = register;
+        vm.register = register;
 
         // Event Handler Implementations
-        function register() {
-            user.username = $scope.username;
-            user.password = $scope.password;
-            user.email = $scope.email;
-            UserService.createUser(user, function(response) {
-                $rootScope.loggedInUser = response;
-                $location.url("/profile");
-            });
+        function register(user) {
+            var usr = {
+              username : user.username,
+              password : user.password,
+              email : user.email
+            };
+            UserService.createUser(usr).then(function (response) {
+                    $rootScope.loggedInUser = usr;
+                    $location.url("/profile");
+                },
+                function (error) {
+                    console.log(error);
+                });
         }
     }
 })();

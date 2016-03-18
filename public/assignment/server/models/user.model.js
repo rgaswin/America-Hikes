@@ -20,10 +20,10 @@ module.exports = function () {
     return api;
 
 
-    function findUserByCredentials(credentials) {
+    function findUserByCredentials(username, password) {
         var loggedInUser = null;
         for (var i = 0; i < users.length; i++) {
-            if (users[i].username === credentials.username && users[i].password === credentials.password) {
+            if (users[i].username === username && users[i].password === password) {
                 loggedInUser = users[i];
                 break;
             }
@@ -51,15 +51,17 @@ module.exports = function () {
         return users;
     }
 
-    function updateUser(userId,newuser) {
+    function updateUser(userId, newuser) {
         for (var i = 0; i < users.length; i++) {
-            if (users[i].id === userId) {
+            userId = parseInt(userId);
+            if (users[i]._id === userId) {
                 users[i].name = newuser.name;
                 users[i].firstName = newuser.firstName;
                 users[i].lastName = newuser.lastName;
                 users[i].username = newuser.username;
                 users[i].password = newuser.password;
-                user[i].roles = newuser.roles;
+                users[i].email = newuser.email;
+                users[i].roles = newuser.roles;
                 return users[i];
             }
         }
