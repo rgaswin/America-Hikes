@@ -19,8 +19,7 @@
                 function (response) {
                     console.log(response);
                     if (response.data !== null && typeof(response.data) !== 'undefined') {
-                        $rootScope.loggedInUser = response.data;
-                        console.log( $rootScope.loggedInUser);
+                        UserService.setCurrentUser(response.data);
                         if ($rootScope.loggedInUser.roles !== null &&
                             typeof($rootScope.loggedInUser.roles) !== 'undefined' && $rootScope.loggedInUser.roles.indexOf('admin') >= 0) {
                             $location.url("/admin");
@@ -30,7 +29,6 @@
                     }
                     else {
                         model.message = "Invalid Credentials";
-                        console.log(model.message);
                     }
                 },
                 function (response) {

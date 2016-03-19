@@ -9,7 +9,12 @@
         var fid = $routeParams["formId"];
         model.addField = addField;
         model.removeField = removeField;
-        model.movable = {axis: 'y'};
+
+        function init(){
+            model.movable = {axis: 'y'};
+        }
+
+        init();
 
         FieldService.findFieldsForForm(fid)
             .then(function (response) {

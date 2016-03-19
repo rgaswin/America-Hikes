@@ -15,9 +15,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assignment/client/css/dashboard.css" rel="stylesheet">
     <link href="/assignment/client/css/style.css" rel="stylesheet">
-    <script src="/assignment/client/js/ui-sortable.js"></script>
+
     <script src="../app.js"></script>
     <script src="../config.js"></script>
+    <script src="/assignment/client/js/ui-sortable.js"></script>
     <script src="services/user.service.client.js"></script>
     <script src="services/forms.service.client.js"></script>
     <script src="services/fields.service.client.js"></script>
@@ -35,16 +36,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <div ng-include = "'views/header/header.view.html'"></div>
+            <div ng-include="'views/header/header.view.html'"></div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar" >
-            <div ng-include = "'views/sidebar/sidebar.view.html'"></div>
+        <div class="col-sm-3 col-md-2 sidebar">
+            <div ng-include="'views/sidebar/sidebar.view.html'"></div>
         </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-view>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view>
         </div>
 
     </div>

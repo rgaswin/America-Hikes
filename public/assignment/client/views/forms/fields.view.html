@@ -2,7 +2,7 @@
 
 <ul class="nav nav-tabs">
     <li role="presentation"><a href="#/forms">Forms</a></li>
-    <li role="presentation" class="active"><a href="#/fields">Fields</a></li>
+    <li role="presentation" class="active"><a href="#/forms">Fields</a></li>
 </ul>
 <br>
 <div class="container-fluid" id="formFields">
@@ -20,10 +20,10 @@
                 <div class="col-xs-6">
                     <div ng-switch="field.type">
                         <div ng-switch-when="TEXT">
-                            <input type="text" class="form-control" placeholder="field.placeholder">
+                            <input type="text" class="form-control" placeholder="{{field.placeholder}}">
                         </div>
                         <div ng-switch-when="DATE">
-                            <input type="date" class="form-control" placeholder="field.placeholder">
+                            <input type="date" class="form-control" placeholder="{{field.placeholder}}">
                         </div>
                         <div ng-switch-when="OPTIONS">
                             <select name="gender" id="inputGender" class="form-control">
@@ -43,7 +43,8 @@
                             </div>
                         </div>
                         <div ng-switch-when="TEXTAREA">
-                            <textarea class="form-control" rows="4" id="comment"></textarea>
+                            <textarea class="form-control" rows="4" id="comment"
+                                      placeholder="{{field.placeholder}}"></textarea>
                         </div>
                         <div ng-switch-default>
                             <input type="{{field.type}}" class="form-control" placeholder="{{field.placeholder}}">
@@ -56,7 +57,7 @@
                                                                   aria-hidden="true"></span></a>
                     <a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
                     <a href="" ng-click="model.removeField($index)"><span class="glyphicon glyphicon-remove"
-                                                                           aria-hidden="true"></span></a>
+                                                                          aria-hidden="true"></span></a>
                     <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
                 </div>
             </div>
