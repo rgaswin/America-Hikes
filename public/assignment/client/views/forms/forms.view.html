@@ -21,7 +21,7 @@
 
     <tbody>
     <tr ng-repeat="formmodel in form.forms">
-        <td><a href="#/fields">{{formmodel.title}}</a></td>
+        <td><a href="#/form/{{formmodel._id}}/fields">{{formmodel.title}}</a></td>
         <td><a ng-click="form.deleteForm($index)"><span class="glyphicon glyphicon-remove iconsize"></span></a>
             <a ng-click="form.selectForm($index)"><span class="glyphicon glyphicon-pencil iconsize"></span></a></td>
     </tr>

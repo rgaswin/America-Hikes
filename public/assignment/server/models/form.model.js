@@ -78,7 +78,7 @@ module.exports = function () {
     function findFormById(Id) {
         var form = null;
         for (var i = 0; i < forms.length; i++) {
-            if (parseInt(forms[i]._id) === parseInt(formId)) {
+            if (parseInt(forms[i]._id) === parseInt(Id)) {
                 form = forms[i];
                 break;
             }
@@ -118,7 +118,7 @@ module.exports = function () {
 
     function createFieldForForm(formId, field) {
         var form = findFormById(formId);
-        form.fields.push(formId);
+        form.fields.push(field);
         return form.fields;
     }
 
