@@ -8,7 +8,7 @@
 
     function HomeController($scope, $http) {
 
-        $http.defaults.headers.common.Authorization = 'X-Mashape-Key JpqqeDQjdxmshlSW6xeSFJUKWuFfp1nz7QTjsnuWxTaf8awgDO';
+   //     $http.defaults.headers.common.Authorization = 'X-Mashape-Key JpqqeDQjdxmshlSW6xeSFJUKWuFfp1nz7QTjsnuWxTaf8awgDO';
         $scope.searchByInput = searchByInput;
 
         function searchByInput() {

@@ -23,8 +23,6 @@
         $scope.treksReviewed = ["Trek1", "Trek2","Trek3"];
         $scope.trekimages = ["Image1","Image2","Image3","Image4"];
 
-      //  console.log($scope.favoriteTreks);
-
         // Event Handler Declarations
         $scope.update = update;
 

@@ -1,7 +1,5 @@
 <br>
 <br>
-
-
 <div class="container-fluid" ng-controller="HomeController">
     <form class="form-horizontal">
         Search for a trail based on a state. If nothing is given as input, default trails are listed.
@@ -28,7 +26,7 @@
                 <tbody>
                 <tr ng-repeat="place in places.data.places">
                     <td>
-                        <img src="{{place.activities[0].thumbnail}}"
+                        <img ng-src="{{place.activities[0].thumbnail}}"
                              height="100px"/>
                     </td>
                     <td>
