@@ -1,7 +1,7 @@
 /**
  * Created by gopal on 2/15/2016.
  */
-(function() {
+(function () {
     "use strict";
     angular
         .module("HikerApp")
@@ -14,19 +14,22 @@
         $scope.username = $rootScope.loggedInUser.username;
         $scope.email = $rootScope.loggedInUser.email;
         $scope.password = $rootScope.loggedInUser.password;
-        $scope.dob =  $rootScope.loggedInUser.dob;
+        $scope.dob = $rootScope.loggedInUser.dob;
         $scope.firstname = $rootScope.loggedInUser.firstName;
         $scope.lastname = $rootScope.loggedInUser.lastName;
 
         // Adding Test data at the moment
-         UserService.TrailsForUser($rootScope.loggedInUser._id).then(
-            function(response)
-            {
-                $scope.favoriteTreks = response.data;
+        UserService.TrailsForUser($rootScope.loggedInUser._id).then(
+            function (response) {
+                if (response.data == "") {
+                    $scope.favoriteTreks = ["None"];
+                }
+                else
+                    $scope.favoriteTreks = response.data;
             }
         );
-        $scope.treksReviewed = ["Trek1", "Trek2","Trek3"];
-        $scope.trekimages = ["Image1","Image2","Image3","Image4"];
+        $scope.treksReviewed = ["Trek1", "Trek2", "Trek3"];
+        $scope.trekimages = ["Image1", "Image2", "Image3", "Image4"];
 
         // Event Handler Declarations
         $scope.update = update;
@@ -39,8 +42,8 @@
             $rootScope.loggedInUser.lastName = $scope.lastname;
             $rootScope.loggedInUser.email = $scope.email;
             $rootScope.loggedInUser.password = $scope.password;
-            $rootScope.loggedInUser.dob = $scope.dob ;
-            UserService.updateUser($rootScope.loggedInUser._id, $rootScope.loggedInUser, function(ResponseUser) {
+            $rootScope.loggedInUser.dob = $scope.dob;
+            UserService.updateUser($rootScope.loggedInUser._id, $rootScope.loggedInUser, function (ResponseUser) {
                 $rootScope.loggedInUser = ResponseUser;
             });
         }

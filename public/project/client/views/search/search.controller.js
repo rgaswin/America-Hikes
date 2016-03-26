@@ -62,7 +62,11 @@
             if (currentUser) {
                 UserService.getAllUsersForTrail(currentTrail).then(
                     function (response) {
-                        vm.userTrails = response.data;
+                        if (response.data == "")
+                            vm.userTrails = ["None"];
+                        else
+                            vm.userTrails = response.data;
+
                     }
                 )
             }
