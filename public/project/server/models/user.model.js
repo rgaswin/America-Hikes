@@ -1,4 +1,3 @@
-
 // load mock data into users
 var users = require("./user.mock.json");
 
@@ -7,12 +6,14 @@ module.exports = function () {
     var api = {
         findUserByCredentials: findUserByCredentials,
         findAllUsers: findAllUsers,
+        findUserById: findUserById,
         createUser: createUser,
         deleteUserById: deleteUserById,
         updateUser: updateUser,
         findUserByUsername: findUserByUsername,
-        findUserById: findUserById
-    };
+        findUserById: findUserById,
+        getAllUserNamesForTrail: getAllUserNamesForTrail
+};
 
     return api;
 
@@ -78,12 +79,23 @@ module.exports = function () {
     function findUserById(id) {
         var user = null;
         for (var i = 0; i < users.length; i++) {
-            if (users[i]._id === id) {
+            if (users[i]._id === parseInt(id)) {
                 user = users[i];
                 break;
             }
         }
         return user;
+    }
+
+    function getAllUserNamesForTrail(trailId) {
+        var userNames = [];
+        for (var u in users) {
+            for (var l in users[u].likes) {
+                if (users[u].likes[l] == trailId)
+                    userNames.push(users[u].firstName);
+            }
+        }
+        return userNames;
     }
 }
 

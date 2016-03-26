@@ -19,7 +19,12 @@
         $scope.lastname = $rootScope.loggedInUser.lastName;
 
         // Adding Test data at the moment
-        $scope.favoriteTreks = ["Trek1", "Trek2","Trek3"];
+         UserService.TrailsForUser($rootScope.loggedInUser._id).then(
+            function(response)
+            {
+                $scope.favoriteTreks = response.data;
+            }
+        );
         $scope.treksReviewed = ["Trek1", "Trek2","Trek3"];
         $scope.trekimages = ["Image1","Image2","Image3","Image4"];
 

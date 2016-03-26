@@ -54,5 +54,8 @@
             $rootScope.loggedInUser = null;
             return null;
         }
+
+
+
     }
 })();

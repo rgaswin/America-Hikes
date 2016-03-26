@@ -7,6 +7,7 @@ module.exports = function (app, model, db) {
     app.get("/api/project/user/username/:username/password/:password", findUserByCredentials);
     app.put("/api/project/user/:id", updateUser);
     app.delete("/api/project/user/:id", deleteUserById);
+    app.get("/api/project/trail/:trailId/users", UsersForTrail);
 
     function createUser(req, res) {
         var user = req.body;
@@ -47,7 +48,14 @@ module.exports = function (app, model, db) {
     function findUserByCredentials(req, res) {
         var username = req.params.username;
         var password = req.params.password;
-        var userResponse = model.findUserByCredentials(username,password);
+        var userResponse = model.findUserByCredentials(username, password);
         res.json(userResponse);
     }
+
+    function UsersForTrail(req,res){
+        var trailId = req.params.trailId;
+        var userNames = model.getAllUserNamesForTrail(trailId);
+        res.json(userNames);
+    }
+
 }

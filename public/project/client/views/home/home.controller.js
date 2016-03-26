@@ -34,6 +34,7 @@
 
             $http(req).then(function (result) {
                 $scope.places = result;
+                console.log(result);
             }, function (result) {
                 console.log("Error : " + result);
             });

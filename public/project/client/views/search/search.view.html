@@ -2,10 +2,10 @@
     <div class="form-group page-header">
         <div class="row">
             <div class="col-sm-4">
-                <h2>{{place.name}}</h2>
+                <h2>{{model.place.name}}</h2>
             </div>
             <div class="col-sm-2">
-                <button class="btn-group-sm">Like</button>
+                <button class="btn-group-sm" ng-click="model.favorite(model.place)">Like</button>
             </div>
         </div>
     </div>
@@ -13,32 +13,32 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Description</label>
         <div class="col-sm-4 control-label">
-            {{place.activities[0].description}}
+            {{model.place.activities[0].description}}
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-2 control-label">City</label>
         <div class="col-sm-4 control-label">
-            {{place.city}}
+            {{model.place.city}}
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-2 control-label">Country</label>
         <div class="col-sm-4 control-label">
-            {{place.country}}
+            {{model.place.country}}
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-2 control-label">State</label>
         <div class="col-sm-4 control-label">
-            {{place.state}}
+            {{model.place.state}}
         </div>
     </div>
 
-    <div class="form-group form-horizontal" ng-repeat="data in weather.data.daily.data">
+    <div class="form-group form-horizontal" ng-repeat="data in model.weather.data.daily.data">
         <label class="col-sm-2 control-label">Weather</label>
         <div class="col-sm-3 control-label">
             {{data.summary}}
@@ -48,14 +48,22 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Get Weather Information For a Future Date</label>
         <div class="col-sm-3">
-            <input type="date" class="form-control" ng-model="startdate">
+            <input type="date" class="form-control" ng-model="model.startdate">
         </div>
         <div class="col-sm-2">
-            <a ng-click="getweather()" class="btn btn-primary">Weather Info</a>
+            <a ng-click="model.getweather()" class="btn btn-primary">Weather Info</a>
         </div>
     </div>
 
     <div ng-show="{{loggedInUser}}">
+
+        <div class="form-group">
+            <h3 class="page-header">Users Who Liked this trail</h3>
+            <div class="col-sm-8" ng-repeat="trail in model.userTrails">
+                 {{trail}}
+            </div>
+        </div>
+
 
         <div class="form-group">
             <h3 class="page-header">Rate the Trek</h3>
@@ -110,24 +118,24 @@
         <div class="form-group">
             <h3 class="page-header">Reviews</h3>
             <div class="col-sm-8">
-        <textarea ng-model="comment" class="form-control" rows="4" cols="50">
+        <textarea ng-model="model.comment" class="form-control" rows="4" cols="50">
         </textarea>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-2">
-                <button class="btn-group-sm" ng-click="addcomment()">Add Comment</button>
+                <button class="btn-group-sm" ng-click="model.addcomment()">Add Comment</button>
             </div>
             <div class="col-sm-2">
-                <button class="btn-group-sm" ng-click="updatecomment()">Update Comment</button>
+                <button class="btn-group-sm" ng-click="model.updatecomment()">Update Comment</button>
             </div>
 
 
         </div>
 
 
-        <div class="form-group" ng-repeat="comment in comments">
+        <div class="form-group" ng-repeat="comment in model.comments">
             <div class="col-sm-3">
                 {{comment.comment}}
             </div>
@@ -137,8 +145,8 @@
             </div>
 
             <div class="col-sm-2">
-                <button class="btn-group-sm" ng-click="deletecomment($index)">Delete</button>
-                <button class="btn-group-sm" ng-click="selectcomment($index)">Select</button>
+                <button class="btn-group-sm" ng-click="model.deletecomment($index)">Delete</button>
+                <button class="btn-group-sm" ng-click="model.selectcomment($index)">Select</button>
             </div>
         </div>
 

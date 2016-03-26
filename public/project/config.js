@@ -47,7 +47,8 @@
             })
             .when("/search/:lat/:lon/:trailname/:city", {
                 templateUrl: "views/search/search.view.html",
-                controller: "SearchController"
+                controller: "SearchController",
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "/home"
