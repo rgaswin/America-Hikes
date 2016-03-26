@@ -30,8 +30,8 @@
             user.dob = $scope.dob;
             user.yearsOfTrekExperience = $scope.yrsOfTrekExp;
 
-            UserService.createUser(user, function(response) {
-                $rootScope.loggedInUser = response;
+            UserService.createUser(user).then(function(response) {
+                $rootScope.loggedInUser = response.data;
                 $location.url("/profile");
             });
         }
