@@ -9,9 +9,9 @@
         var fid = $routeParams["formId"];
         model.addField = addField;
         model.removeField = removeField;
-
+        model.sortFields = {axis: 'y'};
         function init(){
-            model.movable = {axis: 'y'};
+
         }
 
         init();
