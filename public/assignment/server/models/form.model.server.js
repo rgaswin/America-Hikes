@@ -1,12 +1,16 @@
 /**
  * Created by gopal on 3/16/2016.
  */
-
-
 // load mock data into forms
 var forms = require("./form.mock.json");
+// load q promise library
+var q = require("q");
 
-module.exports = function (db,mongoose) {
+module.exports = function (db, mongoose) {
+
+    var FormSchema = require("./form.schema.server.js")(mongoose);
+    // create user model from schema
+    var FormModel = mongoose.model('form', FormSchema);
 
     var api = {
         createFormForUser: createFormForUser,
@@ -24,45 +28,75 @@ module.exports = function (db,mongoose) {
     return api;
 
     function createFormForUser(userId, newForm) {
-        newForm._id = (new Date).getTime();
         newForm.userId = userId;
-        forms.push(newForm);
-        return findAllFormsForUser(userId);
+        var deffered = q.defer();
+        FormModel.create(newForm, function (err, doc) {
+            if (err) {
+                deffered.reject(err);
+            }
+            else {
+                FormModel.find({userId: userId}, function (err, doc) {
+                    if (err) {
+                        deffered.reject(err);
+                    }
+                    else {
+                        deffered.resolve(doc);
+                    }
+                });
+            }
+        });
+        return deffered.promise;
     }
 
     function findAllFormsForUser(userId) {
-        var formsForUser = [];
-        userId = parseInt(userId);
-        for (var i = 0; i < forms.length; i++) {
-            if (parseInt(forms[i].userId) === userId) {
-                formsForUser.push(forms[i]);
+        var deffered = q.defer();
+        FormModel.find({userId: userId}, function (err, doc) {
+            if (err) {
+                deffered.reject(err);
             }
-        }
-        return formsForUser;
+            else {
+                deffered.resolve(doc);
+            }
+        });
+        return deffered.promise;
     }
 
     function deleteFormById(formId) {
-        var userId = null;
-        for (var i = 0; i < forms.length; i++) {
-            if (parseInt(forms[i]._id) === parseInt(formId)) {
-                userId = forms[i].userId;
-                forms.splice(i, 1);
-                break;
+        var deffered = q.defer();
+        FormModel.findOneAndRemove({_id: formId}, function (err, doc) {
+            if (err) {
+                deffered.reject(err);
             }
-        }
-        return findAllFormsForUser(userId);
+            else {
+                deffered.resolve(doc);
+            }
+        });
+        return deffered.promise;
     }
 
     function updateFormById(formId, newForm) {
-        for (var i = 0; i < forms.length; i++) {
-            if (parseInt(forms[i]._id) === parseInt(formId)) {
-                forms[i]._id = newForm._id;
-                forms[i].title = newForm.title;
-                forms[i].userId = newForm.userId;
-                break;
-            }
-        }
-        return findAllFormsForUser(newForm.userId);
+        var deferred = q.defer();
+        FormModel.update({_id: formId},
+            {
+                title: newForm.title,
+                updated: new Date()
+            }, function (err, doc) {
+                if (err) {
+                    // reject promise if error
+                    deferred.reject(err);
+                } else {
+                    // resolve promise
+                    FormModel.find({userId: newForm.userId}, function (err, doc) {
+                        if (err) {
+                            deferred.reject(err);
+                        }
+                        else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+        return deferred.promise;
     }
 
     function findFormByTitle(title) {
@@ -125,7 +159,7 @@ module.exports = function (db,mongoose) {
     function updateFieldByFormId(formId, field) {
         var form = findFormById(formId);
         for (var i = 0; i < form.fields.length; i++) {
-            if(parseInt(form.field[i]._id) === parseInt(field._id)){
+            if (parseInt(form.field[i]._id) === parseInt(field._id)) {
                 form.field[i].label = field.label;
                 form.field[i].type = field.type;
                 form.field[i].placeholder = field.placeholder;

@@ -10,33 +10,73 @@ module.exports = function (app, model, db) {
 
     function findAllFormsForUser(req, res) {
         var userId = req.params.userId;
-        var forms = model.findAllFormsForUser(userId);
-        res.json(forms);
+        model.findAllFormsForUser(userId).then(
+            function (doc) {
+                res.json(doc);
+            },
+            function (err) {
+                res.status(400).json(err);
+            }
+        );
     }
 
     function findFormById(req, res) {
         var formId = req.params.formId;
-        var form = model.findFormById(formId);
-        res.json(form);
+        model.findFormById(formId).then(
+            function (doc) {
+                res.json(doc);
+            },
+            function (err) {
+                res.status(400).json(err);
+            }
+        );
     }
 
     function deleteFormById(req, res) {
         var formId = req.params.formId;
-        var forms = model.deleteFormById(formId);
-        res.json(forms);
+        model
+            .deleteFormById(formId).then(
+            function (doc) {
+                model
+                    .findAllFormsForUser(doc.userId)
+                    .then(
+                        function (doc) {
+                            res.json(doc);
+                        },
+                        function (err) {
+                            res.status(400).json(doc);
+                        }
+                    )
+            },
+            function (err) {
+                res.status(400).json(err);
+            }
+        );
     }
 
     function createFormForUser(req, res) {
         var userId = req.params.userId;
         var newForm = req.body;
-        var forms = model.createFormForUser(userId, newForm);
-        res.json(forms);
+        model.createFormForUser(userId, newForm).then(
+            function (doc) {
+                res.json(doc);
+            },
+            function (err) {
+                res.status(400).json(err);
+            }
+        );
     }
 
     function updateFormById(req, res) {
         var formId = req.params.formId;
         var form = req.body;
-        var forms = model.updateFormById(formId, form);
-        res.json(forms);
+        model.updateFormById(formId, form).then(
+            function (doc) {
+                res.json(doc);
+            },
+            function (err) {
+                res.status(400).json(err);
+            }
+        );
     }
 }

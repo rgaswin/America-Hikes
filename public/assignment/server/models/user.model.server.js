@@ -132,14 +132,15 @@ module.exports = function (db, mongoose) {
     }
 
     function findUserByUsername(username) {
-        var user = null;
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].username === username) {
-                user = users[i];
-                break;
+        var deferred = q.defer();
+        UserModel.find({name:username}, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-        return user;
+        });
+        return deferred.promise;
     }
 
     function findUserById(userId) {
