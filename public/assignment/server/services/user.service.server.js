@@ -13,44 +13,99 @@ module.exports = function (app, model, db) {
 
     function createUser(req, res) {
         var user = req.body;
-        var userResponse = model.createUser(user);
-        res.json(userResponse);
+        user = model.createUser(user).then(
+            // login user if promise resolved
+            function (doc) {
+                res.json(user);
+            },
+            // send error if promise rejected
+            function (err) {
+                res.status(400).send(err);
+            }
+        );
     }
 
     function findAllUsers(req, res) {
-        var userResponse = model.findAllUsers();
-        res.json(userResponse);
+        var users = model.findAllUsers()
+            .then(
+                // return all users if promise resolved
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+        res.json(users);
     }
 
     function findUserById(req, res) {
         var userId = req.params.id;
-        var userResponse = model.findUserById(userid);
-        res.json(userResponse);
+        var user = model.findUserById(userId)
+            .then(
+                // return user if promise resolved
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function updateUser(req, res) {
         var userId = req.params.id;
         var user = req.body;
-        var userResponse = model.updateUser(userId, user);
-        res.json(userResponse);
+        model.updateUser(userId, user).then(
+            // return user if promise resolved
+            function (doc) {
+                res.json(doc);
+            },
+            function (err) {
+                res.json(err);
+            }
+        );
     }
 
     function deleteUserById(req, res) {
         var userId = req.params.id;
-        var userResponse = model.deleteUserById(userId);
-        res.json(userResponse);
+        var userResponse = model.deleteUserById(userId).then(
+            // return user if promise resolved
+            function (doc) {
+                res.json(doc);
+            },
+            function (err) {
+                res.json(err);
+            }
+        );
     }
 
     function findUserByUsername(req, res) {
         var username = req.params.username;
-        var userResponse = model.findUserByUsername(username);
-        res.json(userResponse);
+        var userResponse = model.findUserByUsername(username).then(
+            // return user if promise resolved
+            function (doc) {
+                res.json(doc);
+            },
+            function (err) {
+                res.json(err);
+            }
+        );
     }
 
     function findUserByCredentials(req, res) {
         var username = req.params.username;
         var password = req.params.password;
-        var userResponse = model.findUserByCredentials(username,password);
-        res.json(userResponse);
+        var userResponse = model.findUserByCredentials(username, password).then(
+            function (doc) {
+                res.json(doc);
+            },
+            // send error if promise rejected
+            function (err) {
+                res.status(400).send(err);
+            }
+        );
     }
 }

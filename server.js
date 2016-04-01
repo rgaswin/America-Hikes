@@ -1,23 +1,37 @@
 var express = require('express');
 var app = express();
-var bodyParser    = require('body-parser');
-var multer        = require('multer');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+// install and require the mongoose library
+var mongoose = require('mongoose');
+
+// create a default connection string
+var connectionString = 'mongodb://127.0.0.1:27017/assignment';
+
+if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_APP_NAME;
+}
+
+// connect to the database
+var db = mongoose.connect(connectionString);
 app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(multer());
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 // server side 'app' reference for assignment code.
-require("./public/assignment/server/app.js")(app);
+require("./public/assignment/server/app.js")(app,db,mongoose);
 
 // server side 'app' reference for project code.
-require("./public/project/server/app.js")(app);
+require("./public/project/server/app.js")(app,db,mongoose);
 
-app.get('/hello', function(req, res){
+app.get('/hello', function (req, res) {
     res.send('hello world');
 });
 

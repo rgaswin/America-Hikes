@@ -27,7 +27,9 @@
     "express": "^3.21.2",
     "flickrapi": "^0.4.1",
     "forecast": "^0.2.1",
-    "multer": "^1.1.0"
+    "mongoose": "^4.4.10",
+    "multer": "^1.1.0",
+    "q": "^1.4.1"
   },
   "devDependencies": {},
   "bundleDependencies": [],
