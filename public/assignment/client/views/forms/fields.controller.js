@@ -9,6 +9,7 @@
         var fid = $routeParams["formId"];
         model.addField = addField;
         model.removeField = removeField;
+        model.edit = edit;
         model.sortFields = {axis: 'y'};
         function init(){
 
@@ -28,6 +29,16 @@
                 .then(function (response) {
                     model.fields = response.data;
                 });
+        }
+
+        function edit(field) {
+            model.selectedField = field;
+            if (field.options){
+                model.option = '';
+                for(var i = 0; i< field.options.length ; i++){
+                    model.option += field.options[i].label + ":" + field.options[i].value + "\n";
+                }
+            }
         }
 
         function addField(fieldType) {
