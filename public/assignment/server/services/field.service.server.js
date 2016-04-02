@@ -1,8 +1,7 @@
 /**
  * Created by gopal on 3/16/2016.
  */
-
-module.exports = function (app, model, db) {
+module.exports = function (app, formModel, db) {
     app.get("/api/assignment/form/:formId/field", findAllFieldsForForm);
     app.get("/api/assignment/form/:formId/field/:fieldId", findFieldByFormId);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldByFormId);
@@ -11,36 +10,53 @@ module.exports = function (app, model, db) {
 
     function findAllFieldsForForm(req, res) {
         var formId = req.params.formId;
-        var fields = model.findAllFieldsForForm(formId);
-        res.json(fields);
+        formModel
+            .findFormById(formId)
+            .then(
+                function (doc) {
+                    res.json(doc[0].fields);
+                },
+                function (err) {
+                    res.status(400).json(err);
+                }
+            )
     }
 
     function findFieldByFormId(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var field = model.findFieldByFormId(formId, fieldId);
+        var field = formModel.findFieldByFormId(formId, fieldId);
         res.json(field);
     }
 
     function deleteFieldByFormId(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var fields = model.deleteFieldByFormId(formId, fieldId);
+        var fields = formModel.deleteFieldByFormId(formId, fieldId);
         res.json(fields);
     }
 
     function createFieldForForm(req, res) {
         var formId = req.params.formId;
         var field = req.body;
-        field._id = (new Date).getTime();
-        var fields = model.createFieldForForm(formId, field);
-        res.json(fields);
+
+        formModel
+            .createFieldForForm(formId, field)
+            .then(
+                function (doc) {
+                    console.log(doc.fields);
+                    res.json(doc.fields);
+                },
+                function (err) {
+                    res.status(400).json(err);
+                }
+            );
     }
 
     function updateFieldByFormId(req, res) {
         var formId = req.params.formId;
         var field = req.body;
-        var fields = model.updateFieldByFormId(formId, field);
-        res.json(fields);
+        var fields = formModel.updateFieldByFormId(formId, field);
+
     }
-}
+};

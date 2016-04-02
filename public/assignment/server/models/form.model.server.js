@@ -19,6 +19,7 @@ module.exports = function (db, mongoose) {
         updateFormById: updateFormById,
         findFormByTitle: findFormByTitle,
         findAllFieldsForForm: findAllFieldsForForm,
+        findFormById: findFormById,
         findFieldByFormId: findFieldByFormId,
         deleteFieldByFormId: deleteFieldByFormId,
         createFieldForForm: createFieldForForm,
@@ -100,29 +101,34 @@ module.exports = function (db, mongoose) {
     }
 
     function findFormByTitle(title) {
-        var form = null;
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].title === title) {
-                form = forms[i];
+        var deffered = q.defer();
+        FormModel.find({title: title}, function (err, doc) {
+            if (err) {
+                deffered.reject(err);
             }
-        }
-        return form;
+            else {
+                deffered.resolve(doc);
+            }
+        });
+        return deffered.promise;
     }
 
     function findFormById(Id) {
-        var form = null;
-        for (var i = 0; i < forms.length; i++) {
-            if (parseInt(forms[i]._id) === parseInt(Id)) {
-                form = forms[i];
-                break;
+        var deffered = q.defer();
+        FormModel.find({_id: Id}, function (err, doc) {
+            if (err) {
+                deffered.reject(err);
             }
-        }
-        return form;
+            else {
+                //createonsole.log(doc);
+                deffered.resolve(doc);
+            }
+        });
+        return deffered.promise;
     }
 
     function findAllFieldsForForm(formId) {
-        var form = findFormById(formId);
-        return form.fields;
+        findFormById(formId);
     }
 
     function findFieldByFormId(formId, fieldId) {
@@ -151,9 +157,24 @@ module.exports = function (db, mongoose) {
     }
 
     function createFieldForForm(formId, field) {
-        var form = findFormById(formId);
-        form.fields.push(field);
-        return form.fields;
+        var deferred = q.defer();
+
+        FormModel.update({_id: formId},
+            {$push: {fields: field}}, function (err, doc) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    FormModel
+                        .findById(formId, function (err, doc) {
+                            if (err) {
+                                deferred.reject(err);
+                            } else {
+                                deferred.resolve(doc);
+                            }
+                        });
+                }
+            });
+        return deferred.promise;
     }
 
     function updateFieldByFormId(formId, field) {

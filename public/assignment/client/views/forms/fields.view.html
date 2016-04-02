@@ -19,6 +19,12 @@
             <div class="row">
                 <div class="col-xs-6">
                     <div ng-switch="field.type">
+                        <div ng-switch-when="CHECKBOXES">
+                            <div id="inputRole" ng-repeat="option in field.options">
+                                <label><input type="checkbox" class="checkbox" value="option.value">{{option.label}}</label>
+                            </div>
+                        </div>
+
                         <div ng-switch-when="TEXT">
                             <input type="text" class="form-control" placeholder="{{field.placeholder}}">
                         </div>
@@ -32,11 +38,7 @@
                             </select>
                         </div>
 
-                        <div ng-switch-when="CHECKBOXES">
-                            <div class="checkbox" id="inputRole" ng-repeat="option in field.options">
-                                <label><input type="checkbox" value="option.value">{{option.label}}</label>
-                            </div>
-                        </div>
+
                         <div ng-switch-when="RADIO">
                             <div class="radio" ng-repeat="option in field.options">
                                 <label><input type="radio" value="option.value" name="optradio">{{option.label}}</label>
