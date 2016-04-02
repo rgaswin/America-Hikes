@@ -32,8 +32,14 @@ module.exports = function (app, formModel, db) {
     function deleteFieldByFormId(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var fields = formModel.deleteFieldByFormId(formId, fieldId);
-        res.json(fields);
+        formModel.deleteFieldByFormId(formId, fieldId).then(
+            function (doc) {
+                res.json(doc.fields);
+            },
+            function (err) {
+                res.status(400).json(err);
+            }
+        );
     }
 
     function createFieldForForm(req, res) {
@@ -44,7 +50,6 @@ module.exports = function (app, formModel, db) {
             .createFieldForForm(formId, field)
             .then(
                 function (doc) {
-                    console.log(doc.fields);
                     res.json(doc.fields);
                 },
                 function (err) {
