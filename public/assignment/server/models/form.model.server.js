@@ -1,8 +1,7 @@
 /**
  * Created by gopal on 3/16/2016.
  */
-// load mock data into forms
-var forms = require("./form.mock.json");
+
 // load q promise library
 var q = require("q");
 
@@ -131,18 +130,6 @@ module.exports = function (db, mongoose) {
         findFormById(formId);
     }
 
-    function findFieldByFormId(formId, fieldId) {
-        var form = findFormById(formId);
-        var field = null;
-        for (var i = 0; i < form.fields.length; i++) {
-            if (parseInt(form.fields[i]._id) === parseInt(fieldId)) {
-                field = form.fields[i];
-                break;
-            }
-        }
-        return field;
-    }
-
     function deleteFieldByFormId(formId, fieldId) {
         var deferred = q.defer();
         FormModel.update({_id: formId},
@@ -151,12 +138,12 @@ module.exports = function (db, mongoose) {
                     deferred.reject(err);
                 } else {
                     FormModel.findById(formId, function (err, doc) {
-                            if (err) {
-                                deferred.reject(err);
-                            } else {
-                                deferred.resolve(doc);
-                            }
-                        });
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
                 }
             });
         return deferred.promise;
@@ -181,6 +168,18 @@ module.exports = function (db, mongoose) {
                 }
             });
         return deferred.promise;
+    }
+
+    function findFieldByFormId(formId, fieldId) {
+        var form = findFormById(formId);
+        var field = null;
+        for (var i = 0; i < form.fields.length; i++) {
+            if (parseInt(form.fields[i]._id) === parseInt(fieldId)) {
+                field = form.fields[i];
+                break;
+            }
+        }
+        return field;
     }
 
     function updateFieldByFormId(formId, field) {

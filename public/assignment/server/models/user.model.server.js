@@ -1,9 +1,6 @@
 /**
  * Created by gopal on 3/16/2016.
  */
-
-// load mock data into users
-var users = require("./user.mock.json");
 // load q promise library
 var q = require("q");
 
