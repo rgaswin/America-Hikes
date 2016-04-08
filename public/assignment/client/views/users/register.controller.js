@@ -19,7 +19,7 @@
               password : user.password,
               email : user.email
             };
-            UserService.createUser(usr).then(function (response) {
+            UserService.register(usr).then(function (response) {
                     $rootScope.loggedInUser = usr;
                     $location.url("/profile");
                 },
