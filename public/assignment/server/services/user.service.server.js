@@ -61,7 +61,7 @@ module.exports = function (app, model, db) {
     }
 
     function findAllUsers(req, res) {
-        var users = model.findAllUsers()
+        model.findAllUsers()
             .then(
                 // return all users if promise resolved
                 function (doc) {
@@ -72,7 +72,6 @@ module.exports = function (app, model, db) {
                     res.status(400).send(err);
                 }
             );
-        res.json(users);
     }
 
     function findUserById(req, res) {
@@ -207,7 +206,7 @@ module.exports = function (app, model, db) {
 
     function deleteUserById(req, res) {
         var userId = req.params.id;
-        var userResponse = model.deleteUserById(userId).then(
+        model.deleteUserById(userId).then(
             // return user if promise resolved
             function (doc) {
                 res.json(doc);

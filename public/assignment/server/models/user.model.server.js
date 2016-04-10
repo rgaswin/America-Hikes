@@ -56,15 +56,15 @@ module.exports = function (db, mongoose) {
         UserModel.find(function (err, doc) {
             if (err) {
                 // reject promise if error
-                deferred.reject(err);
+                deffered.reject(err);
             } else {
                 // resolve promise
-                deferred.resolve(doc);
+                deffered.resolve(doc);
             }
         });
 
         // return a promise
-        return deferred.promise;
+        return deffered.promise;
     }
 
     function createUser(user) {
@@ -94,10 +94,19 @@ module.exports = function (db, mongoose) {
                 // reject promise if error
                 deferred.reject(err);
             } else {
-                // resolve promise
-                deferred.resolve(doc);
+                UserModel.find(function (err, doc) {
+                    if (err) {
+                        // reject promise if error
+                        deferred.reject(err);
+                    } else {
+                        // resolve promise
+                        deferred.resolve(doc);
+                    }
+                });
             }
+
         });
+        return deferred.promise;
     }
 
     function updateUser(userId, newuser) {
@@ -108,7 +117,8 @@ module.exports = function (db, mongoose) {
                 password: newuser.password,
                 firstName: newuser.firstName,
                 lastName: newuser.lastName,
-                email: newuser.email
+                email: newuser.email,
+                roles: newuser.roles
             }, function (err, doc) {
                 if (err) {
                     // reject promise if error
@@ -130,7 +140,7 @@ module.exports = function (db, mongoose) {
 
     function findUserByUsername(username) {
         var deferred = q.defer();
-        UserModel.findOne({name:username}, function (err, doc) {
+        UserModel.findOne({name: username}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {

@@ -4,59 +4,57 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th class="col-xs-3"><span class="glyphicon glyphicon-triangle-bottom"
+            <th class="col-xs-1"><span class="glyphicon glyphicon-triangle-bottom"
                                        aria-hidden="true"></span> UserName
             </th>
-            <th class="col-xs-3"><span class="glyphicon glyphicon-triangle-bottom"
+            <th class="col-xs-1"><span class="glyphicon glyphicon-triangle-bottom"
                                        aria-hidden="true"></span> Password
             </th>
-            <th class="col-xs-3"><span class="glyphicon glyphicon-triangle-bottom"
+            <th class="col-xs-2"><span class="glyphicon glyphicon-triangle-bottom"
+                                       aria-hidden="true"></span> First Name
+            </th>
+            <th class="col-xs-2"><span class="glyphicon glyphicon-triangle-bottom"
+                                       aria-hidden="true"></span> Last Name
+            </th>
+            <th class="col-xs-2"><span class="glyphicon glyphicon-triangle-bottom"
+                                       aria-hidden="true"></span> Email
+            </th>
+            <th class="col-xs-2"><span class="glyphicon glyphicon-triangle-bottom"
                                        aria-hidden="true"></span> Role
             </th>
-            <th class="col-xs-3"><span class="glyphicon glyphicon-triangle-bottom"
+            <th class="col-xs-2"><span class="glyphicon glyphicon-triangle-bottom"
                                        aria-hidden="true"></span> Action
             </th>
         </tr>
 
         <tr>
-            <th><input type="text" class="form-control" placeholder="username"></th>
-            <th><input type="text" class="form-control" placeholder="password"></th>
-            <th><input type="text" class="form-control" placeholder="role1,role2"></th>
-            <th><a href="#"><span class="glyphicon glyphicon-plus"></span></a>
-                <a href="#"><span class="glyphicon glyphicon-ok"></span></a>
-            </th>
+            <td><input ng-model="admin.user.username" class="form-control" placeholder="username"/></td>
+            <td><input ng-model="admin.user.password" class="form-control" type="password" placeholder="password"/></td>
+            <td><input ng-model="admin.user.firstName" class="form-control" placeholder="first"/></td>
+            <td><input ng-model="admin.user.lastName" class="form-control" placeholder="last"/></td>
+            <td><input ng-model="admin.user.email" class="form-control" type="email" placeholder="email"/></td>
+            <td><input ng-model="admin.user.roles" class="form-control" placeholder="roles"/></td>
+            <td>
+                <button ng-click="admin.add(admin.user)" class="btn btn-primary">&plus;</button>
+                <button ng-click="admin.update()" class="btn btn-success">&check;</button>
+            </td>
         </tr>
         </thead>
 
         <tbody>
-        <tr>
-            <td>Alice</td>
-            <td></td>
-            <td>student</td>
-            <td><a href="#"> <span class="glyphicon glyphicon-remove iconsize"> </span></a>
-                <a href="#"><span class="glyphicon glyphicon-pencil iconsize"></span></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Bob</td>
-            <td></td>
-            <td>faculty | admin</td>
-            <td><a href="#"><span class="glyphicon glyphicon-remove iconsize"></span></a>
-                <a href="#"><span class="glyphicon glyphicon-pencil iconsize"></span></a>
+        <tr ng-repeat="user in admin.users">
+            <td>{{user.username}}</td>
+            <td>&nbsp;</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.roles}}</td>
+            <td>
+                <button ng-click="admin.remove($index)" class="btn btn-danger">X</button>
+                <button ng-click="admin.select($index)" class="btn btn-success">...</button>
             </td>
         </tr>
 
-        <tr>
-            <td>Charlie</td>
-            <td></td>
-            <td></td>
-            <td><a href="#"><span class="glyphicon glyphicon-remove iconsize"></span></a>
-                <a href="#"><span class="glyphicon glyphicon-pencil iconsize"></span></a>
-            </td>
-        </tr>
-        </tbody>
     </table>
 </div>
-</div>
-</div>
-</div>
+

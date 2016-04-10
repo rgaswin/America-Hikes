@@ -38,6 +38,7 @@
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",
                 controller: "AdminController",
+                controllerAs:"admin",
                 resolve: {
                     loggedin: checkAdmin
                 }
