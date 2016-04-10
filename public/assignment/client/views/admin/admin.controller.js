@@ -31,6 +31,10 @@
         vm.select = select;
         vm.update = update;
 
+        // Initialize table sort properties
+        vm.orderByField = 'firstName';
+        vm.reverseSort = false;
+
         // Event Handler Implementation
 
         function addUser(user) {
