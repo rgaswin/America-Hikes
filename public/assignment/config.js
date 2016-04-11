@@ -46,17 +46,26 @@
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html",
                 controller: "FormController",
-                controllerAs: "form"
+                controllerAs: "form",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
             .when("/fields", {
                 templateUrl: "views/forms/fields.view.html",
                 controller: "FieldsController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
             .when("/form/:formId/fields", {
                 templateUrl: "views/forms/fields.view.html",
                 controller: "FieldsController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
             .otherwise({
                 redirectTo: "/home"
@@ -71,7 +80,7 @@
             // User is Authenticated
             if (user !== '0') {
                 if(user.roles.indexOf('admin') != -1)
-                { $rootScope.currentUser = user;
+                { $rootScope.loggedInUser = user;
                 deferred.resolve();}
                 else{
                     deferred.reject();
@@ -91,7 +100,7 @@
             $rootScope.errorMessage = null;
             // User is Authenticated
             if (user !== '0') {
-                $rootScope.currentUser = user;
+                $rootScope.loggedInUser = user;
                 deferred.resolve();
             }
             // User is Not Authenticated
@@ -112,7 +121,7 @@
             $rootScope.errorMessage = null;
             // User is Authenticated
             if (user !== '0') {
-                $rootScope.currentUser = user;
+                $rootScope.loggedInUser = user;
             }
             deferred.resolve();
         });

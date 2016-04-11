@@ -17,7 +17,8 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
-            register: register
+            register: register,
+            logoutUser: logoutUser
         };
 
         return api;
@@ -56,8 +57,7 @@
         }
 
         function logoutUser() {
-            $rootScope.loggedInUser = null;
-            return null;
+            return $http.post("/api/assignment/logout");
         }
     }
 })();
