@@ -83,6 +83,34 @@
             }
         );
 
+
+        var bingReq = {
+            method: 'POST',
+            url: "https://api.datamarket.azure.com/Bing/Search/Image?Query=%27" + trailname + "%27&$format=json&$top=5",
+            headers: {
+                'Authorization': 'Basic OmdPWEc4SVpxb3ZCWkdad3RTRE5qL3Z0ZlIvL3BYNGVuUTNlSVI1dTIxQnM='
+            },
+        };
+
+        $http(bingReq).then(
+            function (response) {
+                vm.images = response.data.d.results;
+            },
+            function (error) {
+                console.log(error);
+            }
+        )
+
+        //$http.jsonp("https://api.flickr.com/services/feeds/photos_public.gne?tags=slickhorn canyon&tagmode=ANY&format=json&jsoncallback=JSON_CALLBACK").then(
+        //    function (response) {
+        //        console.log(response);
+        //    },
+        //    function (error) {
+        //        console.log(error);
+        //    }
+        //)
+
+
         function getweather() {
 
             console.log(Date.parse(new Date().getDate()));
@@ -153,13 +181,10 @@
         }
 
         var selectedCommentIndex = -1; // Contains the Index of currently selected record
-
         function selectcomment(index) {
             console.log('select');
             selectedCommentIndex = index;
             vm.comment = vm.comments[selectedCommentIndex].comment;
         }
-
-
     }
 })();

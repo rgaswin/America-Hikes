@@ -11,6 +11,13 @@
             <a class="navbar-brand" href="#">The Hiker</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse" ng-controller="HeaderController">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#/home">Home</a></li>
+                <li ng-show="loggedInUser"><a href="#/profile">Profile</a></li>
+                <li ng-show="loggedInUser"><a href="#/event">Create Event</a></li>
+                <li ng-show="loggedInUser.roles.indexOf('admin') >= 0">
+                    <a href="#/admin">Admin</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="loggedInUser"><a href="#/register">Register</a></li>
                 <li ng-hide="loggedInUser"><a href="#/login">Login</a></li>

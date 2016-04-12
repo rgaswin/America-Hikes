@@ -8,13 +8,10 @@
 
     function HomeController($scope, $http) {
 
-   //     $http.defaults.headers.common.Authorization = 'X-Mashape-Key JpqqeDQjdxmshlSW6xeSFJUKWuFfp1nz7QTjsnuWxTaf8awgDO';
         $scope.searchByInput = searchByInput;
 
         function searchByInput() {
-
             $scope.forms = [];
-
             var url = "https://trailapi-trailapi.p.mashape.com?&q[activities_activity_type_name_eq]=hiking&limit=25";
 
             if ($scope.city !== null && typeof($scope.city) !== "undefined")
@@ -34,7 +31,6 @@
 
             $http(req).then(function (result) {
                 $scope.places = result;
-                console.log(result);
             }, function (result) {
                 console.log("Error : " + result);
             });

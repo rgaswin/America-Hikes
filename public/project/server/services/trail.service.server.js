@@ -5,7 +5,7 @@ module.exports = function (app, trailModel, userModel) {
 
     app.post("/api/project/user/:userId/trail/:trailId", userLikesTrail);
     app.get("/api/project/user/:userId/trails", TrailsForUser);
-
+    app.get("/api/project/trail/photos", FewTrailPhotos);
 
     function userLikesTrail(req, res) {
         var trailInfo = req.body;
@@ -48,5 +48,19 @@ module.exports = function (app, trailModel, userModel) {
         var userId = req.params.userId;
         var trailNames = trailModel.getAllTrailNamesForUser(userId);
         res.json(trailNames);
+    }
+
+    function FewTrailPhotos(req,res){
+
+        var Flickr = require("flickrapi"),
+            flickrOptions = {
+                api_key: "API key that you get from Flickr",
+                secret: "API key secret that you get from Flickr"
+            };
+
+        Flickr.tokenOnly(flickrOptions, function(error, flickr) {
+            // we can now use "flickr" as our API object,
+            // but we can only call public methods and access public data
+        });
     }
 }

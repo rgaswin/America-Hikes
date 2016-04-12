@@ -1,4 +1,16 @@
-.form-horizontal .control-label{
+.bingImages {
+    max-width: 100%;
+    width: 25%;
+    height: 50%;
+}
+
+.cover{
+    max-width: 100%;
+    background-image: url("../images/hiker_cover.jpg");
+    background-position: center;
+}
+
+.form-horizontal .control-label {
     text-align: left;
 }
 
