@@ -6,7 +6,7 @@
         .module("HikerApp")
         .controller("SearchController", SearchController);
 
-    function SearchController($scope,$routeParams, $http, UserService, UserDataService, $rootScope) {
+    function SearchController($scope, $routeParams, $http, UserService, TrailService, $rootScope) {
 
         var currentUser = $rootScope.loggedInUser;
         var currentTrail = 0;
@@ -25,11 +25,11 @@
         var trailname = $routeParams.trailname;
         var city = $routeParams.city;
 
-        $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+        $scope.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
         $scope.marker = {
-            id:0,
-            location:{
-                latitude:45,
+            id: 0,
+            location: {
+                latitude: 45,
                 longitude: -73
             }
         };
@@ -91,32 +91,26 @@
             }
         );
 
+        function FetchImagesFromBingAPI() {
+            var bingReq = {
+                method: 'POST',
+                url: "https://api.datamarket.azure.com/Bing/Search/Image?Query=%27" + trailname + "%27&$format=json&$top=5",
+                headers: {
+                    'Authorization': 'Basic OmdPWEc4SVpxb3ZCWkdad3RTRE5qL3Z0ZlIvL3BYNGVuUTNlSVI1dTIxQnM='
+                },
+            };
 
-        var bingReq = {
-            method: 'POST',
-            url: "https://api.datamarket.azure.com/Bing/Search/Image?Query=%27" + trailname + "%27&$format=json&$top=5",
-            headers: {
-                'Authorization': 'Basic OmdPWEc4SVpxb3ZCWkdad3RTRE5qL3Z0ZlIvL3BYNGVuUTNlSVI1dTIxQnM='
-            },
-        };
+            $http(bingReq).then(
+                function (response) {
+                    vm.images = response.data.d.results;
+                },
+                function (error) {
+                    console.log(error);
+                }
+            )
+        }
 
-        $http(bingReq).then(
-            function (response) {
-                vm.images = response.data.d.results;
-            },
-            function (error) {
-                console.log(error);
-            }
-        )
-
-        //$http.jsonp("https://api.flickr.com/services/feeds/photos_public.gne?tags=slickhorn canyon&tagmode=ANY&format=json&jsoncallback=JSON_CALLBACK").then(
-        //    function (response) {
-        //        console.log(response);
-        //    },
-        //    function (error) {
-        //        console.log(error);
-        //    }
-        //)
+        FetchImagesFromBingAPI();
 
 
         function getweather() {
@@ -142,7 +136,7 @@
         }
 
         if ($rootScope.loggedInUser !== null && typeof($rootScope.loggedInUser) !== "undefined") {
-            UserDataService.findAllCommentsForUser($rootScope.loggedInUser._id, function (result) {
+            TrailService.findAllCommentsForUser($rootScope.loggedInUser._id, function (result) {
                 vm.comments = result;
                 console.log(result);
             });
@@ -159,16 +153,27 @@
         }
 
         function addcomment() {
-            UserDataService.createCommentForUser($rootScope.loggedInUser._id, vm.comment, $rootScope.loggedInUser.username, function (result) {
-                console.log(result);
-                vm.comments.push(result);
-                vm.comment = "";
-            });
+            var trailId = vm.place;
+            var userName = $rootScope.loggedInUser.username;
+            var comment = {
+                _id: (new Date).getTime(),
+                username: userName,
+                comment: vm.comment,
+                postedon: (new Date)
+            };
+            TrailService.createCommentForUser(currentTrail, comment).then(function (result) {
+                    console.log(result);
+                    vm.comments.push(result);
+                    vm.comment = "";
+                },
+                function (error) {
+                    console.log(error);
+                });
         };
 
         function deletecomment(index) {
             var commentId = vm.comments[index]._id;
-            UserDataService.deleteCommentById(commentId, function (result) {
+            TrailService.deleteCommentById(commentId, function (result) {
                 vm.comments.splice(index, 1);
             });
         }
@@ -183,7 +188,7 @@
                     userId: userId,
                     username: $rootScope.loggedInUser.username
                 };
-                UserDataService.updateCommentById(commentId, newComment, function (response) {
+                TrailService.updateCommentById(commentId, newComment, function (response) {
                 });
             }
         }

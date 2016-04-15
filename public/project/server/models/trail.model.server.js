@@ -14,7 +14,8 @@ module.exports = function (db, mongoose) {
         findtrailByID: findtrailByID,
         createTrail: createTrail,
         getAllTrailNamesForUser: getAllTrailNamesForUser,
-        userLikesTrail: userLikesTrail
+        userLikesTrail: userLikesTrail,
+        postTrailComments: postTrailComments
     };
     return api;
 
@@ -101,7 +102,7 @@ module.exports = function (db, mongoose) {
                         city: trail.city,
                         lat: trail.lat,
                         lon: trail.lon,
-                        likes:[]
+                        likes: []
                     });
                     // add user to likes
                     newTrail.likes.push(userId);
@@ -112,6 +113,36 @@ module.exports = function (db, mongoose) {
                             deferred.reject(err);
                         } else {
                             // resolve promise
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+        return deferred.promise;
+    }
+
+    function postTrailComments(trailId, comment) {
+        var deferred = q.defer();
+        trailModel.findOne({trailId: trailId},
+            function (err, doc) {
+                if (err) {
+                    // reject the promise;
+                    deffered.reject(err);
+                }
+                else {
+                    if (!doc.comments) {
+                        doc.comments = [];
+                    }
+                    doc.comments.push({
+                        id: comment.id,
+                        comment: comment.comment,
+                        username: comment.username,
+                        postedon: comment.postedon
+                    });
+                    doc.save(function (err, doc) {
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
                             deferred.resolve(doc);
                         }
                     });

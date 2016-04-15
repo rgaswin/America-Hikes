@@ -4,6 +4,7 @@
 module.exports = function (app, trailModel, userModel) {
 
     app.post("/api/project/user/:userId/trail/:trailId", userLikesTrail);
+    app.post("/api/project/trail/:trailId/comment", CommentsForTrail);
     app.get("/api/project/trail/:trailId/users", UsersForTrail);
     app.get("/api/project/trail/:trailId/user", findUserLikes);
 
@@ -35,25 +36,25 @@ module.exports = function (app, trailModel, userModel) {
             );
     }
 
-    function findUserLikes (req, res) {
+    function findUserLikes(req, res) {
         var trailId = req.params.trailId;
         var trail = null;
         trailModel
             .findtrailByID(trailId)
-            .then (
+            .then(
                 function (doc) {
                     trail = doc;
                     if (doc) {
                         return userModel.findUsersByIds(trail.likes);
                     } else {
-                        res.json ({});
+                        res.json({});
                     }
                 },
                 function (err) {
                     res.status(400).send(err);
                 }
             )
-            .then (
+            .then(
                 function (users) {
                     movie.userLikes = users;
                     res.json(movie);
@@ -71,5 +72,20 @@ module.exports = function (app, trailModel, userModel) {
         res.json(trailNames);
     }
 
-
+    function CommentsForTrail(req, res) {
+        var comment = req.body;
+        var trailId = req.params.trailId;
+        console.log(trailId);
+        trailModel
+            .postTrailComments(trailId, comment)
+            // Send the Trail Back to the client after updating the trail
+            .then(
+                function (trail) {
+                    res.json(trail);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 }

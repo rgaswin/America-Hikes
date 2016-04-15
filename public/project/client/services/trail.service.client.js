@@ -5,26 +5,10 @@
     "use strict";
     angular
         .module("HikerApp")
-        .factory("UserDataService", UserDataService);
+        .factory("TrailService", TrailService);
 
-    function UserDataService() {
+    function TrailService($http) {
         var comments = [];
-        comments = [{
-            "_id": "000",
-            "comment": "This is a comment",
-            "userId": 123,
-            "username": "alice"
-        }, {
-            "_id": "010",
-            "comment": "This is another comment",
-            "userId": 123,
-            "username": "alice"
-        }, {
-            "_id": "020",
-            "comment": "This is one more comment",
-            "userId": 123,
-            "username": "alice"
-        }];
 
         var api = {
             createCommentForUser: createCommentForUser,
@@ -35,14 +19,10 @@
 
         return api;
 
-        function createCommentForUser(userId, newComment,username, callback) {
-            var comment = {};
-            comment._id = (new Date).getTime();
-            comment.userId = userId;
-            comment.comment = newComment;
-            comment.username = username;
-            comments.push(comment);
-            callback(comment);
+        function createCommentForUser(trailId, comment) {
+
+            var url = "/api/project/trail/" + trailId + "/comment";
+            return $http.post(url, comment);
         }
 
         function findAllCommentsForUser(userId, callback) {

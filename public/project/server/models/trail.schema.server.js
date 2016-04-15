@@ -10,6 +10,7 @@ module.exports = function (mongoose) {
         lon: String,
         city: String,
         likes: [String],
+        comments:[{id:String,comment:String,username:String,postedon:Date}]
     }, {collection: 'trail'});
     return UserSchema;
 };

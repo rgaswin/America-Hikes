@@ -46,9 +46,7 @@ module.exports = function (db, mongoose) {
                 }
 
             });
-
         return deferred.promise;
-
     }
 
     function findAllUsers() {
@@ -62,7 +60,6 @@ module.exports = function (db, mongoose) {
                 deffered.resolve(doc);
             }
         });
-
         // return a promise
         return deffered.promise;
     }
@@ -80,10 +77,8 @@ module.exports = function (db, mongoose) {
                 deferred.resolve(doc);
             }
         });
-
         // return a promise
         return deferred.promise;
-
     }
 
     function deleteUserById(userId) {
@@ -162,7 +157,3 @@ module.exports = function (db, mongoose) {
         return deferred.promise;
     }
 }
-
-
-
-
