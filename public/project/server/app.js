@@ -1,11 +1,10 @@
-module.exports = function (app) {
+module.exports = function (app, db, mongoose) {
     // Initializing the User Model Instance.
-
-    var userModel  = require('./models/user.model.js')();
-    var trailModel = require('./models/trail.model.js')();
+    var userModel = require('./models/user.model.server.js')(db, mongoose);
+    var trailModel = require('./models/trail.model.js')(db, mongoose);
 
     // Intializing the User Service Instance.
-    var userService  = require("./services/user.service.server.js")(app,userModel,trailModel);
-    var trailService = require("./services/trail.service.server.js")(app,trailModel,userModel);
+    var userService = require("./services/user.service.server.js")(app, userModel, trailModel);
+    var trailService = require("./services/trail.service.server.js")(app, trailModel, userModel);
 }
 

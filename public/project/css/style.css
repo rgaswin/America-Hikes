@@ -4,10 +4,21 @@
     height: 50%;
 }
 
-.cover{
-    max-width: 100%;
-    background-image: url("../images/hiker_cover.jpg");
-    background-position: center;
+.angular-google-map-container {
+    height: 400px;
+}
+
+.cover {
+    background: url("../images/hiker_cover_3.jpg") no-repeat center center fixed;
+    --webkit-background-size: cover;
+    --moz-background-size: cover;
+    --o-background-size: cover;
+    background-size: cover;
+    /*background-color: white;*/
+}
+
+.labelcolor {
+    color: whitesmoke;
 }
 
 .form-horizontal .control-label {

@@ -2,54 +2,121 @@
  * Created by gopal on 3/25/2016.
  */
 
-module.exports = function () {
+var q = require("q");
+
+module.exports = function (db, mongoose) {
+
+    var trailSchema = require("./trail.schema.server.js")(mongoose);
+    var trailModel = mongoose.model('trails', trailSchema);
     var trails = [];
 
     var api = {
         findtrailByID: findtrailByID,
         createTrail: createTrail,
-        getAllTrailNamesForUser:getAllTrailNamesForUser
+        getAllTrailNamesForUser: getAllTrailNamesForUser,
+        userLikesTrail: userLikesTrail
     };
     return api;
 
     function findtrailByID(trailId) {
-        for (var t in trails) {
-            if (trails[t].trailId == trailId) {
-                return trails[t];
-            }
-        }
-        return null;
+        var deferred = q.defer();
+
+        // find one retrieves one document
+        trailModel.findOne(
+            // first argument is predicate
+            {
+                trailId: trailId
+            },
+
+            // doc is unique instance matches predicate
+            function (err, doc) {
+                if (err) {
+                    // reject promise if error
+                    deferred.reject(err);
+                } else {
+                    // resolve promise
+                    deferred.resolve(doc);
+                }
+            });
+        return deferred.promise;
     }
 
     function createTrail(trail) {
-        trail = {
-            trailId: trail.unique_id,
-            name: trail.name,
-            lat: trail.lat,
-            lon: trail.lon,
-            city: trail.city
-        };
-        trails.push(trail);
-        return trail;
-    }
-
-    function getAllTrailNamesForUser(userId)
-    {
-        var trailNames = [];
-        for(var t in trails)
-        {
-            for(var u in trails[t].likes)
-            {
-                if(trails[t].likes[u] == userId)
-                trailNames.push(trails[t].name);
+        // use q to defer the response
+        var deferred = q.defer();
+        // insert new user with mongoose user model's create()
+        trailModel.create(trail, function (err, doc) {
+            if (err) {
+                // reject promise if error
+                deferred.reject(err);
+            } else {
+                // resolve promise
+                deferred.resolve(doc);
             }
-        }
-        return trailNames;
+        });
+        // return a promise
+        return deferred.promise;
     }
 
+    function getAllTrailNamesForUser(trailId) {
+        var deffered = q.defer();
+        trailModel.find({trailId: trailId}, function (err, doc) {
+            if (err) {
+                deffered.reject(err);
+            }
+            else {
+                deffered.resolve(doc);
+            }
+        });
+        return deffered.promise;
+    }
 
-
+    function userLikesTrail(userId, trail) {
+        var deferred = q.defer();
+        var newTrail;
+        // find the movie by imdb ID
+        trailModel.findOne({trailId: trail.unique_id},
+            function (err, doc) {
+                // reject promise if error
+                if (err) {
+                    deferred.reject(err);
+                }
+                // if there's a trail
+                if (doc) {
+                    // add user to likes
+                    doc.likes.push(userId);
+                    // save changes
+                    doc.save(function (err, doc) {
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                } else {
+                    // if there's no trail
+                    // create a new instance
+                    newTrail = new trailModel({
+                        trailId: trail.unique_id,
+                        city: trail.city,
+                        lat: trail.lat,
+                        lon: trail.lon,
+                        likes:[]
+                    });
+                    // add user to likes
+                    newTrail.likes.push(userId);
+                    // save new instance
+                    newTrail.save(function (err, doc) {
+                        if (err) {
+                            // reject promise if error
+                            deferred.reject(err);
+                        } else {
+                            // resolve promise
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+        return deferred.promise;
+    }
 }
-
-
-

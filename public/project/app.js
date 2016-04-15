@@ -3,5 +3,5 @@
  */
 (function () {
     angular
-        .module("HikerApp", ["ngRoute"]);
+        .module("HikerApp", ["ngRoute","uiGmapgoogle-maps"]);
 })();

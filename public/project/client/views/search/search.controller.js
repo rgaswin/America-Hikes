@@ -6,7 +6,7 @@
         .module("HikerApp")
         .controller("SearchController", SearchController);
 
-    function SearchController($routeParams, $http, UserService, UserDataService, $rootScope) {
+    function SearchController($scope,$routeParams, $http, UserService, UserDataService, $rootScope) {
 
         var currentUser = $rootScope.loggedInUser;
         var currentTrail = 0;
@@ -25,6 +25,14 @@
         var trailname = $routeParams.trailname;
         var city = $routeParams.city;
 
+        $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+        $scope.marker = {
+            id:0,
+            location:{
+                latitude:45,
+                longitude: -73
+            }
+        };
 
         var url = "https://trailapi-trailapi.p.mashape.com/?lat=" + lat + "&lon=" + lon +
             "&q[activities_activity_name_cont]=" + trailname + "q[city_cont]=" + city +

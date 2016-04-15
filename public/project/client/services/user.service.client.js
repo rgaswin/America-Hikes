@@ -12,6 +12,7 @@
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
+            register:register,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
             userLikesTrail: userLikesTrail,
@@ -56,6 +57,10 @@
         function getAllUsersForTrail(trailId)
         {
             return $http.get("/api/project/trail/" + trailId + "/users/");
+        }
+
+        function register(user) {
+            return $http.post("/api/project/register", user);
         }
 
         function setCurrentUser(user) {
