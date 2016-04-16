@@ -10,12 +10,6 @@
         </div>
     </div>
 
-
-    <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-        <ui-gmap-marker idkey="marker.id" coords="marker.location">
-        </ui-gmap-marker>
-    </ui-gmap-google-map>
-
     <div class="form-group">
         <label class="col-sm-2 control-label">Description</label>
         <div class="col-sm-4 control-label">
@@ -57,7 +51,7 @@
             <input type="date" class="form-control" ng-model="model.startdate">
         </div>
         <div class="col-sm-2">
-            <a ng-click="model.getweather()" class="btn btn-primary">Weather Info</a>
+            <a ng-click="model.GetWeatherForFuture()" class="btn btn-primary">Weather Info</a>
         </div>
     </div>
 
@@ -68,10 +62,24 @@
         <h3 class="page-header">Images of this trail </h3>
         <div class="row">
             <div class="col-sm-8">
-                <img ng-repeat="result in model.images" ng-src="{{result.Thumbnail.MediaUrl}}" class="bingImages">
+                <img ng-repeat="result in model.images" ng-src="{{result.Thumbnail.MediaUrl}}"
+                     class="img-thumbnail  bingImages">
             </div>
         </div>
     </div>
+
+    <div class="form-group">
+        <h3 class="page-header">Maps and Directions </h3>
+        <div class="row">
+            <div class="col-sm-8">
+                <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                    <ui-gmap-marker idkey="marker.id" coords="marker.location">
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
+            </div>
+        </div>
+    </div>
+
 
     <div ng-show="{{loggedInUser}}">
 
@@ -143,10 +151,10 @@
 
         <div class="form-group">
             <div class="col-sm-2">
-                <button class="btn-group-sm" ng-click="model.addcomment()">Add Comment</button>
+                <button class="btn-group-sm" ng-click="model.addComment()">Add Comment</button>
             </div>
             <div class="col-sm-2">
-                <button class="btn-group-sm" ng-click="model.updatecomment()">Update Comment</button>
+                <button class="btn-group-sm" ng-click="model.updateComment()">Update Comment</button>
             </div>
 
 
@@ -163,8 +171,8 @@
             </div>
 
             <div class="col-sm-2">
-                <button class="btn-group-sm" ng-click="model.deletecomment($index)">Delete</button>
-                <button class="btn-group-sm" ng-click="model.selectcomment($index)">Select</button>
+                <button class="btn-group-sm" ng-click="model.deleteComment($index)">Delete</button>
+                <button class="btn-group-sm" ng-click="model.selectComment($index)">Select</button>
             </div>
         </div>
 

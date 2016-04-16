@@ -12,7 +12,7 @@
 
         var api = {
             createCommentForUser: createCommentForUser,
-            findAllCommentsForUser: findAllCommentsForUser,
+            findAllCommentsForTrail: findAllCommentsForTrail,
             deleteCommentById: deleteCommentById,
             updateCommentById: updateCommentById
         };
@@ -20,19 +20,13 @@
         return api;
 
         function createCommentForUser(trailId, comment) {
-
             var url = "/api/project/trail/" + trailId + "/comment";
             return $http.post(url, comment);
         }
 
-        function findAllCommentsForUser(userId, callback) {
-            var commentsForUser = [];
-            for (var i = 0; i < comments.length; i++) {
-                if (comments[i].userId === userId) {
-                    commentsForUser.push(comments[i]);
-                }
-            }
-            callback(commentsForUser);
+        function findAllCommentsForTrail(trailId) {
+            var url = "/api/project/trail/" + trailId + "/comment";
+            return $http.get(url);
         }
 
         function deleteCommentById(commentId, callback) {

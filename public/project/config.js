@@ -45,7 +45,12 @@
                 templateUrl: "views/project/project.view.html",
                 controller: "SearchDetailsController"
             })
-            .when("/search/:lat/:lon/:trailname/:city", {
+            //.when("/search/:lat/:lon/:trailname/:city", {
+            //    templateUrl: "views/search/search.view.html",
+            //    controller: "SearchController",
+            //    controllerAs: "model"
+            //})
+            .when("/search/:trailId/:trailname/:lat/:lon", {
                 templateUrl: "views/search/search.view.html",
                 controller: "SearchController",
                 controllerAs: "model"

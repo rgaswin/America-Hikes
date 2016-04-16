@@ -25,7 +25,8 @@
                 <tbody>
                 <tr ng-repeat="place in places.data.places">
                     <td>
-                        <a class="labelcolor" href="#/search/{{place.lat}}/{{place.lon}}/{{place.name}}/{{place.city}}">
+                        <a class="labelcolor"
+                           href="#/search/{{place.unique_id}}/{{place.name}}/{{place.lat}}/{{place.lon}}">
                             {{place.name}}
                         </a>
                     </td>

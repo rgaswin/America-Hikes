@@ -3,11 +3,30 @@
  */
 module.exports = function (app, trailModel, userModel) {
 
-    app.post("/api/project/user/:userId/trail/:trailId", userLikesTrail);
-    app.post("/api/project/trail/:trailId/comment", CommentsForTrail);
+    app.get("/api/project/trail/:trailId/comment", findAllCommentsForTrail);
     app.get("/api/project/trail/:trailId/users", UsersForTrail);
-    app.get("/api/project/trail/:trailId/user", findUserLikes);
+    app.post("/api/project/user/:userId/trail/:trailId", userLikesTrail);
+    app.post("/api/project/trail/:trailId/comment", createCommentForTrail);
+    app.put("/api/project/trail/:trailId/comment", updateCommentForTrail);
+    app.delete("/api/project/trail/:trailId/comment", deleteCommentForTrail);
 
+    function findAllCommentsForTrail(req, res) {
+        var trailId = req.params.trailId;
+        trailModel.findtrailByID(trailId).then(
+            function (trail) {
+                res.json(trail.comments);
+            },
+            function (err) {
+                res.status(400).send(err);
+            }
+        );
+    }
+
+    function UsersForTrail(req, res) {
+        var trailId = req.params.trailId;
+        var trailNames = trailModel.getAllTrailNamesForUser(trailId);
+        res.json(trailNames);
+    }
 
     function userLikesTrail(req, res) {
         var trailInfo = req.body;
@@ -36,56 +55,57 @@ module.exports = function (app, trailModel, userModel) {
             );
     }
 
-    function findUserLikes(req, res) {
-        var trailId = req.params.trailId;
-        var trail = null;
-        trailModel
-            .findtrailByID(trailId)
-            .then(
-                function (doc) {
-                    trail = doc;
-                    if (doc) {
-                        return userModel.findUsersByIds(trail.likes);
-                    } else {
-                        res.json({});
-                    }
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )
-            .then(
-                function (users) {
-                    movie.userLikes = users;
-                    res.json(movie);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            );
-    }
-
-
-    function UsersForTrail(req, res) {
-        var trailId = req.params.trailId;
-        var trailNames = trailModel.getAllTrailNamesForUser(trailId);
-        res.json(trailNames);
-    }
-
-    function CommentsForTrail(req, res) {
+    function createCommentForTrail(req, res) {
         var comment = req.body;
         var trailId = req.params.trailId;
-        console.log(trailId);
         trailModel
-            .postTrailComments(trailId, comment)
+            .postTrailComment(trailId, comment)
             // Send the Trail Back to the client after updating the trail
             .then(
                 function (trail) {
-                    res.json(trail);
+                    res.json(trail.comments);
                 },
                 function (err) {
                     res.status(400).send(err);
                 }
             );
     }
+
+    function updateCommentForTrail(req, res) {
+        //var comment = req.body;
+        //var trailId = req.params.trailId;
+        //trailModel
+        //    .updateTrailComment(trailId, comment)
+        //    // Send the Trail Back to the client after updating the trail
+        //    .then(
+        //        function (trail) {
+        //            res.json(trail.comments);
+        //        },
+        //        function (err) {
+        //            res.status(400).send(err);
+        //        }
+        //    );
+    }
+
+    function deleteCommentForTrail(req, res) {
+        var comment = req.body;
+        var trailId = req.params.trailId;
+        trailModel
+            .deleteTrailComment(trailId, comment)
+            // Send the Trail Back to the client after updating the trail
+            .then(
+                function (trail) {
+                    res.json(trail.comments);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+
+
+
+
+
 }

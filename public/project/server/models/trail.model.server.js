@@ -15,13 +15,12 @@ module.exports = function (db, mongoose) {
         createTrail: createTrail,
         getAllTrailNamesForUser: getAllTrailNamesForUser,
         userLikesTrail: userLikesTrail,
-        postTrailComments: postTrailComments
+        postTrailComment: postTrailComment
     };
     return api;
 
     function findtrailByID(trailId) {
         var deferred = q.defer();
-
         // find one retrieves one document
         trailModel.findOne(
             // first argument is predicate
@@ -121,7 +120,7 @@ module.exports = function (db, mongoose) {
         return deferred.promise;
     }
 
-    function postTrailComments(trailId, comment) {
+    function postTrailComment(trailId, comment) {
         var deferred = q.defer();
         trailModel.findOne({trailId: trailId},
             function (err, doc) {
@@ -150,4 +149,29 @@ module.exports = function (db, mongoose) {
             });
         return deferred.promise;
     }
+
+    function updateTrailComment(trailId, comment) {
+        //var deferred = q.defer();
+        //trailModel.update({trailId: trailId},
+        //    {
+        //
+        //    }, function (err, doc) {
+        //        if (err) {
+        //            // reject promise if error
+        //            deferred.reject(err);
+        //        } else {
+        //            // resolve promise
+        //            UserModel.findById({_id: userId}, function (err, doc) {
+        //                if (err) {
+        //                    deferred.reject(err);
+        //                }
+        //                else {
+        //                    deferred.resolve(doc);
+        //                }
+        //            });
+        //        }
+        //    });
+        //return deferred.promise;
+    }
+
 }
