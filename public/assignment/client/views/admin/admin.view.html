@@ -60,8 +60,8 @@
             <td><input ng-model="admin.user.email" class="form-control" type="email" placeholder="email"/></td>
             <td><input ng-model="admin.user.roles" class="form-control" placeholder="roles"/></td>
             <td>
-                <button ng-click="admin.add(admin.user)" class="btn btn-primary">&plus;</button>
-                <button ng-click="admin.update()" class="btn btn-success">&check;</button>
+                <button ng-click="admin.add(admin.user)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                <button ng-click="admin.update()" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
             </td>
         </tr>
         </thead>
@@ -75,8 +75,8 @@
             <td>{{user.email}}</td>
             <td>{{user.roles}}</td>
             <td>
-                <button ng-click="admin.remove($index)" class="btn btn-danger">X</button>
-                <button ng-click="admin.select($index)" class="btn btn-success">...</button>
+                <button ng-click="admin.remove($index)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                <button ng-click="admin.select($index)" class="btn btn-success"><span class="glyphicon glyphicon-cog"></span></button>
             </td>
         </tr>
 
