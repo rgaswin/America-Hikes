@@ -15,7 +15,10 @@ module.exports = function (db, mongoose) {
         createTrail: createTrail,
         getAllTrailNamesForUser: getAllTrailNamesForUser,
         userLikesTrail: userLikesTrail,
-        postTrailComment: postTrailComment
+        postTrailComment: postTrailComment,
+        updateTrailComment: updateTrailComment,
+        deleteTrailComment: deleteTrailComment
+
     };
     return api;
 
@@ -151,27 +154,44 @@ module.exports = function (db, mongoose) {
     }
 
     function updateTrailComment(trailId, comment) {
-        //var deferred = q.defer();
-        //trailModel.update({trailId: trailId},
-        //    {
-        //
-        //    }, function (err, doc) {
-        //        if (err) {
-        //            // reject promise if error
-        //            deferred.reject(err);
-        //        } else {
-        //            // resolve promise
-        //            UserModel.findById({_id: userId}, function (err, doc) {
-        //                if (err) {
-        //                    deferred.reject(err);
-        //                }
-        //                else {
-        //                    deferred.resolve(doc);
-        //                }
-        //            });
-        //        }
-        //    });
-        //return deferred.promise;
+        var deferred = q.defer();
+        trailModel.update({trailId: trailId},
+            {}, function (err, doc) {
+                if (err) {
+                    // reject promise if error
+                    deferred.reject(err);
+                } else {
+                    // resolve promise
+                    UserModel.findById({_id: userId}, function (err, doc) {
+                        if (err) {
+                            deferred.reject(err);
+                        }
+                        else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+        return deferred.promise;
     }
 
+    function deleteTrailComment(trailId, commentId) {
+        // use q to defer the response
+        var deferred = q.defer();
+        trailModel.update({trailId: trailId},
+            {$pull: {comments: {id: commentId}}}, function (err, doc) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    trailModel.findOne({trailId: trailId}, function (err, doc) {
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+        return deferred.promise;
+    }
 }

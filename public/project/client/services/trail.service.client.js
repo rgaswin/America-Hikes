@@ -11,15 +11,15 @@
         var comments = [];
 
         var api = {
-            createCommentForUser: createCommentForUser,
+            createCommentForTrail: createCommentForTrail,
             findAllCommentsForTrail: findAllCommentsForTrail,
-            deleteCommentById: deleteCommentById,
-            updateCommentById: updateCommentById
+            deleteCommentForTrail: deleteCommentForTrail,
+            updateCommentForTrail: updateCommentForTrail
         };
 
         return api;
 
-        function createCommentForUser(trailId, comment) {
+        function createCommentForTrail(trailId, comment) {
             var url = "/api/project/trail/" + trailId + "/comment";
             return $http.post(url, comment);
         }
@@ -29,27 +29,14 @@
             return $http.get(url);
         }
 
-        function deleteCommentById(commentId, callback) {
-            for (var i = 0; i < comments.length; i++) {
-                if (comments[i]._id === commentId) {
-                    comments.splice(i, 1);
-                    break;
-                }
-            }
-            callback(comments);
+        function deleteCommentForTrail(trailId, commentId) {
+            var url = "/api/project/trail/" + trailId + "/comment/" + commentId;
+            return $http.delete(url);
         }
 
-        function updateCommentById(commentId, newComment, callback) {
-            for (var i = 0; i < comments.length; i++) {
-                if (comments[i]._id === commentId) {
-                    comments[i]._id = newComment._id;
-                    comments[i].comment = newComment.comment;
-                    comments[i].userId = newComment.userId;
-                    comments[i].username = newComment.username;
-                    callback(comments[i]);
-                    break;
-                }
-            }
+        function updateCommentForTrail(trailId, comment) {
+            var url = "/api/project/trail/" + trailId + "/comment";
+            return $http.put(url, comment);
         }
     }
 })();

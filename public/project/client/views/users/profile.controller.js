@@ -17,6 +17,7 @@
         $scope.dob = $rootScope.loggedInUser.dob;
         $scope.firstname = $rootScope.loggedInUser.firstName;
         $scope.lastname = $rootScope.loggedInUser.lastName;
+        $scope.trekimages = $rootScope.loggedInUser.images;
 
         // Adding Test data at the moment
         UserService.TrailsForUser($rootScope.loggedInUser._id).then(
@@ -29,11 +30,11 @@
             }
         );
         $scope.treksReviewed = ["Trek1", "Trek2", "Trek3"];
-        $scope.trekimages = ["Image1", "Image2", "Image3", "Image4"];
+
 
         // Event Handler Declarations
         $scope.update = update;
-
+        $scope.uploadImage = uploadImage;
         // Event Handler Implementations
         function update() {
             $rootScope.loggedInUser.aboutme = $scope.aboutme;
@@ -45,7 +46,14 @@
             $rootScope.loggedInUser.dob = $scope.dob;
             UserService.updateUser($rootScope.loggedInUser._id, $rootScope.loggedInUser, function (ResponseUser) {
                 $rootScope.loggedInUser = ResponseUser;
+                console.log(ResponseUser.images);
+
             });
         }
+
+        function uploadImage() {
+            UserService.uploadImage();
+        }
+
     }
 })();

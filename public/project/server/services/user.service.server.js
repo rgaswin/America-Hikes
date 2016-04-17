@@ -1,15 +1,70 @@
-module.exports = function (app, userModel, trailModel) {
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var bcrypt = require("bcrypt-nodejs");
 
-    app.get("/api/project/user", findAllUsers);
+module.exports = function (app, userModel, trailModel) {
+    var multer = require('multer');
+    var upload = multer({dest: __dirname + '../../../../uploads'});
+    app.post("/api/upload", upload.single('myFile'), uploadImage);
+    var auth = authorized;
+
+    app.get("/api/project/loggedin", loggedIn);
+    app.get("/api/project/user", auth, findAllUsers);
     app.get("/api/project/user/:id", findUserById);
     app.get("/api/project/user/username/:username", findUserByUsername);
     app.get("/api/project/user/username/:username/password/:password", findUserByCredentials);
     app.get("/api/project/user/:userId/trails", TrailsForUser);
-    app.post("/api/project/user", createUser);
+    app.post("/api/project/user", auth, createUser);
     app.post("/api/project/register", register);
+    app.post("/api/project/login", passport.authenticate('local'), login);
     app.post("/api/project/user/:userId/trail/:trailId", userLikesTrail);
-    app.put("/api/project/user/:id", updateUser);
-    app.delete("/api/project/user/:id", deleteUserById);
+    app.put("/api/project/user/:id", auth, updateUser);
+    app.delete("/api/project/user/:id", auth, deleteUserById);
+
+
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    function localStrategy(username, password, done) {
+        userModel
+            .findUserByUsername(username)
+            .then(
+                function (user) {
+                    // if the user exists, compare passwords with bcrypt.compareSync
+                    if (user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
+                    } else {
+                        return done(null, false);
+                    }
+                },
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
+                }
+            );
+    }
+
+    function serializeUser(user, done) {
+        delete user.password;
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        userModel.findUserById(user._id).then(function (user) {
+                delete user.password;
+                done(null, user);
+            },
+            function (err) {
+                done(err, null);
+            }
+        );
+    }
+
+    function loggedIn(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
 
     function createUser(req, res) {
         var newUser = req.body;
@@ -69,6 +124,7 @@ module.exports = function (app, userModel, trailModel) {
                 if (user) {
                     res.json(null);
                 } else {
+                    newUser.password = bcrypt.hashSync(newUser.password);
                     return userModel.createUser(newUser);
                 }
             },
@@ -91,7 +147,6 @@ module.exports = function (app, userModel, trailModel) {
             }
         );
     }
-
 
     function updateUser(req, res) {
         var userId = req.params.id;
@@ -178,6 +233,13 @@ module.exports = function (app, userModel, trailModel) {
             );
     }
 
+    function login(req, res) {
+        var user = req.user;
+        delete user.password;
+        res.json(user);
+    }
+
+
     function TrailsForUser(req, res) {
         var userId = req.params.userId;
         var user = userModel.getAllTrailsForUser(userId);
@@ -205,6 +267,52 @@ module.exports = function (app, userModel, trailModel) {
             .then(
                 function (user) {
                     res.json(user);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function authorized(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    };
+
+    function uploadImage(req, res) {
+
+        var username = req.user.username;
+        //var applicationId = req.body.applicationId;
+        //var pageId = req.body.pageId;
+        //var widgetId = req.body.widgetId;
+        //var width = req.body.width;
+        var myFile = req.file;
+        var destination = myFile.destination;
+        var path = myFile.path;
+        var originalname = myFile.originalname;
+        var size = myFile.size;
+        var mimetype = myFile.mimetype;
+        var filename = myFile.filename;
+
+
+        userModel.findUserByUsername(username).then(
+            function (user) {
+                if (!user.images) {
+                    user.images = [];
+                }
+                user.images.push("/uploads/" + filename);//originalname;
+                return user.save();
+            },
+            function (err) {
+                res.status(400).send(err);
+            }
+            )
+            .then(
+                function () {
+                    res.redirect("/project/client/index.html#/profile");
                 },
                 function (err) {
                     res.status(400).send(err);

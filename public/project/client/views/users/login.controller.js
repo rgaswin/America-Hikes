@@ -12,7 +12,7 @@
         // Event Handler Implementation
         function login(user) {
             UserService
-                .findUserByCredentials(user.username, user.password).then(
+                .findUserByCredentials(user).then(
                 function (response) {
                     console.log(response);
                     if (response.data !== null && typeof(response.data) !== 'undefined') {

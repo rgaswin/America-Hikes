@@ -39,10 +39,15 @@
     </div>
 
     <div class="form-group form-horizontal" ng-repeat="data in model.weather.data.daily.data">
-        <label class="col-sm-2 control-label">Weather</label>
-        <div class="col-sm-3 control-label">
+        <label class="col-sm-2 control-label">Weather Summary</label>
+        <div class="col-sm-1 control-label">
             {{data.summary}}
         </div>
+        <div class="col-sm-1 control-label">
+            <skycon icon="data.icon"></skycon>
+        </div>
+
+
     </div>
 
     <div class="form-group">
@@ -51,7 +56,7 @@
             <input type="date" class="form-control" ng-model="model.startdate">
         </div>
         <div class="col-sm-2">
-            <a ng-click="model.GetWeatherForFuture()" class="btn btn-primary">Weather Info</a>
+            <a ng-click="model.getWeatherForFuture()" class="btn btn-group-sm btn-info">Get Weather</a>
         </div>
     </div>
 
@@ -63,7 +68,7 @@
         <div class="row">
             <div class="col-sm-8">
                 <img ng-repeat="result in model.images" ng-src="{{result.Thumbnail.MediaUrl}}"
-                     class="img-thumbnail  bingImages">
+                     class="img-responsive img-thumbnail  bingImages">
             </div>
         </div>
     </div>
@@ -72,8 +77,8 @@
         <h3 class="page-header">Maps and Directions </h3>
         <div class="row">
             <div class="col-sm-8">
-                <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-                    <ui-gmap-marker idkey="marker.id" coords="marker.location">
+                <ui-gmap-google-map center='model.map.center' zoom='model.map.zoom'>
+                    <ui-gmap-marker idkey="model.marker.id" coords="marker.location">
                     </ui-gmap-marker>
                 </ui-gmap-google-map>
             </div>
@@ -91,55 +96,55 @@
         </div>
 
 
-        <div class="form-group">
-            <h3 class="page-header">Rate the Trek</h3>
-            <div class="col-sm-2">
-                <label for="sel1">Question 1 </label>
-                <select class="form-control" id="sel1">
-                    <option>Select an Option</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-2">
-                <label for="sel2">Question 2</label>
-                <select class="form-control" id="sel2">
-                    <option>Select an Option</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-2">
-                <label for="sel3">Question 3</label>
-                <select class="form-control" id="sel3">
-                    <option>Select an Option</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-2">
-                <label for="sel4">Question 4</label>
-                <select class="form-control" id="sel4">
-                    <option>Select an Option</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                </select>
-            </div>
-        </div>
+        <!--<div class="form-group">-->
+        <!--<h3 class="page-header">Rate the Trek</h3>-->
+        <!--<div class="col-sm-2">-->
+        <!--<label for="sel1">Question 1 </label>-->
+        <!--<select class="form-control" id="sel1">-->
+        <!--<option>Select an Option</option>-->
+        <!--<option>1</option>-->
+        <!--<option>2</option>-->
+        <!--<option>3</option>-->
+        <!--<option>4</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-sm-2">-->
+        <!--<label for="sel2">Question 2</label>-->
+        <!--<select class="form-control" id="sel2">-->
+        <!--<option>Select an Option</option>-->
+        <!--<option>1</option>-->
+        <!--<option>2</option>-->
+        <!--<option>3</option>-->
+        <!--<option>4</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-sm-2">-->
+        <!--<label for="sel3">Question 3</label>-->
+        <!--<select class="form-control" id="sel3">-->
+        <!--<option>Select an Option</option>-->
+        <!--<option>1</option>-->
+        <!--<option>2</option>-->
+        <!--<option>3</option>-->
+        <!--<option>4</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-sm-2">-->
+        <!--<label for="sel4">Question 4</label>-->
+        <!--<select class="form-control" id="sel4">-->
+        <!--<option>Select an Option</option>-->
+        <!--<option>1</option>-->
+        <!--<option>2</option>-->
+        <!--<option>3</option>-->
+        <!--<option>4</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--</div>-->
 
         <div class="form-group">
             <h3 class="page-header">Reviews</h3>
@@ -150,11 +155,12 @@
         </div>
 
         <div class="form-group">
-            <div class="col-sm-2">
-                <button class="btn-group-sm" ng-click="model.addComment()">Add Comment</button>
+            <div class="col-sm-3">
+                <button class="btn-group-sm btn-info" ng-click="model.addComment()">Add Comment</button>
+                <button class="btn-group-sm btn-info" ng-click="model.updateComment()">Update Comment</button>
             </div>
             <div class="col-sm-2">
-                <button class="btn-group-sm" ng-click="model.updateComment()">Update Comment</button>
+
             </div>
 
 
@@ -171,8 +177,8 @@
             </div>
 
             <div class="col-sm-2">
-                <button class="btn-group-sm" ng-click="model.deleteComment($index)">Delete</button>
-                <button class="btn-group-sm" ng-click="model.selectComment($index)">Select</button>
+                <button class="btn-group-sm btn-danger" ng-click="model.deleteComment($index)">Delete</button>
+                <button class="btn-group-sm btn-info" ng-click="model.selectComment($index)">Select</button>
             </div>
         </div>
 

@@ -12,12 +12,12 @@
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            register:register,
+            register: register,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
             userLikesTrail: userLikesTrail,
-            TrailsForUser : TrailsForUser,
-            getAllUsersForTrail:getAllUsersForTrail
+            TrailsForUser: TrailsForUser,
+            getAllUsersForTrail: getAllUsersForTrail
         };
 
         return api;
@@ -26,8 +26,8 @@
             return $http.get("/api/project/user/username/" + username);
         }
 
-        function findUserByCredentials(username, password) {
-            return $http.get("/api/project/user/username/" + username + "/password/" + password);
+        function findUserByCredentials(user) {
+            return $http.post("/api/project/login",user);
         }
 
         function findAllUsers() {
@@ -54,13 +54,16 @@
             return $http.get("/api/project/user/" + userId + "/trails/");
         }
 
-        function getAllUsersForTrail(trailId)
-        {
+        function getAllUsersForTrail(trailId) {
             return $http.get("/api/project/trail/" + trailId + "/users/");
         }
 
         function register(user) {
             return $http.post("/api/project/register", user);
+        }
+
+        function uploadImage() {
+
         }
 
         function setCurrentUser(user) {

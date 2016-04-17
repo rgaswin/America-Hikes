@@ -6,7 +6,7 @@
         .module("HikerApp")
         .controller("SearchController", SearchController);
 
-    function SearchController($scope, $routeParams, $http, UserService, TrailService, $rootScope) {
+    function SearchController($routeParams, $http, UserService, TrailService, $rootScope) {
 
         var currentUser = $rootScope.loggedInUser;
         var vm = this;
@@ -17,13 +17,14 @@
         vm.updateComment = updateComment;
         vm.selectComment = selectComment;
         vm.favorite = favorite;
-        $http.defaults.headers.common.Authorization = 'X-Mashape-Key JpqqeDQjdxmshlSW6xeSFJUKWuFfp1nz7QTjsnuWxTaf8awgDO';
 
+        // Set Properties From RouteParams
         var currentTrail = $routeParams.trailId;
         var trailname = $routeParams.trailname;
         var lat = $routeParams.lat;
         var lon = $routeParams.lon;
 
+        // Init Function to Initialize the page.
         function init() {
             // Fetch the Trail Details
             GetDetailsFromTrailAPI();
@@ -52,7 +53,6 @@
                 url: url,
                 headers: {
                     "X-Mashape-Key": "JpqqeDQjdxmshlSW6xeSFJUKWuFfp1nz7QTjsnuWxTaf8awgDO",
-                    //"X-Mashape-Key": process.env.TrailAPIKey,
                     "Accept": "text/plain"
                 }
             };
@@ -62,14 +62,10 @@
                 for (var i = 0; i < result.data.places.length; i++) {
                     if (result.data.places[i].name == trailname) {
                         filter = result.data.places[i];
-                        lat = result.data.places[i].lat;
-                        lon = result.data.places[i].lon;
-                        city = result.data.places[i].city;
                         break;
                     }
                 }
                 vm.place = filter;
-                currentTrail = filter.unique_id;
             }, function (err) {
                 console.log(err);
             });
@@ -117,6 +113,7 @@
             $http.jsonp(url).then(
                 function (result) {
                     vm.weather = result;
+                    console.log(result);
                 }, function (result) {
                 }
             );
@@ -142,26 +139,14 @@
         }
 
         function RenderGoogleMaps() {
-            $scope.map = {center: {latitude: lat, longitude: lon}, zoom: 8};
-            $scope.marker = {
+            vm.map = {center: {latitude: lat, longitude: lon}, zoom: 8};
+            vm.marker = {
                 id: 0,
                 location: {
                     latitude: lat,
                     longitude: lon
                 }
             };
-        }
-
-        function GetAllCommentsForTrail() {
-            var trail = vm.place;
-            if ($rootScope.loggedInUser !== null && typeof($rootScope.loggedInUser) !== "undefined") {
-                TrailService.findAllCommentsForTrail(currentTrail)
-                    .then(function (result) {
-                        console.log("Comments - ");
-                        console.log(result);
-                        vm.comments = result.data;
-                    });
-            }
         }
 
         // Event Handler Implementations
@@ -175,48 +160,65 @@
             }
         }
 
+        // Comments Related Functions
+        // Get All Comments for the Trail
+        function GetAllCommentsForTrail() {
+            var trail = vm.place;
+            if ($rootScope.loggedInUser !== null && typeof($rootScope.loggedInUser) !== "undefined") {
+                TrailService.findAllCommentsForTrail(currentTrail)
+                    .then(function (result) {
+                        vm.comments = result.data;
+                    });
+            }
+        }
+
+        // Add a comment for the Trail
         function addComment() {
             var trail = vm.place;
             var userName = $rootScope.loggedInUser.username;
             var comment = {
-                _id: (new Date).getTime(),
+                id: (new Date).getTime(),
                 username: userName,
                 comment: vm.comment,
                 postedon: (new Date)
             };
-            TrailService.createCommentForUser(trail.unique_id, comment).then(function (result) {
+            TrailService.createCommentForTrail(currentTrail, comment).then(function (result) {
                     vm.comments = result.data;
+                    vm.comment = "";
                 },
                 function (error) {
                     console.log(error);
                 });
         }
 
+        // Delete a comment for the Trail
         function deleteComment(index) {
-            var commentId = vm.comments[index]._id;
-            TrailService.deleteCommentById(commentId, function (result) {
-                vm.comments.splice(index, 1);
-            });
+            var comment = vm.comments[index];
+            TrailService.deleteCommentForTrail(currentTrail, comment.id).then(function (result) {
+                    vm.comments = result.data;
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
         }
 
+        // Update a comment for the Trail
         function updateComment() {
             if (selectedCommentIndex >= 0) {
-                var userId = vm.comments[selectedCommentIndex].userId;
-                var commentId = vm.comments[selectedCommentIndex]._id;
-                var newComment = {
-                    _id: commentId,
-                    comment: vm.comment,
-                    userId: userId,
-                    username: $rootScope.loggedInUser.username
-                };
-                TrailService.updateCommentById(commentId, newComment, function (response) {
+                var comment = vm.comments[selectedCommentIndex];
+                TrailService.updateCommentForTrail(currentTrail, comment).then(function (result) {
+                    vm.comments = result.data;
+                    vm.comment = "";
+                }, function (error) {
+                    console.log(error);
                 });
             }
         }
 
+        // Select a comment for Edit
         var selectedCommentIndex = -1; // Contains the Index of currently selected record
         function selectComment(index) {
-            console.log('select');
             selectedCommentIndex = index;
             vm.comment = vm.comments[selectedCommentIndex].comment;
         }

@@ -10,7 +10,8 @@ module.exports = function (mongoose) {
         lastName: String,
         email: String,
         roles: [String],
-        likes: [String]
+        likes: [String],
+        images:[String],
         // collection property sets
         // collection name to 'user'
     }, {collection: 'hikeruser'});
