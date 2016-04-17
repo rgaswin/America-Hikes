@@ -4,12 +4,16 @@
     height: 150px;
 }
 
+.headerbg{
+    background-color: grey;
+}
+
 .angular-google-map-container {
     height: 400px;
 }
 
 .cover {
-    background: url("../images/hiker_cover_3.jpg") no-repeat center center fixed;
+    background: url("../images/hiker_cover_5.jpg") no-repeat center center fixed;
     --webkit-background-size: cover;
     --moz-background-size: cover;
     --o-background-size: cover;

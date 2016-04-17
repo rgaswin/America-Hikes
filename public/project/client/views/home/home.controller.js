@@ -6,12 +6,26 @@
         .module("HikerApp")
         .controller("HomeController", HomeController);
 
-    function HomeController($scope, $http) {
+    function HomeController($scope, $http, $sce) {
+        function setPaginationProperties() {
+            $scope.currentPage = 1
+                , $scope.numPerPage = 10
+                , $scope.maxSize = 5;
+
+            $scope.$watch('currentPage + numPerPage', function () {
+                var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+                    , end = begin + $scope.numPerPage;
+                if ($scope.places)
+                    $scope.filteredplaces = $scope.places.slice(begin, end);
+            });
+        };
+
+        setPaginationProperties();
 
         $scope.searchByInput = searchByInput;
 
         function searchByInput() {
-            $scope.forms = [];
+
             var url = "https://trailapi-trailapi.p.mashape.com?&q[activities_activity_type_name_eq]=hiking&limit=25";
 
             if ($scope.city !== null && typeof($scope.city) !== "undefined")
@@ -30,7 +44,19 @@
             };
 
             $http(req).then(function (result) {
-                $scope.places = result;
+
+                for (var placeindex in result.data.places) {
+                    result.data.places[placeindex].activities[0].description = $sce.trustAsHtml(result.data.places[placeindex].activities[0].description);
+                    console.log(result.data.places[placeindex].activities[0].description);
+                }
+
+                console.log(result);
+                $scope.places = result.data.places;
+                var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+                    , end = begin + $scope.numPerPage;
+                if ($scope.places)
+                    $scope.filteredplaces = $scope.places.slice(begin, end);
+
             }, function (result) {
                 console.log("Error : " + result);
             });
