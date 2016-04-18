@@ -17,7 +17,8 @@ module.exports = function (db, mongoose) {
         findUserById: findUserById,
         getAllTrailsForUser: getAllTrailsForUser,
         userLikesTrail: userLikesTrail,
-        findUsersByIds: findUsersByIds
+        findUsersByIds: findUsersByIds,
+        followUser:followUser
     };
 
     return api;
@@ -205,6 +206,33 @@ module.exports = function (db, mongoose) {
                 deferred.reject(err);
             } else {
                 deferred.resolve(users);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function followUser(CurrentUser, OtherUser) {
+        var deferred = q.defer();
+
+        // find the user
+        UserModel.findById(CurrentUser, function (err, doc) {
+            // reject promise if error
+            if (err) {
+                deferred.reject(err);
+            } else {
+                // add User id to user Following
+                doc.following.push(OtherUser);
+
+                // save user
+                doc.save(function (err, doc) {
+
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        // resolve promise with user
+                        deferred.resolve(doc);
+                    }
+                });
             }
         });
         return deferred.promise;

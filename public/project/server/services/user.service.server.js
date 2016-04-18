@@ -20,6 +20,7 @@ module.exports = function (app, userModel, trailModel) {
     app.post("/api/project/user/:userId/trail/:trailId", userLikesTrail);
     app.put("/api/project/user/:id", auth, updateUser);
     app.delete("/api/project/user/:id", auth, deleteUserById);
+    app.post("/api/project/follow/:userName/currentuser/:currentUserId", followUser);
 
 
     passport.use(new LocalStrategy(localStrategy));
@@ -319,4 +320,20 @@ module.exports = function (app, userModel, trailModel) {
                 }
             );
     }
+
+    function followUser(req, res) {
+        var OtherUser = req.params.userName;
+        var CurrentUser = req.params.currentUserId;
+        userModel.followUser(CurrentUser,OtherUser).then(
+            function (success) {
+                res.json(200);
+            },
+            function (error) {
+               res.status(401).send(error);
+            }
+        )
+
+
+    }
+
 }

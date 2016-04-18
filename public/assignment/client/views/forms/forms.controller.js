@@ -13,13 +13,13 @@
             vm.forms = response.data;
         });
 
-        // event handler declarations
+        // viewuser handler declarations
         vm.addForm = addForm;
         vm.updateForm = updateForm;
         vm.deleteForm = deleteForm;
         vm.selectForm = selectForm;
 
-        // event handler implementation
+        // viewuser handler implementation
         function addForm() {
             var newForm = {
                 title: vm.formtitle

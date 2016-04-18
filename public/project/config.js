@@ -38,9 +38,10 @@
                     loggedin: checkAdmin
                 }
             })
-            .when("/event", {
-                templateUrl: "views/event/event.view.html",
-                controller: "EventController",
+            .when("/viewuser/:userName", {
+                templateUrl: "views/viewuser/viewuser.html",
+                controller: "ViewUserController",
+                controllerAs:"model",
                 resolve: {
                     loggedin: checkLoggedin
                 }
@@ -58,7 +59,7 @@
                 controller: "SearchController",
                 controllerAs: "model",
                 resolve: {
-                    loggedin: checkLoggedin
+                    loggedin: checkCurrentUser
                 }
             })
             .otherwise({

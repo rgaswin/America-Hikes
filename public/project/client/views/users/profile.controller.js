@@ -18,6 +18,7 @@
         $scope.firstname = $rootScope.loggedInUser.firstName;
         $scope.lastname = $rootScope.loggedInUser.lastName;
         $scope.trekimages = $rootScope.loggedInUser.images;
+        $scope.following = $rootScope.loggedInUser.following;
 
         // Adding Test data at the moment
         UserService.TrailsForUser($rootScope.loggedInUser._id).then(

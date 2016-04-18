@@ -22,6 +22,7 @@
 
         // Event Handler Implementations
         function register() {
+            user.aboutme = $scope.aboutme;
             user.username = $scope.username;
             user.password = $scope.password;
             user.email = $scope.email;

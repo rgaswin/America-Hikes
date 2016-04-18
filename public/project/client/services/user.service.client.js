@@ -17,7 +17,8 @@
             setCurrentUser: setCurrentUser,
             userLikesTrail: userLikesTrail,
             TrailsForUser: TrailsForUser,
-            getAllUsersForTrail: getAllUsersForTrail
+            getAllUsersForTrail: getAllUsersForTrail,
+            followUser: followUser
         };
 
         return api;
@@ -27,7 +28,7 @@
         }
 
         function findUserByCredentials(user) {
-            return $http.post("/api/project/login",user);
+            return $http.post("/api/project/login", user);
         }
 
         function findAllUsers() {
@@ -69,6 +70,11 @@
         function setCurrentUser(user) {
             $rootScope.loggedInUser = user;
             return $rootScope.loggedInUser;
+        }
+
+        function followUser(OtherUserName, currentUserId) {
+            return $http.post("/api/project/follow/" + OtherUserName + "/currentuser/" + currentUserId);
+
         }
 
         function logoutUser() {
