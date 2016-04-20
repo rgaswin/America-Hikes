@@ -1,0 +1,85 @@
+<h2 class="page-header">Admin</h2>
+<h3>Users</h3>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th class="col-xs-1">
+                <a href="#/admin" ng-click="admin.orderByField='username'; admin.reverseSort = !admin.reverseSort">
+                    UserName <span ng-show="admin.orderByField == 'username'">
+                    <span ng-show="!admin.reverseSort" class="glyphicon glyphicon-triangle-top"
+                          aria-hidden="true"></span>
+                    <span ng-show="admin.reverseSort" class="glyphicon glyphicon-triangle-bottom"
+                          aria-hidden="true"></span></span>
+                </a>
+            </th>
+
+            <th class="col-xs-1">
+                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
+                </span> Password
+            </th>
+            <th class="col-xs-2">
+                <a href="#/admin" ng-click="admin.orderByField='firstName'; admin.reverseSort = !admin.reverseSort">
+                    First Name <span ng-show="admin.orderByField == 'firstName'">
+                    <span ng-show="!admin.reverseSort" class="glyphicon glyphicon-triangle-top"
+                          aria-hidden="true"></span>
+                    <span ng-show="admin.reverseSort" class="glyphicon glyphicon-triangle-bottom"
+                          aria-hidden="true"></span></span>
+                </a>
+            </th>
+            <th class="col-xs-2">
+                <a href="#/admin" ng-click="admin.orderByField='lastName'; admin.reverseSort = !admin.reverseSort">
+                    Last Name <span ng-show="admin.orderByField == 'lastName'">
+                    <span ng-show="!admin.reverseSort" class="glyphicon glyphicon-triangle-top"
+                          aria-hidden="true"></span>
+                    <span ng-show="admin.reverseSort" class="glyphicon glyphicon-triangle-bottom"
+                          aria-hidden="true"></span></span>
+                </a>
+            </th>
+            <th class="col-xs-2"> <a href="#/admin" ng-click="admin.orderByField='email'; admin.reverseSort = !admin.reverseSort">
+                Email <span ng-show="admin.orderByField == 'email'">
+                    <span ng-show="!admin.reverseSort" class="glyphicon glyphicon-triangle-top"
+                          aria-hidden="true"></span>
+                    <span ng-show="admin.reverseSort" class="glyphicon glyphicon-triangle-bottom"
+                          aria-hidden="true"></span></span>
+            </a>
+            </th>
+            <th class="col-xs-2"><span class="glyphicon glyphicon-triangle-bottom"
+                                       aria-hidden="true"></span> Roles
+            </th>
+            <th class="col-xs-2"><span class="glyphicon glyphicon-triangle-bottom"
+                                       aria-hidden="true"></span> Action
+            </th>
+        </tr>
+
+        <tr>
+            <td><input ng-model="admin.user.username" class="form-control" placeholder="username"/></td>
+            <td><input ng-model="admin.user.password" class="form-control" type="password" placeholder="password"/></td>
+            <td><input ng-model="admin.user.firstName" class="form-control" placeholder="first"/></td>
+            <td><input ng-model="admin.user.lastName" class="form-control" placeholder="last"/></td>
+            <td><input ng-model="admin.user.email" class="form-control" type="email" placeholder="email"/></td>
+            <td><input ng-model="admin.user.roles" class="form-control" placeholder="roles"/></td>
+            <td>
+                <button ng-click="admin.add(admin.user)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                <button ng-click="admin.update()" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+            </td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="user in admin.users|orderBy:admin.orderByField:admin.reverseSort">
+            <td>{{user.username}}</td>
+            <td>&nbsp;</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.roles}}</td>
+            <td>
+                <button ng-click="admin.remove($index)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                <button ng-click="admin.select($index)" class="btn btn-success"><span class="glyphicon glyphicon-cog"></span></button>
+            </td>
+        </tr>
+
+    </table>
+</div>
+
