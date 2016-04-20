@@ -29,7 +29,7 @@
             user.firstName = $scope.firstname;
             user.lastName = $scope.lastname;
             user.dob = $scope.dob;
-            user.yearsOfTrekExperience = $scope.yrsOfTrekExp;
+            user.yrsOfTrekExp = $scope.yrsOfTrekExp;
 
             UserService.register(user).then(function(response) {
                 $rootScope.loggedInUser = response.data;

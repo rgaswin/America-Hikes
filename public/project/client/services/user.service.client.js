@@ -18,7 +18,8 @@
             userLikesTrail: userLikesTrail,
             TrailsForUser: TrailsForUser,
             getAllUsersForTrail: getAllUsersForTrail,
-            followUser: followUser
+            followUser: followUser,
+            logoutUser:logoutUser
         };
 
         return api;
@@ -78,8 +79,7 @@
         }
 
         function logoutUser() {
-            $rootScope.loggedInUser = null;
-            return null;
+            return $http.post("/api/project/logout");
         }
     }
 })();

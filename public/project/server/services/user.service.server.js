@@ -17,7 +17,8 @@ module.exports = function (app, userModel, trailModel) {
     app.post("/api/project/user", auth, createUser);
     app.post("/api/project/register", register);
     app.post("/api/project/login", passport.authenticate('local'), login);
-    app.post("/api/project/user/:userId/trail/:trailId", userLikesTrail);
+    app.post("/api/project/logout", logout);
+    //app.post("/api/project/user/:userId/trail/:trailId", userLikesTrail);
     app.put("/api/project/user/:id", auth, updateUser);
     app.delete("/api/project/user/:id", auth, deleteUserById);
     app.post("/api/project/follow/:userName/currentuser/:currentUserId", followUser);
@@ -83,6 +84,7 @@ module.exports = function (app, userModel, trailModel) {
                     // if the user does not already exist
                     if (user == null) {
                         // create a new user
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.createUser(newUser)
                             .then(
                                 // fetch all the users
@@ -190,6 +192,12 @@ module.exports = function (app, userModel, trailModel) {
             );
     }
 
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    }
+
+
     function findUserById(req, res) {
         var userId = req.params.id;
         var user = userModel.findUserById(userId)
@@ -255,7 +263,7 @@ module.exports = function (app, userModel, trailModel) {
 
         trailModel
             .userLikesTrail(userId, trailInfo)
-            // add user to movie likes
+            // add user to trail likes
             .then(
                 function (trail) {
                     return userModel.userLikesTrail(userId, trail);
@@ -264,7 +272,7 @@ module.exports = function (app, userModel, trailModel) {
                     res.status(400).send(err);
                 }
             )
-            // add movie to user likes
+            // add trail to user likes
             .then(
                 function (user) {
                     res.json(user);

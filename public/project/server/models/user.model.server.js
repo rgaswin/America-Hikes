@@ -18,7 +18,7 @@ module.exports = function (db, mongoose) {
         getAllTrailsForUser: getAllTrailsForUser,
         userLikesTrail: userLikesTrail,
         findUsersByIds: findUsersByIds,
-        followUser:followUser
+        followUser: followUser
     };
 
     return api;
@@ -103,6 +103,7 @@ module.exports = function (db, mongoose) {
         var deferred = q.defer();
         UserModel.update({_id: userId},
             {
+                aboutme: newuser.aboutme,
                 username: newuser.username,
                 password: newuser.password,
                 firstName: newuser.firstName,
@@ -164,19 +165,34 @@ module.exports = function (db, mongoose) {
         return deferred.promise;
     }
 
-    function userLikesTrail(userId, trailInfo) {
+    function userLikesTrail(userId, username, trailInfo) {
         var deferred = q.defer();
 
         // find the user
         UserModel.findById(userId, function (err, doc) {
-
             // reject promise if error
             if (err) {
                 deferred.reject(err);
             } else {
-
-                // add trail id to user likes
-                doc.likes.push(trailInfo.trailId);
+                // Check if user already liked the trail
+                var trailliked = false;
+                if (doc.likes) {
+                    for (var trail in doc.likes) {
+                        if (doc.likes[trail].id == trailInfo.trailId) {
+                            trailliked = true;
+                            break;
+                        }
+                    }
+                }
+                if (!trailliked) {
+                    // add trail to user
+                    doc.likes.push({
+                        id: trailInfo.trailId,
+                        trailname: trailInfo.name,
+                        lat: trailInfo.lat,
+                        lon: trailInfo.lon
+                    });
+                }
 
                 // save user
                 doc.save(function (err, doc) {

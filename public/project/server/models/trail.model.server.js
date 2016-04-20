@@ -63,7 +63,7 @@ module.exports = function (db, mongoose) {
 
     function getAllTrailNamesForUser(trailId) {
         var deffered = q.defer();
-        trailModel.find({trailId: trailId}, function (err, doc) {
+        trailModel.findOne({trailId: trailId}, function (err, doc) {
             if (err) {
                 deffered.reject(err);
             }
@@ -74,7 +74,7 @@ module.exports = function (db, mongoose) {
         return deffered.promise;
     }
 
-    function userLikesTrail(userId, trail) {
+    function userLikesTrail(userId, username, trail) {
         var deferred = q.defer();
         var newTrail;
         // find the movie by imdb ID
@@ -86,8 +86,20 @@ module.exports = function (db, mongoose) {
                 }
                 // if there's a trail
                 if (doc) {
-                    // add user to likes
-                    doc.likes.push(userId);
+                    // Check if user already liked the trail
+                    var userliked = false;
+                    if (doc.likes) {
+                        for (var user in doc.likes) {
+                            if (doc.likes[user].username == username) {
+                                userliked = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!userliked) {
+                        // add user to likes
+                        doc.likes.push({userId: userId, username: username});
+                    }
                     // save changes
                     doc.save(function (err, doc) {
                         if (err) {
@@ -104,10 +116,11 @@ module.exports = function (db, mongoose) {
                         city: trail.city,
                         lat: trail.lat,
                         lon: trail.lon,
+                        name: trail.name,
                         likes: []
                     });
                     // add user to likes
-                    newTrail.likes.push(userId);
+                    newTrail.likes.push({userId: userId, username: username});
                     // save new instance
                     newTrail.save(function (err, doc) {
                         if (err) {
@@ -131,7 +144,7 @@ module.exports = function (db, mongoose) {
                     // reject the promise;
                     deffered.reject(err);
                 }
-                else {
+                if (doc) {
                     if (!doc.comments) {
                         doc.comments = [];
                     }
@@ -145,6 +158,35 @@ module.exports = function (db, mongoose) {
                         if (err) {
                             deferred.reject(err);
                         } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+                else {
+// if there's no trail
+                    // create a new instance
+                    var newTrail = new trailModel({
+                        trailId: comment.trailId,
+                        city: comment.city,
+                        lat: comment.lat,
+                        lon: comment.lon,
+                        name: comment.trailname,
+                        likes: []
+                    });
+                    // add comments to trail
+                    newTrail.comments.push({
+                        id: comment.id,
+                        comment: comment.comment,
+                        username: comment.username,
+                        postedon: comment.postedon
+                    });
+                    // save new instance
+                    newTrail.save(function (err, doc) {
+                        if (err) {
+                            // reject promise if error
+                            deferred.reject(err);
+                        } else {
+                            // resolve promise
                             deferred.resolve(doc);
                         }
                     });

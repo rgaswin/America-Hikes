@@ -6,7 +6,14 @@
         .module("HikerApp")
         .controller("HomeController", HomeController);
 
-    function HomeController($scope, $http, $sce) {
+    function HomeController($scope, $rootScope, $http, $sce) {
+        function init() {
+            if ($rootScope.setSearchFlag)
+                searchByInput();
+        }
+
+        init();
+
         function setPaginationProperties() {
             $scope.currentPage = 1
                 , $scope.numPerPage = 10
@@ -21,18 +28,37 @@
         };
 
         setPaginationProperties();
-
         $scope.searchByInput = searchByInput;
 
         function searchByInput() {
-
             var url = "https://trailapi-trailapi.p.mashape.com?&q[activities_activity_type_name_eq]=hiking&limit=25";
+            if ($rootScope.default) {
+                if ($rootScope.default == "") {
+                    $rootScope.setSearchFlag == $rootScope.state;
+                    url = url + "&q[state_cont]=" + $rootScope.setSearchFlag;
+                }
+            }
 
-            if ($scope.city !== null && typeof($scope.city) !== "undefined")
-                url = url + "&q[city_cont]=" + $scope.city;
+            if ($rootScope.state){
+                if($rootScope.state != ""){
+                    $rootScope.setSearchFlag == $rootScope.state;
+                    url = url + "&q[state_cont]=" + $rootScope.setSearchFlag;
+                }
+            }
 
-            if ($scope.state !== null && typeof($scope.state) !== "undefined")
+
+            if ($scope.state !== null && typeof($scope.state) !== "undefined") {
                 url = url + "&q[state_cont]=" + $scope.state;
+                $rootScope.setSearchFlag = $scope.state;
+                $rootScope.state = $scope.state;
+                $rootScope.default = "";
+            }
+
+            else {
+                $rootScope.state = "";
+                $rootScope.default = "default";
+                $rootScope.setSearchFlag = "default";
+            }
 
             var req = {
                 method: 'GET',

@@ -17,6 +17,7 @@
         vm.updateComment = updateComment;
         vm.selectComment = selectComment;
         vm.favorite = favorite;
+        vm.showemptyheart = true;
 
         // Set Properties From RouteParams
         var currentTrail = $routeParams.trailId;
@@ -38,10 +39,13 @@
             RenderGoogleMaps();
             // Get All Comments for the Trail
             GetAllCommentsForTrail();
+            // Show or Hide Heart For like
+            ShowOrHideHeart();
         }
 
         // Initialization Functions for the page
         init();
+
 
         function GetDetailsFromTrailAPI() {
             var url = "https://trailapi-trailapi.p.mashape.com/?lat=" + lat + "&lon=" + lon +
@@ -154,6 +158,7 @@
             if (currentUser) {
                 UserService.userLikesTrail(currentUser._id, place).then(
                     function (response) {
+                        vm.showemptyheart = false;
                         GetAllTrailsForUser();
                     }
                 );
@@ -180,9 +185,14 @@
                 id: (new Date).getTime(),
                 username: userName,
                 comment: vm.comment,
-                postedon: (new Date)
+                postedon: (new Date),
+                trailId: trail.unique_id,
+                city: trail.city,
+                trailname: trail.name,
+                lat: trail.lat,
+                lon: trail.lon
             };
-            TrailService.createCommentForTrail(currentTrail, comment).then(function (result) {
+            TrailService.createCommentForTrail(trail.unique_id, comment).then(function (result) {
                     vm.comments = result.data;
                     vm.comment = "";
                 },
@@ -222,5 +232,19 @@
             selectedCommentIndex = index;
             vm.comment = vm.comments[selectedCommentIndex].comment;
         }
+
+        function ShowOrHideHeart() {
+            if ($rootScope.loggedInUser) {
+                vm.showemptyheart = true;
+                var usersLikedPlace = $rootScope.loggedInUser.likes;
+                for (var user in usersLikedPlace) {
+                    if (usersLikedPlace[user].id == currentTrail) {
+                        vm.showemptyheart = false;
+                        break;
+                    }
+                }
+            }
+        }
+
     }
 })();

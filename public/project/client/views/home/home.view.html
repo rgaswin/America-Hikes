@@ -1,5 +1,4 @@
-<div class="container-fluid" ng-controller="HomeController">
-
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-2">
         </div>
@@ -24,7 +23,7 @@
 
                             <div class="row" ng-repeat="place in filteredplaces">
                                 <div class="col-sm-12">
-                                    <a class=""
+                                    <a class="labelcolor"
                                        href="#/search/{{place.unique_id}}/{{place.name}}/{{place.lat}}/{{place.lon}}">
                                         {{place.name}}
                                     </a>
@@ -40,7 +39,6 @@
                         </div>
                     </form>
                 </div>
-                <!--<div class="col-sm-1"></div>-->
             </div>
         </div>
     </div>

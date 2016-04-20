@@ -1,131 +1,166 @@
-<form class="form-horizontal">
-    <div class="form-group page-header">
-        <div class="row">
-            <div class="col-sm-4">
-                <h2>{{model.place.name}}</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                    <div class="form-horizontal">
+                        <div class="form-group page-header">
+                            <div class="col-sm-10">
+                                <h2>{{model.place.name}}&nbsp;
+                                    <div ng-show="loggedInUser"
+                                    <span id="heartempty" ng-show="model.showemptyheart"
+                                          class="glyphicon glyphicon-heart-empty  heartcolor"
+                                          ng-click="model.favorite(model.place)"></span>
+                                <span id="heart" ng-hide="model.showemptyheart"
+                                      class="glyphicon glyphicon-heart  heartcolor"
+                                      ng-click="model.favorite(model.place)"></span></h2>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Description</label>
+                            <div class="col-sm-10 control-label">
+                                <span>{{model.place.activities[0].description}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">City</label>
+                            <div class="col-sm-4 control-label">
+                                {{model.place.city}}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Country</label>
+                            <div class="col-sm-4 control-label">
+                                {{model.place.country}}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">State</label>
+                            <div class="col-sm-4 control-label">
+                                {{model.place.state}}
+                            </div>
+                        </div>
+
+                        <div class="form-group form-horizontal" ng-repeat="data in model.weather.data.daily.data">
+                            <label class="col-sm-2 control-label">Weather Summary</label>
+                            <div class="col-sm-2 control-label">
+                                {{data.summary}}
+                            </div>
+                            <div class="col-sm-1 control-label">
+                                <skycon icon="data.icon"></skycon>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"> Weather For a Future Date</label>
+                            <div class="col-sm-3">
+                                <input type="date" class="form-control" ng-model="model.startdate">
+                            </div>
+                            <div class="col-sm-2">
+                                <a ng-click="model.getWeatherForFuture()" class="btn btn-group-sm btn-info">Get
+                                    Weather</a>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-group">
+                            <h3 class="page-header">Images of this trail </h3>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <img ng-repeat="result in model.images" ng-src="{{result.Thumbnail.MediaUrl}}"
+                                         class="img-responsive img-thumbnail  bingImages">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h3 class="page-header">Maps and Directions </h3>
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <ui-gmap-google-map center='model.map.center' zoom='model.map.zoom'>
+                                        <ui-gmap-marker idkey="model.marker.id" coords="marker.location">
+                                        </ui-gmap-marker>
+                                    </ui-gmap-google-map>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-show="{{loggedInUser}}">
+
+                            <div class="form-group">
+                                <h3 class="page-header">Users Who Liked this trail</h3>
+                                <div class="col-sm-10" ng-repeat="trail in model.userTrails">
+                                    <a href="#/viewuser/{{trail.username}}">{{trail.username}}</a>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <h3 class="page-header">Comments</h3>
+                                <div class="col-sm-10">
+                                    <div class="widget-area no-padding blank">
+                                        <div class="status-upload">
+                                            <form>
+                                <textarea placeholder="Comment Here"
+                                          ng-model="model.comment"></textarea>
+                                                <ul>
+                                                    <li><a title="" data-toggle="tooltip" data-placement="bottom"
+                                                           data-original-title="Audio"><i class=""></i></a></li>
+                                                    <li><a title="" data-toggle="tooltip" data-placement="bottom"
+                                                           data-original-title="Video"><i class=""></i></a></li>
+                                                    <li><a title="" data-toggle="tooltip" data-placement="bottom"
+                                                           data-original-title="Sound Record"><i class=""></i></a></li>
+                                                    <li><a title="" data-toggle="tooltip" data-placement="bottom"
+                                                           data-original-title="Picture"><i class=""></i></a></li>
+                                                </ul>
+                                                <button class="btn btn-success green" ng-click="model.addComment()"><i
+                                                        class="fa fa-share"></i> Add Comment
+                                                </button>
+                                            </form>
+                                        </div><!-- Status Upload  -->
+                                    </div><!-- Widget Area -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-repeat="comment in model.comments">
+                            <div class="col-sm-10">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        comment by <a
+                                            href="#/viewuser/{{comment.username}}"><strong>{{comment.username}}</strong></a>
+                                        on <span class="">{{comment.postedon | date:"MM/dd/yyyy 'at' h:mma"}}</span>
+                                         <span class="glyphicon glyphicon-remove floatright"
+                                               ng-click="model.deleteComment($index)"></span>
+                                    </div>
+                                    <div class="panel-body">
+                                        {{comment.comment}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-1"></div>
             </div>
-            <div class="col-sm-2">
-                <button class="btn-group-sm" ng-click="model.favorite(model.place)">Like</button>
-            </div>
-        </div>
-    </div>
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Description</label>
-        <div class="col-sm-4 control-label">
-            {{model.place.activities[0].description}}
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-2 control-label">City</label>
-        <div class="col-sm-4 control-label">
-            {{model.place.city}}
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Country</label>
-        <div class="col-sm-4 control-label">
-            {{model.place.country}}
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-2 control-label">State</label>
-        <div class="col-sm-4 control-label">
-            {{model.place.state}}
-        </div>
-    </div>
-
-    <div class="form-group form-horizontal" ng-repeat="data in model.weather.data.daily.data">
-        <label class="col-sm-2 control-label">Weather Summary</label>
-        <div class="col-sm-1 control-label">
-            {{data.summary}}
-        </div>
-        <div class="col-sm-1 control-label">
-            <skycon icon="data.icon"></skycon>
-        </div>
-
-
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-2 control-label"> Weather For a Future Date</label>
-        <div class="col-sm-3">
-            <input type="date" class="form-control" ng-model="model.startdate">
         </div>
         <div class="col-sm-2">
-            <a ng-click="model.getWeatherForFuture()" class="btn btn-group-sm btn-info">Get Weather</a>
         </div>
     </div>
+</div>
 
-    <br>
-
-
-    <div class="form-group">
-        <h3 class="page-header">Images of this trail </h3>
-        <div class="row">
-            <div class="col-sm-8">
-                <img ng-repeat="result in model.images" ng-src="{{result.Thumbnail.MediaUrl}}"
-                     class="img-responsive img-thumbnail  bingImages">
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <h3 class="page-header">Maps and Directions </h3>
-        <div class="row">
-            <div class="col-sm-8">
-                <ui-gmap-google-map center='model.map.center' zoom='model.map.zoom'>
-                    <ui-gmap-marker idkey="model.marker.id" coords="marker.location">
-                    </ui-gmap-marker>
-                </ui-gmap-google-map>
-            </div>
-        </div>
-    </div>
-
-
-    <div ng-show="{{loggedInUser}}">
-
-        <div class="form-group">
-            <h3 class="page-header">Users Who Liked this trail</h3>
-            <div class="col-sm-8" ng-repeat="trail in model.userTrails">
-                {{trail}}
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <h3 class="page-header">Reviews</h3>
-            <div class="col-sm-8">
-        <textarea ng-model="model.comment" class="form-control">
-        </textarea>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-3">
-                <button class="btn-group-sm btn-info" ng-click="model.addComment()">Add Comment</button>
-                <button class="btn-group-sm btn-info" ng-click="model.updateComment()">Update Comment</button>
-            </div>
-        </div>
-
-
-        <div class="form-group" ng-repeat="comment in model.comments">
-            <div class="col-sm-3">
-                {{comment.comment}}
-            </div>
-
-            <div class="col-sm-2">
-                <a href="#/viewuser/{{comment.username}}">{{comment.username}}</a>
-            </div>
-
-            <div class="col-sm-2">
-                <button class="btn-group-sm btn-danger" ng-click="model.deleteComment($index)">Delete</button>
-                <button class="btn-group-sm btn-info" ng-click="model.selectComment($index)">Select</button>
-            </div>
-        </div>
-
-    </div>
-</form>

@@ -2,7 +2,6 @@
  * Created by gopal on 3/25/2016.
  */
 module.exports = function (app, trailModel, userModel) {
-
     app.get("/api/project/trail/:trailId/comment", findAllCommentsForTrail);
     app.get("/api/project/trail/:trailId/users", UsersForTrail);
     app.post("/api/project/user/:userId/trail/:trailId", userLikesTrail);
@@ -24,27 +23,36 @@ module.exports = function (app, trailModel, userModel) {
 
     function UsersForTrail(req, res) {
         var trailId = req.params.trailId;
-        var trailNames = trailModel.getAllTrailNamesForUser(trailId);
-        res.json(trailNames);
+        trailModel.getAllTrailNamesForUser(trailId).then(function (trail) {
+                if (trail) {
+                    res.json(trail.likes);
+                }
+                else {
+                    res.json({message: "No Users"});
+                }
+            },
+            function (err) {
+                res.status(400).send(err);
+            });
     }
 
     function userLikesTrail(req, res) {
         var trailInfo = req.body;
         var userId = req.params.userId;
         var trailId = req.params.trailId;
+        var username = req.user.username;
 
         trailModel
-            .userLikesTrail(userId, trailInfo)
-            // add user to movie likes
+            .userLikesTrail(userId, username, trailInfo)
+            // add user to trail likes
             .then(
                 function (trail) {
-                    return userModel.userLikesTrail(userId, trail);
+                    return userModel.userLikesTrail(userId,username, trail);
                 },
                 function (err) {
                     res.status(400).send(err);
                 }
             )
-            // add movie to user likes
             .then(
                 function (user) {
                     res.json(user);

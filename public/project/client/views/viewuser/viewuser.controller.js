@@ -22,11 +22,11 @@
                 vm.aboutme = user.aboutme;
                 vm.username = user.username;
                 vm.email = user.email;
-                vm.dob = user.dob;
                 vm.firstname = user.firstName;
                 vm.lastname = user.lastName;
                 vm.trekimages = user.images;
                 vm.following = user.following;
+                vm.favouriteTreks = user.likes;
             }
         )
 

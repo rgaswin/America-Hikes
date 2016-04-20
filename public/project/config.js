@@ -15,6 +15,13 @@
                     loggedin: checkCurrentUser
                 }
             })
+            .when("/home/:searchType", {
+                templateUrl: "views/home/home.view.html",
+                controller: "SearchType",
+                resolve: {
+                    loggedin: checkCurrentUser
+                }
+            })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
                 controller: "LoginController",
@@ -34,6 +41,7 @@
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",
                 controller: "AdminController",
+                controllerAs:"admin",
                 resolve: {
                     loggedin: checkAdmin
                 }

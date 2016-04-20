@@ -29,7 +29,7 @@
                     }
                 },
                 function (response) {
-                    console.log("error");
+                    model.message = "Invalid Credentials";
                 }
             )
         }
