@@ -7,16 +7,17 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10">
                     <div class="form-horizontal">
+
                         <div class="form-group page-header">
                             <div class="col-sm-10">
                                 <h2>{{model.place.name}}&nbsp;
-                                    <div ng-show="loggedInUser"
                                     <span id="heartempty" ng-show="model.showemptyheart"
                                           class="glyphicon glyphicon-heart-empty  heartcolor"
                                           ng-click="model.favorite(model.place)"></span>
-                                <span id="heart" ng-hide="model.showemptyheart"
+                                    <span id="heart" ng-hide="model.showemptyheart"
                                       class="glyphicon glyphicon-heart  heartcolor"
-                                      ng-click="model.favorite(model.place)"></span></h2>
+                                      ng-click="model.favorite(model.place)"></span>
+                                </h2>
                             </div>
                         </div>
 

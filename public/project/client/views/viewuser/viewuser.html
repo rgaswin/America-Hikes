@@ -16,10 +16,9 @@
                     </div>
                     <div class="form-group" ng-show="model.aboutme">
                         <label class="col-sm-4 control-label">
-                            <About></About>
-                            Me</label>
+                          About Me</label>
                         <div class="col-sm-8">
-                            <label ng-model="model.aboutme" class="col-sm-2 control-label">{{model.aboutme}}</label>
+                            <label ng-model="model.aboutme" class="col-sm-12 control-label">{{model.aboutme}}</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -60,8 +59,8 @@
                     </div>
                     <div class="form-group" ng-show="model.trekimages.length > 0">
                         <label class="col-sm-4 control-label">Photos</label>
-                        <div class="col-sm-8" ng-repeat="image in model.trekimages">
-                            <img src="{{image}}" class="img-responsive bingImages">
+                        <div class="col-sm-8" >
+                            <img ng-repeat="image in model.trekimages" src="{{image}}" class="img-responsive img-thumbnail bingImages">
                         </div>
                     </div>
                     <div class="form-group">
