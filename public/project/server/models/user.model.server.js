@@ -237,7 +237,8 @@ module.exports = function (db, mongoose) {
                 deferred.reject(err);
             } else {
                 // add User id to user Following
-                doc.following.push(OtherUser);
+                if (doc.following.indexOf(OtherUser) < 0)
+                    doc.following.push(OtherUser);
 
                 // save user
                 doc.save(function (err, doc) {
