@@ -8,8 +8,11 @@
         .controller("HeaderController", HeaderController);
 
     function HeaderController($scope, $rootScope, $location, UserService) {
-        $scope.Logout = Logout;
+        var vm = this;
+        // Event Handker Declaration
+        vm.Logout = Logout;
 
+        // Event Handler Implementation
         function Logout() {
             UserService.logoutUser().then(function (response) {
                 $rootScope.loggedInUser = null;

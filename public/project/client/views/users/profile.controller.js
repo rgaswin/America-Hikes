@@ -46,7 +46,6 @@
                 $rootScope.loggedInUser = ResponseUser.data;
                 vm.message = "Profile updated Successfully";
                 $window.scrollTo(0, 0);
-                console.log( $rootScope.loggedInUser);
             });
         }
 
