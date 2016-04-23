@@ -18,7 +18,6 @@ module.exports = function (app, userModel, trailModel) {
     app.post("/api/project/register", register);
     app.post("/api/project/login", passport.authenticate('local'), login);
     app.post("/api/project/logout", logout);
-    //app.post("/api/project/user/:userId/trail/:trailId", userLikesTrail);
     app.put("/api/project/user/:id", auth, updateUser);
     app.delete("/api/project/user/:id", auth, deleteUserById);
     app.post("/api/project/follow/:userName/currentuser/:currentUserId", followUser);

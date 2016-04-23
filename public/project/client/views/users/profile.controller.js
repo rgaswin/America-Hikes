@@ -7,49 +7,51 @@
         .module("HikerApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, $window, UserService) {
-
-        // Set the View properties from the logged in user.
-        $scope.aboutme = $rootScope.loggedInUser.aboutme;
-        $scope.username = $rootScope.loggedInUser.username;
-        $scope.email = $rootScope.loggedInUser.email;
-        $scope.password = $rootScope.loggedInUser.password;
-        //   $scope.dob = Date.parse($rootScope.loggedInUser.dob);
-        $scope.firstname = $rootScope.loggedInUser.firstName;
-        $scope.lastname = $rootScope.loggedInUser.lastName;
-        $scope.trekimages = $rootScope.loggedInUser.images;
-        if ($rootScope.loggedInUser.following == "") {
-            $scope.following = [];
+    function ProfileController($rootScope, $window, UserService) {
+        var vm = this;
+        // Initialization function
+        function init() {
+            // Set the View properties from the logged in user.
+            vm.aboutme = $rootScope.loggedInUser.aboutme;
+            vm.username = $rootScope.loggedInUser.username;
+            vm.email = $rootScope.loggedInUser.email;
+            vm.password = $rootScope.loggedInUser.password;
+            vm.firstname = $rootScope.loggedInUser.firstName;
+            vm.lastname = $rootScope.loggedInUser.lastName;
+            vm.trekimages = $rootScope.loggedInUser.images;
+            if ($rootScope.loggedInUser.following == "") {
+                vm.following = [];
+            }
+            else {
+                vm.following = $rootScope.loggedInUser.following;
+            }
+            vm.favoriteTreks = $rootScope.loggedInUser.likes;
         }
-        else {
-            $scope.following = $rootScope.loggedInUser.following;
-        }
-        $scope.favoriteTreks = $rootScope.loggedInUser.likes;
 
-        console.log($scope.favoriteTreks);
+        // Calling the init function
+        init();
 
         // Event Handler Declarations
-        $scope.update = update;
-        $scope.uploadImage = uploadImage;
+        vm.update = update;
+        vm.uploadImage = uploadImage;
         // Event Handler Implementations
         function update() {
-            $rootScope.loggedInUser.aboutme = $scope.aboutme;
-            $rootScope.loggedInUser.username = $scope.username;
-            $rootScope.loggedInUser.firstName = $scope.firstname;
-            $rootScope.loggedInUser.lastName = $scope.lastname;
-            $rootScope.loggedInUser.email = $scope.email;
-            $rootScope.loggedInUser.password = $scope.password;
-            //     $rootScope.loggedInUser.dob = $scope.dob;
+            $rootScope.loggedInUser.aboutme = vm.aboutme;
+            $rootScope.loggedInUser.username = vm.username;
+            $rootScope.loggedInUser.firstName = vm.firstname;
+            $rootScope.loggedInUser.lastName = vm.lastname;
+            $rootScope.loggedInUser.email = vm.email;
+            $rootScope.loggedInUser.password = vm.password;
             UserService.updateUser($rootScope.loggedInUser._id, $rootScope.loggedInUser).then(function (ResponseUser) {
-                $rootScope.loggedInUser = ResponseUser;
-                $scope.message = "Profile updated Successfully";
+                $rootScope.loggedInUser = ResponseUser.data;
+                vm.message = "Profile updated Successfully";
                 $window.scrollTo(0, 0);
+                console.log( $rootScope.loggedInUser);
             });
         }
 
         function uploadImage() {
             UserService.uploadImage();
         }
-
     }
 })();
