@@ -7,7 +7,7 @@
         .module("HikerApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, UserService) {
+    function ProfileController($scope, $rootScope, $window, UserService) {
 
         // Set the View properties from the logged in user.
         $scope.aboutme = $rootScope.loggedInUser.aboutme;
@@ -39,11 +39,11 @@
             $rootScope.loggedInUser.lastName = $scope.lastname;
             $rootScope.loggedInUser.email = $scope.email;
             $rootScope.loggedInUser.password = $scope.password;
-                        //     $rootScope.loggedInUser.dob = $scope.dob;
+            //     $rootScope.loggedInUser.dob = $scope.dob;
             UserService.updateUser($rootScope.loggedInUser._id, $rootScope.loggedInUser).then(function (ResponseUser) {
                 $rootScope.loggedInUser = ResponseUser;
-                $scope.message = "Profile updated Successfully"
-
+                $scope.message = "Profile updated Successfully";
+                $window.scrollTo(0, 0);
             });
         }
 
