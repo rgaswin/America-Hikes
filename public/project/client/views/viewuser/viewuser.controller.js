@@ -26,7 +26,7 @@
                 vm.lastname = user.lastName;
                 vm.trekimages = user.images;
                 vm.following = user.following;
-                vm.favouriteTreks = user.likes;
+                vm.favoriteTreks = user.likes;
             }
         )
 

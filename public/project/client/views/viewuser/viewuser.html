@@ -16,51 +16,53 @@
                     </div>
                     <div class="form-group" ng-show="model.aboutme">
                         <label class="col-sm-4 control-label">
-                          About Me</label>
+                            About Me</label>
                         <div class="col-sm-8">
-                            <label ng-model="model.aboutme" class="col-sm-12 control-label">{{model.aboutme}}</label>
+                            <label ng-model="model.aboutme" class="control-label">{{model.aboutme}}</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">User Name</label>
                         <div class="col-sm-8">
-                            <label ng-model="model.username" class="col-sm-2 control-label">{{model.username}}</label>
+                            <label ng-model="model.username" class="control-label">{{model.username}}</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">First Name</label>
                         <div class="col-sm-8">
-                            <label ng-model="model.username" class="col-sm-2 control-label">{{model.firstname}}</label>
+                            <label ng-model="model.username" class="control-label">{{model.firstname}}</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Last Name</label>
                         <div class="col-sm-8">
-                            <label ng-model="model.username" class="col-sm-2 control-label">{{model.lastname}}</label>
+                            <label ng-model="model.username" class="control-label">{{model.lastname}}</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Email</label>
                         <div class="col-sm-8">
-                            <label ng-model="model.email" class="col-sm-2 control-label">{{model.email}}</label>
+                            <label ng-model="model.email" class="control-label">{{model.email}}</label>
                         </div>
                     </div>
                     <div class="form-group" ng-show="model.favoriteTreks.length > 0">
                         <label class="col-sm-4 control-label">Favourite Treks</label>
                         <div class="col-sm-8" ng-repeat="trek in model.favoriteTreks">
-                            <a href="">{{trek.name}}</a>
+                            <a class="btn btn-info"
+                               href="#/search/{{trek.id}}/{{trek.trailname}}/{{trek.lat}}/{{trek.lon}}">{{trek.trailname}}</a>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" ng-show="model.following.length > 0">Following</label>
+                    <div class="form-group" ng-show="model.following.length > 0">
+                        <label class="col-sm-4 control-label">Following</label>
                         <div class="col-sm-8" ng-repeat="user in model.following">
-                            <a href="#/viewuser/{{user}}">{{user}}</a>
+                            <a href="#/viewuser/{{user}}" class="btn btn-info">{{user}}</a>
                         </div>
                     </div>
                     <div class="form-group" ng-show="model.trekimages.length > 0">
                         <label class="col-sm-4 control-label">Photos</label>
-                        <div class="col-sm-8" >
-                            <img ng-repeat="image in model.trekimages" src="{{image}}" class="img-responsive img-thumbnail bingImages">
+                        <div class="col-sm-8">
+                            <img ng-repeat="image in model.trekimages" src="{{image}}"
+                                 class="img-responsive img-thumbnail bingImages">
                         </div>
                     </div>
                     <div class="form-group">

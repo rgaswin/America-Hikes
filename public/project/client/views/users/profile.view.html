@@ -42,10 +42,12 @@
                 </div>
 
                 <div ng-show="favoriteTreks.length > 0">
-                    <div class="row">
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">Favourite Treks</label>
-                        <div class="col-sm-1" ng-repeat="trek in favoriteTreks">
-                            <a href="#/search/{{trek.id}}/{{trek.trailname}}/{{trek.lat}}/{{trek.lon}}">{{trek.trailname}}</a>
+                        <div class="row">
+                            <div class="col-sm-2" ng-repeat="trek in favoriteTreks">
+                                <a class="btn btn-info" href="#/search/{{trek.id}}/{{trek.trailname}}/{{trek.lat}}/{{trek.lon}}">{{trek.trailname}}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
