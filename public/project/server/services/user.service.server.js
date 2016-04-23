@@ -292,56 +292,54 @@ module.exports = function (app, userModel, trailModel) {
     };
 
     function uploadImage(req, res) {
-
         var username = req.user.username;
-        //var applicationId = req.body.applicationId;
-        //var pageId = req.body.pageId;
-        //var widgetId = req.body.widgetId;
-        //var width = req.body.width;
         var myFile = req.file;
-        var destination = myFile.destination;
-        var path = myFile.path;
-        var originalname = myFile.originalname;
-        var size = myFile.size;
-        var mimetype = myFile.mimetype;
-        var filename = myFile.filename;
+        // To handle an empty upload
+        if (!myFile) {
+            res.redirect("/project/client/index.html#/profile");
+        }
+        else {
+            var destination = myFile.destination;
+            var path = myFile.path;
+            var originalname = myFile.originalname;
+            var size = myFile.size;
+            var mimetype = myFile.mimetype;
+            var filename = myFile.filename;
 
 
-        userModel.findUserByUsername(username).then(
-            function (user) {
-                if (!user.images) {
-                    user.images = [];
-                }
-                user.images.push("/uploads/" + filename);//originalname;
-                return user.save();
-            },
-            function (err) {
-                res.status(400).send(err);
-            }
-            )
-            .then(
-                function () {
-                    res.redirect("/project/client/index.html#/profile");
+            userModel.findUserByUsername(username).then(
+                function (user) {
+                    if (!user.images) {
+                        user.images = [];
+                    }
+                    user.images.push("/uploads/" + filename);
+                    return user.save();
                 },
                 function (err) {
                     res.status(400).send(err);
                 }
-            );
+                )
+                .then(
+                    function () {
+                        res.redirect("/project/client/index.html#/profile");
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+        }
     }
 
     function followUser(req, res) {
         var OtherUser = req.params.userName;
         var CurrentUser = req.params.currentUserId;
-        userModel.followUser(CurrentUser,OtherUser).then(
+        userModel.followUser(CurrentUser, OtherUser).then(
             function (success) {
                 res.json(200);
             },
             function (error) {
-               res.status(401).send(error);
+                res.status(401).send(error);
             }
         )
-
-
     }
-
 }
