@@ -232,4 +232,11 @@ body .no-padding {
     font-size: xx-large;
 }
 
+.aligncenter{
+    text-align: center;
+    vertical-align: middle;
+}
 
+.linkcolor{
+    color: whitesmoke;
+}
