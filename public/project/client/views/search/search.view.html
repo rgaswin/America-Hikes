@@ -100,8 +100,8 @@
 
                             <div class="form-group">
                                 <h3 class="page-header">Users Who Liked this trail</h3>
-                                <div class="col-sm-10" ng-repeat="trail in model.userTrails">
-                                    <a href="#/viewuser/{{trail.username}}">{{trail.username}}</a>
+                                <div class="col-sm-1" ng-repeat="trail in model.userTrails">
+                                    <a class="btn btn-info nowrap" href="#/viewuser/{{trail.username}}">{{trail.username}}</a>
                                 </div>
                             </div>
 

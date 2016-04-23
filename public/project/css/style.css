@@ -240,3 +240,11 @@ body .no-padding {
 .linkcolor{
     color: whitesmoke;
 }
+
+.labelcolorblack{
+    color: black;
+}
+
+.nowrap{
+    white-space: nowrap;
+}
