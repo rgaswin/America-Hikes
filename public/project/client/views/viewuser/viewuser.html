@@ -3,79 +3,74 @@
     <div class="row">
         <div class="col-sm-2">&nbsp;</div>
         <div class="col-sm-8">
-            <div class="row">
-                <div class="col-sm-2">&nbsp;</div>
-                <div class="col-sm-8 form-horizontal">
-                    <div class="form-group page-header">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h2>{{model.firstname}},{{model.lastname}}&nbsp;&nbsp;
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-show="model.aboutme">
-                        <label class="col-sm-4 control-label">
-                            About Me</label>
-                        <div class="col-sm-8">
-                            <label ng-model="model.aboutme" class="control-label">{{model.aboutme}}</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">User Name</label>
-                        <div class="col-sm-8">
-                            <label ng-model="model.username" class="control-label">{{model.username}}</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">First Name</label>
-                        <div class="col-sm-8">
-                            <label ng-model="model.username" class="control-label">{{model.firstname}}</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Last Name</label>
-                        <div class="col-sm-8">
-                            <label ng-model="model.username" class="control-label">{{model.lastname}}</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Email</label>
-                        <div class="col-sm-8">
-                            <label ng-model="model.email" class="control-label">{{model.email}}</label>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-show="model.favoriteTreks.length > 0">
-                        <label class="col-sm-4 control-label">Favourite Treks</label>
-                        <div class="col-sm-8" ng-repeat="trek in model.favoriteTreks">
-                            <a class="btn btn-info"
-                               href="#/search/{{trek.id}}/{{trek.trailname}}/{{trek.lat}}/{{trek.lon}}">{{trek.trailname}}</a>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-show="model.following.length > 0">
-                        <label class="col-sm-4 control-label">Following</label>
-                        <div class="col-sm-8" ng-repeat="user in model.following">
-                            <a href="#/viewuser/{{user}}" class="btn btn-info">{{user}}</a>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-show="model.trekimages.length > 0">
-                        <label class="col-sm-4 control-label">Photos</label>
-                        <div class="col-sm-8">
-                            <img ng-repeat="image in model.trekimages" src="{{image}}"
-                                 class="img-responsive img-thumbnail bingImages">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <button class="btn btn-info"
-                                    ng-click="model.followUser()">Follow
-                            </button>
-                        </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <h1 class="page-header">{{model.firstname}},{{model.lastname}}&nbsp;&nbsp;
+                        </h1>
                     </div>
                 </div>
-                <div class="col-sm-2">&nbsp;</div>
+                <div class="form-group" ng-show="model.aboutme">
+                    <label class="col-sm-2 control-label">About Me</label>
+                    <div class="col-sm-10">
+                        <label ng-model="model.aboutme" class="control-label">{{model.aboutme}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">User Name</label>
+                    <div class="col-sm-10">
+                        <label ng-model="model.username" class="control-label">{{model.username}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">First Name</label>
+                    <div class="col-sm-10">
+                        <label ng-model="model.username" class="control-label">{{model.firstname}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Last Name</label>
+                    <div class="col-sm-10">
+                        <label ng-model="model.username" class="control-label">{{model.lastname}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <label ng-model="model.email" class="control-label">{{model.email}}</label>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="model.favoriteTreks.length > 0">
+                    <label class="col-sm-2 control-label">Favourite Treks</label>
+                    <div class="col-sm-10" ng-repeat="trek in model.favoriteTreks">
+                        <a class="btn btn-info"
+                           href="#/search/{{trek.id}}/{{trek.trailname}}/{{trek.lat}}/{{trek.lon}}">{{trek.trailname}}</a>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="model.following.length > 0">
+                    <label class="col-sm-2 control-label">Following</label>
+                    <div class="col-sm-10" ng-repeat="user in model.following">
+                        <a href="#/viewuser/{{user}}" class="btn btn-info">{{user}}</a>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="model.trekimages.length > 0">
+                    <label class="col-sm-2 control-label">Photos</label>
+                    <div class="col-sm-10">
+                        <img ng-repeat="image in model.trekimages" src="{{image}}"
+                             class="img-responsive img-thumbnail bingImages">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <button class="btn btn-info"
+                                ng-click="model.followUser()">Follow
+                        </button>
+                    </div>
+                </div>
             </div>
+            <div class="col-sm-2">&nbsp;</div>
         </div>
-        <div class="col-sm-2">&nbsp;</div>
     </div>
+    <div class="col-sm-2">&nbsp;</div>
+</div>
 </div>

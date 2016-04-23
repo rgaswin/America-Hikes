@@ -28,7 +28,7 @@
                 vm.following = user.following;
                 vm.favoriteTreks = user.likes;
             }
-        )
+        );
 
         function followUser() {
             UserService.followUser(OtherUserName, $rootScope.loggedInUser._id).then(
