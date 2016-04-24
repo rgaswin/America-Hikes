@@ -46,7 +46,7 @@
                     vm.users = response.data;
                 },
                 function (error) {
-                    console.log(user);
+                    console.log(error);
                 }
             );
         }

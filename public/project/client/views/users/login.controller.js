@@ -1,4 +1,4 @@
-(function () {
+(function() {
     "use strict";
     angular
         .module("HikerApp")
@@ -13,8 +13,7 @@
         function login(user) {
             UserService
                 .findUserByCredentials(user).then(
-                function (response) {
-                    console.log(response);
+                function(response) {
                     if (response.data !== null && typeof(response.data) !== 'undefined') {
                         UserService.setCurrentUser(response.data);
                         if ($rootScope.loggedInUser.roles !== null &&
@@ -23,12 +22,11 @@
                         } else {
                             $location.url("/profile");
                         }
-                    }
-                    else {
+                    } else {
                         model.message = "Invalid Credentials";
                     }
                 },
-                function (response) {
+                function(response) {
                     model.message = "Invalid Credentials";
                 }
             )

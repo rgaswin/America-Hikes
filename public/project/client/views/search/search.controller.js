@@ -1,7 +1,7 @@
 /**
  * Created by gopal on 3/3/2016.
  */
-(function () {
+(function() {
     angular
         .module("HikerApp")
         .controller("SearchController", SearchController);
@@ -51,7 +51,7 @@
                 "&q[activities_activity_name_cont]=" + trailname +
                 "&q[activities_activity_type_name_eq]=hiking";
 
-            TrailService.getDetailsFromTrailAPI(url).then(function (result) {
+            TrailService.getDetailsFromTrailAPI(url).then(function(result) {
                 var filter = {};
                 for (var i = 0; i < result.data.places.length; i++) {
                     if (result.data.places[i].name == trailname) {
@@ -60,17 +60,17 @@
                     }
                 }
                 vm.place = filter;
-            }, function (err) {
+            }, function(err) {
                 console.log(err);
             });
         }
 
         function FetchImagesFromBingAPI() {
             TrailService.fetchImagesFromBingAPI(trailname).then(
-                function (response) {
+                function(response) {
                     vm.images = response.data.d.results;
                 },
-                function (error) {
+                function(error) {
                     console.log(error);
                 }
             )
@@ -79,7 +79,7 @@
         function GetAllTrailsForUser() {
             if (currentUser) {
                 UserService.getAllUsersForTrail(currentTrail).then(
-                    function (response) {
+                    function(response) {
                         if (response.data == "")
                             vm.userTrails = ["None"];
                         else
@@ -95,26 +95,26 @@
             var url = "https://api.forecast.io/forecast/e9ca6bb302fd28ed3733bc20fab313fa/" + lat + "," + lon + "," + currentdate + "?callback=JSON_CALLBACK";
 
             TrailService.getWeatherFromForecastAPI(url).then(
-                function (result) {
+                function(result) {
                     vm.weather = result;
-                    console.log(result);
-                }, function (result) {
-                }
+                },
+                function(result) {}
             );
         }
 
         function getWeatherForFuture() {
             var date = Date.parse(vm.startdate) / 1000;
             if (!isNaN(date)) {
-                var url = "https://api.forecast.io/forecast/e9ca6bb302fd28ed3733bc20fab313fa/" + lat + "," + lon + ","
-                    + date + "?callback=JSON_CALLBACK";
+                var url = "https://api.forecast.io/forecast/e9ca6bb302fd28ed3733bc20fab313fa/" + lat + "," + lon + "," +
+                    date + "?callback=JSON_CALLBACK";
 
                 vm.weather = {};
 
                 TrailService.getWeatherFromForecastAPI(url).then(
-                    function (result) {
+                    function(result) {
                         vm.weather = result;
-                    }, function (result) {
+                    },
+                    function(result) {
 
                     }
                 );
@@ -122,7 +122,13 @@
         }
 
         function RenderGoogleMaps() {
-            vm.map = {center: {latitude: lat, longitude: lon}, zoom: 8};
+            vm.map = {
+                center: {
+                    latitude: lat,
+                    longitude: lon
+                },
+                zoom: 8
+            };
             vm.marker = {
                 id: 0,
                 location: {
@@ -136,7 +142,7 @@
         function favorite(place) {
             if (currentUser) {
                 UserService.userLikesTrail(currentUser._id, place).then(
-                    function (response) {
+                    function(response) {
                         vm.showemptyheart = false;
                         GetAllTrailsForUser();
                     }
@@ -150,7 +156,7 @@
             var trail = vm.place;
             if ($rootScope.loggedInUser !== null && typeof($rootScope.loggedInUser) !== "undefined") {
                 TrailService.findAllCommentsForTrail(currentTrail)
-                    .then(function (result) {
+                    .then(function(result) {
                         vm.comments = result.data;
                     });
             }
@@ -171,11 +177,11 @@
                 lat: trail.lat,
                 lon: trail.lon
             };
-            TrailService.createCommentForTrail(trail.unique_id, comment).then(function (result) {
+            TrailService.createCommentForTrail(trail.unique_id, comment).then(function(result) {
                     vm.comments = result.data;
                     vm.comment = "";
                 },
-                function (error) {
+                function(error) {
                     console.log(error);
                 });
         }
@@ -183,10 +189,10 @@
         // Delete a comment for the Trail
         function deleteComment(index) {
             var comment = vm.comments[index];
-            TrailService.deleteCommentForTrail(currentTrail, comment.id).then(function (result) {
+            TrailService.deleteCommentForTrail(currentTrail, comment.id).then(function(result) {
                     vm.comments = result.data;
                 },
-                function (error) {
+                function(error) {
                     console.log(error);
                 }
             );
@@ -196,10 +202,10 @@
         function updateComment() {
             if (selectedCommentIndex >= 0) {
                 var comment = vm.comments[selectedCommentIndex];
-                TrailService.updateCommentForTrail(currentTrail, comment).then(function (result) {
+                TrailService.updateCommentForTrail(currentTrail, comment).then(function(result) {
                     vm.comments = result.data;
                     vm.comment = "";
-                }, function (error) {
+                }, function(error) {
                     console.log(error);
                 });
             }
