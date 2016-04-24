@@ -46,22 +46,12 @@
         // Initialization Functions for the page
         init();
 
-
         function GetDetailsFromTrailAPI() {
             var url = "https://trailapi-trailapi.p.mashape.com/?lat=" + lat + "&lon=" + lon +
                 "&q[activities_activity_name_cont]=" + trailname +
                 "&q[activities_activity_type_name_eq]=hiking";
 
-            var req = {
-                method: 'GET',
-                url: url,
-                headers: {
-                    "X-Mashape-Key": "JpqqeDQjdxmshlSW6xeSFJUKWuFfp1nz7QTjsnuWxTaf8awgDO",
-                    "Accept": "text/plain"
-                }
-            };
-
-            $http(req).then(function (result) {
+            TrailService.getDetailsFromTrailAPI(url).then(function (result) {
                 var filter = {};
                 for (var i = 0; i < result.data.places.length; i++) {
                     if (result.data.places[i].name == trailname) {
@@ -76,15 +66,7 @@
         }
 
         function FetchImagesFromBingAPI() {
-            var bingReq = {
-                method: 'POST',
-                url: "https://api.datamarket.azure.com/Bing/Search/Image?Query=%27" + trailname + "%27&$format=json&$top=5",
-                headers: {
-                    'Authorization': 'Basic OmdPWEc4SVpxb3ZCWkdad3RTRE5qL3Z0ZlIvL3BYNGVuUTNlSVI1dTIxQnM='
-                },
-            };
-
-            $http(bingReq).then(
+            TrailService.fetchImagesFromBingAPI(trailname).then(
                 function (response) {
                     vm.images = response.data.d.results;
                 },
@@ -102,7 +84,6 @@
                             vm.userTrails = ["None"];
                         else
                             vm.userTrails = response.data;
-
                     }
                 )
             }
@@ -110,11 +91,10 @@
 
         function GetTodaysWeatherFromForecastAPI() {
             var currentdate = Math.floor(Date.now() / 1000);
-            console.log(currentdate);
 
             var url = "https://api.forecast.io/forecast/e9ca6bb302fd28ed3733bc20fab313fa/" + lat + "," + lon + "," + currentdate + "?callback=JSON_CALLBACK";
 
-            $http.jsonp(url).then(
+            TrailService.getWeatherFromForecastAPI(url).then(
                 function (result) {
                     vm.weather = result;
                     console.log(result);
@@ -131,9 +111,8 @@
 
                 vm.weather = {};
 
-                $http.jsonp(url).then(
+                TrailService.getWeatherFromForecastAPI(url).then(
                     function (result) {
-                        console.log(result);
                         vm.weather = result;
                     }, function (result) {
 
