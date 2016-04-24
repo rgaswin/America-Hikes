@@ -18,10 +18,6 @@
     --moz-background-size: cover;
     --o-background-size: cover;
     background-size: cover;
-    background-attachment: fixed;
-    width:100%;
-    height:100%;
-    /*background-color: white;*/
 }
 
 .labelcolor {
@@ -227,27 +223,27 @@ body .no-padding {
     color: red;
 }
 
-#heartempty.glyphicon{
+#heartempty.glyphicon {
     font-size: xx-large;
 }
 
-#heart.glyphicon{
+#heart.glyphicon {
     font-size: xx-large;
 }
 
-.aligncenter{
+.aligncenter {
     text-align: center;
     vertical-align: middle;
 }
 
-.linkcolor{
+.linkcolor {
     color: whitesmoke;
 }
 
-.labelcolorblack{
+.labelcolorblack {
     color: black;
 }
 
-.nowrap{
+.nowrap {
     white-space: nowrap;
 }
