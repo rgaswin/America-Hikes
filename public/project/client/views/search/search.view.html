@@ -11,12 +11,14 @@
                         <div class="form-group page-header">
                             <div class="col-sm-10">
                                 <h2>{{model.place.name}}&nbsp;
+                                    <span ng-show="{{loggedInUser}}">
                                     <span id="heartempty" ng-show="model.showemptyheart"
                                           class="glyphicon glyphicon-heart-empty  heartcolor"
                                           ng-click="model.favorite(model.place)"></span>
                                     <span id="heart" ng-hide="model.showemptyheart"
-                                      class="glyphicon glyphicon-heart  heartcolor"
-                                      ng-click="model.favorite(model.place)"></span>
+                                          class="glyphicon glyphicon-heart  heartcolor"
+                                          ng-click="model.favorite(model.place)"></span>
+                                    </span>
                                 </h2>
                             </div>
                         </div>
@@ -140,7 +142,8 @@
                                         comment by <a
                                             href="#/viewuser/{{comment.username}}"><strong>{{comment.username}}</strong></a>
                                         on <span class="">{{comment.postedon | date:"MM/dd/yyyy 'at' h:mma"}}</span>
-                                         <span ng-show="loggedInUser.roles.indexOf('admin') >= 0 || loggedInUser.username == comment.username" class="glyphicon glyphicon-remove floatright"
+                                         <span ng-show="loggedInUser.roles.indexOf('admin') >= 0 || loggedInUser.username == comment.username"
+                                               class="glyphicon glyphicon-remove floatright"
                                                ng-click="model.deleteComment($index)"></span>
                                     </div>
                                     <div class="panel-body">
