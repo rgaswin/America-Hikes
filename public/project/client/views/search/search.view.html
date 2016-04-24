@@ -140,7 +140,7 @@
                                         comment by <a
                                             href="#/viewuser/{{comment.username}}"><strong>{{comment.username}}</strong></a>
                                         on <span class="">{{comment.postedon | date:"MM/dd/yyyy 'at' h:mma"}}</span>
-                                         <span class="glyphicon glyphicon-remove floatright"
+                                         <span ng-show="loggedInUser.roles.indexOf('admin') >= 0 || loggedInUser.username == comment.username" class="glyphicon glyphicon-remove floatright"
                                                ng-click="model.deleteComment($index)"></span>
                                     </div>
                                     <div class="panel-body">
