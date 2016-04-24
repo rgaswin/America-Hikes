@@ -8,28 +8,31 @@
         .controller("RegisterController", RegisterController);
 
     function RegisterController($scope, $rootScope, $location, UserService) {
+
+        var vm = this;
+
         var user = {
-            "firstName": $scope.firstName,
-            "lastName": $scope.lastName,
-            "username": $scope.username,
-            "email": $scope.email,
-            "password": $scope.password,
+            "firstName": vm.firstName,
+            "lastName": vm.lastName,
+            "username": vm.username,
+            "email": vm.email,
+            "password": vm.password,
             "roles": ["student"]
         };
 
         // Event Handler Declarations
-        $scope.register = register;
+        vm.register = register;
 
         // Event Handler Implementations
         function register() {
-            user.aboutme = $scope.aboutme;
-            user.username = $scope.username;
-            user.password = $scope.password;
-            user.email = $scope.email;
-            user.firstName = $scope.firstname;
-            user.lastName = $scope.lastname;
-            user.dob = $scope.dob;
-            user.yrsOfTrekExp = $scope.yrsOfTrekExp;
+            user.aboutme = vm.aboutme;
+            user.username = vm.username;
+            user.password = vm.password;
+            user.email = vm.email;
+            user.firstName = vm.firstname;
+            user.lastName = vm.lastname;
+            user.dob = vm.dob;
+            user.yrsOfTrekExp = vm.yrsOfTrekExp;
 
             UserService.register(user).then(function(response) {
                 $rootScope.loggedInUser = response.data;

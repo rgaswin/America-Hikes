@@ -6,6 +6,8 @@
         .module("HikerApp")
         .controller("HomeController", HomeController);
 
+    // NOTE: Using $scope in this page alone as watch function is not supported by vm.
+    //       $watch must be attached to $scope
     function HomeController($scope, $rootScope, $http, $sce) {
         function init() {
             if ($rootScope.setSearchFlag)
@@ -31,7 +33,7 @@
         $scope.searchByInput = searchByInput;
 
         function searchByInput() {
-            var url = "https://trailapi-trailapi.p.mashape.com?&q[activities_activity_type_name_eq]=hiking&limit=25";
+            var url = "https://trailapi-trailapi.p.mashape.com?&q[activities_activity_type_name_eq]=hiking&limit=50";
             if ($rootScope.default) {
                 if ($rootScope.default == "") {
                     $rootScope.setSearchFlag == $rootScope.state;
@@ -39,8 +41,8 @@
                 }
             }
 
-            if ($rootScope.state){
-                if($rootScope.state != ""){
+            if ($rootScope.state) {
+                if ($rootScope.state != "") {
                     $rootScope.setSearchFlag == $rootScope.state;
                     url = url + "&q[state_cont]=" + $rootScope.setSearchFlag;
                 }
