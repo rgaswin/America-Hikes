@@ -253,9 +253,15 @@ module.exports = function (db, mongoose) {
             if (err) {
                 deferred.reject(err);
             } else {
+
+                var otherUserIndex = doc.following.indexOf(OtherUser);
                 // add User id to user Following
-                if (doc.following.indexOf(OtherUser) < 0)
+                if (otherUserIndex < 0)
                     doc.following.push(OtherUser);
+
+                else {
+                    doc.following.splice(otherUserIndex, 1);
+                }
 
                 // save user
                 doc.save(function (err, doc) {
