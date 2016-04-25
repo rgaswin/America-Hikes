@@ -1,7 +1,7 @@
 /**
  * Created by gopal on 2/15/2016.
  */
-(function() {
+(function () {
     "use strict";
     angular
         .module("HikerApp")
@@ -34,10 +34,16 @@
             user.dob = vm.dob;
             user.yrsOfTrekExp = vm.yrsOfTrekExp;
 
-            UserService.register(user).then(function(response) {
-                $rootScope.loggedInUser = response.data;
-                $location.url("/profile");
-            });
+            if (vm.username && vm.password && vm.email && vm.firstname && vm.lastname ) {
+                UserService.register(user).then(function (response) {
+                    $rootScope.loggedInUser = response.data;
+                    $location.url("/profile");
+                });
+            }
+
+            else {
+                vm.message = "Please fill all required fields";
+            }
         }
     }
 })();
