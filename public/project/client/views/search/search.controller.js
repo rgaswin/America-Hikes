@@ -9,15 +9,20 @@
     function SearchController($routeParams, $http, UserService, TrailService, $rootScope) {
 
         var currentUser = $rootScope.loggedInUser;
+
         var vm = this;
         vm.form = {};
+        vm.showemptyheart = true;
+
+        // Event Handler Declarations
         vm.getWeatherForFuture = getWeatherForFuture;
         vm.addComment = addComment;
         vm.deleteComment = deleteComment;
         vm.updateComment = updateComment;
         vm.selectComment = selectComment;
         vm.favorite = favorite;
-        vm.showemptyheart = true;
+        vm.unfavorite = unfavorite;
+
 
         // Set Properties From RouteParams
         var currentTrail = $routeParams.trailId;
@@ -80,10 +85,7 @@
             if (currentUser) {
                 UserService.getAllUsersForTrail(currentTrail).then(
                     function(response) {
-                        if (response.data == "")
-                            vm.userTrails = ["None"];
-                        else
-                            vm.userTrails = response.data;
+                       vm.userTrails = response.data;
                     }
                 )
             }
@@ -144,6 +146,17 @@
                 UserService.userLikesTrail(currentUser._id, place).then(
                     function(response) {
                         vm.showemptyheart = false;
+                        GetAllTrailsForUser();
+                    }
+                );
+            }
+        }
+
+        function unfavorite(place) {
+            if (currentUser) {
+                UserService.userLikesTrail(currentUser._id, place).then(
+                    function(response) {
+                        vm.showemptyheart = true;
                         GetAllTrailsForUser();
                     }
                 );

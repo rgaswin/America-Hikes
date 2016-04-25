@@ -100,6 +100,24 @@ module.exports = function (db, mongoose) {
                         // add user to likes
                         doc.likes.push({userId: userId, username: username});
                     }
+                    else{
+                        // Remove a user from trail likes array
+                        trailModel.update({trailId: trail.unique_id},
+                            {$pull: {likes: {userId: userId}}}, function (err, doc) {
+                                if (err) {
+                                    deferred.reject(err);
+                                } else {
+                                    trailModel.findOne({trailId: trail.unique_id}, function (err, doc) {
+                                        if (err) {
+                                            deferred.reject(err);
+                                        }
+                                        else {
+                                            deferred.resolve(doc);
+                                        }
+                                    });
+                                }
+                            });
+                    }
                     // save changes
                     doc.save(function (err, doc) {
                         if (err) {

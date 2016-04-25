@@ -17,7 +17,7 @@
                                           ng-click="model.favorite(model.place)"></span>
                                     <span id="heart" ng-hide="model.showemptyheart"
                                           class="glyphicon glyphicon-heart  heartcolor"
-                                          ng-click="model.favorite(model.place)"></span>
+                                          ng-click="model.unfavorite(model.place)"></span>
                                     </span>
                                 </h2>
                             </div>
@@ -100,10 +100,12 @@
 
                         <div ng-show="{{loggedInUser}}">
 
-                            <div class="form-group">
-                                <h3 class="page-header">Users Who Liked this trail</h3>
-                                <div class="col-sm-1" ng-repeat="trail in model.userTrails">
-                                    <a class="btn btn-info nowrap" href="#/viewuser/{{trail.username}}">{{trail.username}}</a>
+                            <div ng-show="model.userTrails.length > 0">
+                                <div class="form-group">
+                                    <h3 class="page-header">Users Who Liked this trail</h3>
+                                    <div class="col-sm-1" ng-repeat="trail in model.userTrails">
+                                        <a class="btn btn-info nowrap" href="#/viewuser/{{trail.username}}">{{trail.username}}</a>
+                                    </div>
                                 </div>
                             </div>
 

@@ -193,6 +193,23 @@ module.exports = function (db, mongoose) {
                         lon: trailInfo.lon
                     });
                 }
+                else {
+                    // Remove a trail from likes array
+                    UserModel.update({_id: userId},
+                        {$pull: {likes: {id: trailInfo.trailId}}}, function (err, doc) {
+                            if (err) {
+                                deferred.reject(err);
+                            } else {
+                                UserModel.findById({_id: userId}, function (err, doc) {
+                                    if (err) {
+                                        deferred.reject(err);
+                                    } else {
+                                        deferred.resolve(doc);
+                                    }
+                                });
+                            }
+                        });
+                }
 
                 // save user
                 doc.save(function (err, doc) {
