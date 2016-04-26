@@ -3,5 +3,5 @@
  */
 (function () {
     angular
-        .module("HikerApp", ["ngRoute","uiGmapgoogle-maps","angular-skycons","ui.bootstrap"]);
+        .module("HikerApp", ["ngRoute","uiGmapgoogle-maps","angular-skycons","ui.bootstrap","autocomplete"]);
 })();

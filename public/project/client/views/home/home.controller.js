@@ -1,7 +1,7 @@
 /**
  * Created by gopal on 3/1/2016.
  */
-(function() {
+(function () {
     angular
         .module("HikerApp")
         .controller("HomeController", HomeController);
@@ -10,16 +10,23 @@
     //       $watch must be attached to $scope
     function HomeController($scope, $rootScope, TrailService, $http, $sce) {
         function init() {
-            if ($rootScope.homeURL)
+            if ($rootScope.homeURL) {
                 getTrailInformation($rootScope.homeURL);
+            }
+            getAllStates();
         }
 
         init();
 
+        function getAllStates() {
+            $scope.states = TrailService.getAllStates();
+        }
+
+
         function setPaginationProperties() {
             $scope.currentPage = 1, $scope.numPerPage = 10, $scope.maxSize = 5;
 
-            $scope.$watch('currentPage + numPerPage', function() {
+            $scope.$watch('currentPage + numPerPage', function () {
                 var begin = (($scope.currentPage - 1) * $scope.numPerPage),
                     end = begin + $scope.numPerPage;
                 if ($scope.places)
@@ -47,7 +54,7 @@
 
         function getTrailInformation(url) {
             TrailService.getDetailsFromTrailAPI(url).then(
-                function(result) {
+                function (result) {
                     for (var placeindex in result.data.places) {
                         result.data.places[placeindex].activities[0].description = $sce.trustAsHtml(result.data.places[placeindex].activities[0].description);
                     }
@@ -58,7 +65,7 @@
                         $scope.filteredplaces = $scope.places.slice(begin, end);
 
                 },
-                function(result) {
+                function (result) {
                     console.log("Error : " + result);
                 });
         }

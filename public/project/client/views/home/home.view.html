@@ -20,8 +20,13 @@
                     <form class="form-horizontal">
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <input id="txtState" type="text" ng-model="state" class="form-control"
-                                       placeholder="Search for Trail By State">
+                                <!--<input id="txtState" type="text" ng-model="state" class="form-control"-->
+                                       <!--placeholder="Search for Trail By State">-->
+
+                                <autocomplete id="txtState" ng-model="state" data="states" class="autocomplete">
+
+                                </autocomplete>
+
                             </div>
                             <div class="col-sm-2">
                                 <a class="btn btn-block btn-primary" ng-click="searchByInput()">Search</a>
