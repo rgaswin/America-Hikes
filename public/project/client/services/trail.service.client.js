@@ -57,11 +57,12 @@
         }
 
         function fetchImagesFromBingAPI(trailname) {
+
             var bingReq = {
                 method: 'POST',
-                url: "https://api.datamarket.azure.com/Bing/Search/Image?Query=%27" + trailname + "%27&$format=json&$top=5",
+                url: "https://user:3PKBCTHpy6B7Jzfvoxi7qUPudr6aUleC+EtsZ0BKjFE=@api.datamarket.azure.com/Bing/Search/Image?Query=%27" + trailname + "%27&$format=json&$top=5",
                 headers: {
-                    'Authorization': 'Basic OmdPWEc4SVpxb3ZCWkdad3RTRE5qL3Z0ZlIvL3BYNGVuUTNlSVI1dTIxQnM='
+                    'Authorization': 'Basic 3PKBCTHpy6B7Jzfvoxi7qUPudr6aUleC+EtsZ0BKjFE='
                 },
             };
 

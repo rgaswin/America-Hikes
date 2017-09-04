@@ -30,7 +30,7 @@ app.use(multer());
 
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: "Aswin",
     resave: true,
     saveUninitialized: true
 }));
