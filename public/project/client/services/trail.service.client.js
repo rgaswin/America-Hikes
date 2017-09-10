@@ -66,6 +66,14 @@
                 },
             };
 
+            // var bingReq = {
+            //     method: 'POST',
+            //     url: "https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=" + trailname,
+            //     headers: {
+            //         'Ocp-Apim-Subscription-Key': 'ca824ab482484cb2991f4dc9ae4a2940'
+            //     },
+            // };
+
             return $http(bingReq);
         }
 
