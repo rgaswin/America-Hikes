@@ -12,16 +12,18 @@ var session = require('express-session');
 // create a default connection string
 var connectionString = 'mongodb://127.0.0.1:27017/assignment';
 
-if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-        process.env.OPENSHIFT_MONGODB_DB_HOST + ":" +
-        process.env.OPENSHIFT_MONGODB_DB_PORT + "/" +
-        process.env.OPENSHIFT_APP_NAME;
-}
+// if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+//     connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+//         process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+//         process.env.OPENSHIFT_MONGODB_DB_HOST + ":" +
+//         process.env.OPENSHIFT_MONGODB_DB_PORT + "/" +
+//         process.env.OPENSHIFT_APP_NAME;
+// }
+
+var conn2 = "mongodb://rgaswin:rgaswin@ds231205.mlab.com:31205/americahikes";
 
 // connect to the database
-var db = mongoose.connect(connectionString);
+var db = mongoose.connect(conn2);
 
 
 app.use(bodyParser.json());

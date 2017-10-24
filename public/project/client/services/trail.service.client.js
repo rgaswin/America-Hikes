@@ -60,9 +60,10 @@
 
             var bingReq = {
                 method: 'POST',
-                url: "https://user:3PKBCTHpy6B7Jzfvoxi7qUPudr6aUleC+EtsZ0BKjFE=@api.datamarket.azure.com/Bing/Search/Image?Query=%27" + trailname + "%27&$format=json&$top=5",
+                url: "https://https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=" + trailname ,
                 headers: {
-                    'Authorization': 'Basic 3PKBCTHpy6B7Jzfvoxi7qUPudr6aUleC+EtsZ0BKjFE='
+                    'Content-Type': 'multipart/form-data',
+                    'Ocp-Apim-Subscription-Key': '06d39796-21bd-460a-ba56-49d333cf8b0e'
                 },
             };
 
